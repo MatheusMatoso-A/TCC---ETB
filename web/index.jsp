@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Teste Teste</title>
+        <link rel="icon" type="imagem/png" sizes="16x16" href="imagens/favicon.png">
+        <title>Taí Telecom - Fibra Óptica</title>
     </head>
     <body>
         <h1>Hello World!</h1>
