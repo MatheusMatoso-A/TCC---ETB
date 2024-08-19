@@ -1,0 +1,35 @@
+.menu:hover{
+
+    cursor: pointer;
+
+}
+
+.menu ul li {
+
+    margin: 0;
+    list-style: none;
+    float: left;
+    display: block;
+    border-right: none;
+
+}
+
+.menu ul li a {
+
+    float: left;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+
+
+

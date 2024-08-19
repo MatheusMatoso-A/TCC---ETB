@@ -9,11 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="width=device-width, inital-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="imagem/png" sizes="16x16" href="imagens/favicon.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/reset.css" type="text/css" >
+        
+        
+        
         <title>Taí Telecom - Fibra Óptica</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <h2>Teste do teste</h2>
+        <header>
+        <div class="container">
+        <%@include file="banner.jsp" %>
+        <%@include file="menu.jsp" %>
+        </div>
+        </header>
     </body>
 </html>
