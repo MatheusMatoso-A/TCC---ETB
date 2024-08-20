@@ -1,9 +1,9 @@
 <div class="menu"> 
 
     <ul>    
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Quem Somos</a></li>    
-        <li><a href="#">Login</a></li>
+        <li><a href="index.jsp">Inicio</a></li>
+        <li><a href="quemSomos.jsp">Quem Somos</a></li>    
+        <li><a href="login.jsp" >Login</a></li>
     </ul>
 
 </div>

@@ -13,3 +13,59 @@ a{
     text-decoration: none;
     
 }
+
+
+
+  /*css tem que arrumar  */
+
+main {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ededed;
+    padding: 20px;
+    height: 400px;
+}
+
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.box {
+    width: 30%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+      
+        .quem {
+            
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #0056b3;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
