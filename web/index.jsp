@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/reset.css" type="text/css">
      
         <title>Taí Telecom - Fibra Óptica</title>
-    </head>
+    </head> 
     <body>
         <!-- Início do cabeçalho -->
         <header>
