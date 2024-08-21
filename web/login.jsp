@@ -14,20 +14,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/reset.css" type="text/css">
-        <style>
-            main{
-                margin: 0 auto;
-                width: 30%;
-                display: flex;
-
-                background-color: #ededed;
-
-
-            }  
-
-
-
-        </style>
+     
         <title>Taí Telecom - Fibra Óptica</title>
     </head>
     <body>
@@ -41,30 +28,43 @@
             </div>
         </header>
         <!-- Fim do cabeçalho -->
+       
         <main>
-            <div class="container my-5">
-                <h2 class="text-center mb-4">Login</h2>
-                <form action="processarLogin.jsp" method="post">
-                    <!-- Campo Login -->
-                    <div class="mb-3">
-                        <label for="login" class="form-label">Login:</label>
-                        <input type="text" class="form-control" id="login" name="login" required>
-                    </div>
-                    <!-- Campo Senha -->
-                    <div class="mb-3">
-                        <label for="senha" class="form-label">Senha:</label>
-                        <input type="password" class="form-control" id="senha" name="senha" required>
-                    </div>
-                    <!-- Link Esqueci a Senha -->
-                    <div class="mb-3 text-end">
-                        <a href="#" class="link-primary">Esqueci minha senha</a>
-                    </div>
-                    <!-- Botão Entrar -->
-                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                </form>
-            </div> 
+            <section>
+                <!-- Imagem acima do login -->
+                <img src="imagens/logo-tai.png" alt="Banner" class="login-image" />
 
+                <!-- Formulário de login -->
+                <div class="container my-5">
+                    <h2 class="text-center mb-4">Login</h2>
+                    <form action="processarLogin.jsp" method="post">
+                        <!-- Campo Login -->
+                        <div class="mb-3">
+                            <label for="login" class="form-label">Login:</label>
+                            <input type="text" class="form-control" id="login" name="login" required>
+                        </div>
+                        <!-- Campo Senha -->
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha:</label>
+                            <input type="password" class="form-control" id="senha" name="senha" required>
+                        </div>
+                        <!-- Link Esqueci a Senha -->
+                        <div class="mb-3 text-end">
+                            <a href="#" class="link-primary">Esqueci minha senha</a>
+                        </div>
+                        <!-- Botão Entrar -->
+                        <button type="submit" class="btn btn-red w-100">Entrar</button>
+                    </form>
+                </div> 
+            </section>
         </main>
 
+        <!-- Início do Rodapé -->
+        <footer class="text-white p-4">
+            <div class="container text-center">
+                <p>&copy; 2024 Taí Telecom. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+        <!-- Fim do Rodapé -->
     </body>
 </html>

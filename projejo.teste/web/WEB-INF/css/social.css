@@ -1,0 +1,24 @@
+header .insta:hover,
+header .face:hover{
+
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.social ul li a {
+
+    float: right;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+
+}
+
+header .insta,
+header .face{
+    
+    width: 30px;
+    transition: 0.2s ease-in-out;
+
+}
+

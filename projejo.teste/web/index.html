@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/png" sizes="16x16" href="imagens/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <title>Taí Telecom - Fibra Óptica</title>
+</head>
+<body>
+    <!-- Início do cabeçalho -->
+    <header class="bg-light py-3">
+        <div class="container">
+            <!-- Inclusão do banner -->
+            <%@include file="banner.jsp" %>
+            <!-- Inclusão do menu de navegação -->
+            <%@include file="menu.jsp" %>
+        </div>
+    </header>
+    <!-- Fim do cabeçalho -->
+
+    <!-- Imagem de destaque -->
+    <div class="container-fluid p-0">
+        <img src="imagens/destaque.jpg" class="img-fluid w-100" alt="Imagem de destaque">
+    </div>
+
+    <!-- Seção de Planos de Internet -->
+    <section class="my-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Nossos Planos de Internet</h2>
+            <div class="row">
+                <!-- Plano 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Plano Básico</h5>
+                            <p class="card-text">100 Mbps de velocidade</p>
+                            <p class="card-text">Download ilimitado</p>
+                            <p class="card-text">Suporte 24/7</p>
+                            <p class="card-text"><strong>R$ 99,90/mês</strong></p>
+                            <a href="plano1.jsp" class="btn btn-primary">Assinar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plano 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Plano Intermediário</h5>
+                            <p class="card-text">300 Mbps de velocidade</p>
+                            <p class="card-text">Download ilimitado</p>
+                            <p class="card-text">Suporte 24/7</p>
+                            <p class="card-text"><strong>R$ 149,90/mês</strong></p>
+                            <a href="plano2.jsp" class="btn btn-primary">Assinar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plano 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Plano Avançado</h5>
+                            <p class="card-text">500 Mbps de velocidade</p>
+                            <p class="card-text">Download ilimitado</p>
+                            <p class="card-text">Suporte 24/7</p>
+                            <p class="card-text"><strong>R$ 199,90/mês</strong></p>
+                            <a href="plano3.jsp" class="btn btn-primary">Assinar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Vantagens -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Vantagens de Escolher a Taí Telecom</h2>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="imagens/icone-velocidade.png" alt="Velocidade" class="mb-3">
+                    <h5>Velocidade e Estabilidade</h5>
+                    <p>Internet rápida e estável com fibra óptica de última geração.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="imagens/icone-suporte.png" alt="Suporte" class="mb-3">
+                    <h5>Suporte 24/7</h5>
+                    <p>Atendimento especializado disponível a qualquer hora.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="imagens/icone-custo.png" alt="Custo-benefício" class="mb-3">
+                    <h5>Melhor Custo-Benefício</h5>
+                    <p>Planos acessíveis que cabem no seu bolso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Fale Conosco</h2>
+            <form action="enviarContato.jsp" method="post">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mensagem" class="form-label">Mensagem</label>
+                    <textarea class="form-control" id="mensagem" name="mensagem" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white py-3">
+        <div class="container text-center">
+            <p>&copy; 2024 Taí Telecom - Todos os direitos reservados.</p>
+            <p><a href="https://www.facebook.com" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+               <a href="https://www.instagram.com" class="text-white"><i class="bi bi-instagram"></i></a></p>
+        </div>
+    </footer>
+</body>
+</html>

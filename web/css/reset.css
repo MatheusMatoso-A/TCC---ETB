@@ -9,24 +9,28 @@ ul{
 }
 
 a{
-    
+
     text-decoration: none;
-    
+
 }
 
 
 
-  /*css tem que arrumar  */
+/*css tem que arrumar  */
+/* pagina index */ 
+header{
+    background-color: #f0f0f0;
+}
+.titulo {
 
-main {
-    
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ededed;
+    background-color: 	#FF4500;
     padding: 20px;
-    height: 400px;
+    height: 200px;
 }
+
 
 
 .row {
@@ -48,24 +52,81 @@ main {
     justify-content: center;
 }
 
-      
-        .quem {
-            
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
-        h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #0056b3;
-            text-align: center;
-        }
-        p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-            text-align: justify;
-        }
+
+/* pagina quem somos */ 
+.quem {
+
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+h1 {color: red;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #0056b3;
+    text-align: center;
+}
+p { 
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+/* coisas que aumentam*/ 
+.vantagem-img {
+    transition: transform 0.3s ease; /* Animação suave */
+}
+
+.vantagem-img:hover {
+    transform: scale(1.2); /* Aumenta 20% do tamanho original */
+}
+
+
+
+/* pagina login */     
+main {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#fff ;
+    height: 700px;
+
+}
+
+.login-image {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+footer {
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* cor dos botoes*/      
+.btn-red {
+    background-color: #FF6347;
+    border-color: #FF6347;
+    color: white; /* Mantém o texto branco */
+}
+
+.btn-red:hover {
+    background-color: red; /* Cor do botão ao passar o mouse */
+    border-color: red;
+}
+
+
+
+
+
