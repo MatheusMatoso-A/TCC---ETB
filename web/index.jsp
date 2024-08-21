@@ -10,22 +10,32 @@
         <title>Taí Telecom - Fibra Óptica</title>
     </head>
     <body>
-        <!-- Início do cabeçalho -->
+        <!-- In?cio do cabe?alho -->
         <header>
             <div class="container">
-                <!-- Inclusão do banner -->
+                <!-- Inclus?o do banner -->
                 <%@include file="banner.jsp" %>
-                <!-- Inclusão do menu de navegação -->
+                <!-- Inclus?o do menu de navega??o -->
                 <%@include file="menu.jsp" %>
             </div>
         </header>
+<<<<<<< HEAD
         <!-- Fim do cabeçalho -->
 
         <!-- Imagem de destaque -->
         <div class="container-fluid p-0">
             <img src="imagens/imagem-index.png" class="img-fluid w-100" alt="Imagem de destaque"width="100" height="100">
+=======
+        <!-- Fim do cabe?alho -->
+    <div class ="titulo"  >
+            <h1 class="text-center mb-4">Nossos Planos de Internet</h1>
+>>>>>>> origin/master
         </div>
 
+                        </div>
+                    </div>
+
+<<<<<<< HEAD
         <!-- Seção de Planos de Internet -->
         <section class="my-5">
             <div class="container">
@@ -42,34 +52,26 @@
                                 <p class="card-text"><strong>R$ 99,90/mês</strong></p>
                                 <a href="plano1.jsp" class="btn btn-red vantagem-img">Assinar</a>
                             </div>
+=======
+        <!-- In?cio do conte?do principal -->
+        <main class="container my-5">
+            <!-- T?tulo da se??o -->
+            <!-- Cria??o de uma linha (row) para os planos -->
+            <div class="row">
+                <!-- Plano 1 -->
+                <div class="box">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Plano B?sico</h5>
+                            <p class="card-text">100 Mbps de velocidade</p>
+                            <p class="card-text">Download ilimitado</p>
+                            <p class="card-text">Suporte 24/7</p>
+                            <p class="card-text"><strong>R$ 99,90/m?s</strong></p>
+                            <a href="plano1.jsp" class="btn btn-primary" >Assinar</a>
+>>>>>>> origin/master
                         </div>
                     </div>
 
-                    <!-- Plano 2 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano Intermediário</h5>
-                                <p class="card-text">300 Mbps de velocidade</p>
-                                <p class="card-text">Download ilimitado</p>
-                                <p class="card-text">Suporte 24/7</p>
-                                <p class="card-text"><strong>R$ 149,90/mês</strong></p>
-                                <a href="plano2.jsp" class="btn btn-red vantagem-img">Assinar</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Plano 3 -->
-                    <div class="col-md-4 mb-4 ">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano Avançado</h5>
-                                <p class="card-text">500 Mbps de velocidade</p>
-                                <p class="card-text">Download ilimitado</p>
-                                <p class="card-text">Suporte 24/7</p>
-                                <p class="card-text"><strong>R$ 199,90/mês</strong></p>
-                                <a href="plano3.jsp" class="btn btn-red vantagem-img">Assinar</a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,3 +114,27 @@
 
     </body>
 </html>
+<<<<<<< HEAD
+                    <!-- Plano 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Plano Intermediário</h5>
+                                <p class="card-text">300 Mbps de velocidade</p>
+                                <p class="card-text">Download ilimitado</p>
+                                <p class="card-text">Suporte 24/7</p>
+                                <p class="card-text"><strong>R$ 149,90/mês</strong></p>
+                                <a href="plano2.jsp" class="btn btn-red vantagem-img">Assinar</a>
+                            </div>
+=======
+                <!-- Plano 2 -->
+                <div class="box">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Plano Intermedi?rio</h5>
+                            <p class="card-text">300 Mbps de velocidade</p>
+                            <p class="card-text">Download ilimitado</p>
+                            <p class="card-text">Suporte 24/7</p>
+                            <p class="card-text"><strong>R$ 149,90/m?s</strong></p>
+                            <a href="plano1.jsp" class="btn btn-primary">Assinar</a>
+>>>>>>> origin/master
