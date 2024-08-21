@@ -8,37 +8,37 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/reset.css" type="text/css">
      
-        <title>Taí Telecom - Fibra Óptica</title>
+        <title>Ta? Telecom - Fibra ?ptica</title>
     </head> 
     <body>
-        <!-- Início do cabeçalho -->
+        <!-- In?cio do cabe?alho -->
         <header>
             <div class="container">
-                <!-- Inclusão do banner -->
+                <!-- Inclus?o do banner -->
                 <%@include file="banner.jsp" %>
-                <!-- Inclusão do menu de navegação -->
+                <!-- Inclus?o do menu de navega??o -->
                 <%@include file="menu.jsp" %>
             </div>
         </header>
-        <!-- Fim do cabeçalho -->
+        <!-- Fim do cabe?alho -->
     <div class ="titulo"  >
             <h1 class="text-center mb-4">Nossos Planos de Internet</h1>
         </div>
 
-        <!-- Início do conteúdo principal -->
+        <!-- In?cio do conte?do principal -->
         <main class="container my-5">
-            <!-- Título da seção -->
-            <!-- Criação de uma linha (row) para os planos -->
+            <!-- T?tulo da se??o -->
+            <!-- Cria??o de uma linha (row) para os planos -->
             <div class="row">
                 <!-- Plano 1 -->
                 <div class="box">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Plano Básico</h5>
+                            <h5 class="card-title">Plano B?sico</h5>
                             <p class="card-text">100 Mbps de velocidade</p>
                             <p class="card-text">Download ilimitado</p>
                             <p class="card-text">Suporte 24/7</p>
-                            <p class="card-text"><strong>R$ 99,90/mês</strong></p>
+                            <p class="card-text"><strong>R$ 99,90/m?s</strong></p>
                             <a href="plano1.jsp" class="btn btn-primary" >Assinar</a>
                         </div>
                     </div>
@@ -48,11 +48,11 @@
                 <div class="box">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Plano Intermediário</h5>
+                            <h5 class="card-title">Plano Intermedi?rio</h5>
                             <p class="card-text">300 Mbps de velocidade</p>
                             <p class="card-text">Download ilimitado</p>
                             <p class="card-text">Suporte 24/7</p>
-                            <p class="card-text"><strong>R$ 149,90/mês</strong></p>
+                            <p class="card-text"><strong>R$ 149,90/m?s</strong></p>
                             <a href="plano1.jsp" class="btn btn-primary">Assinar</a>
                         </div>
                     </div>
@@ -62,11 +62,11 @@
                 <div class="box">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Plano Avançado</h5>
+                            <h5 class="card-title">Plano Avan?ado</h5>
                             <p class="card-text">500 Mbps de velocidade</p>
                             <p class="card-text">Download ilimitado</p>
                             <p class="card-text">Suporte 24/7</p>
-                            <p class="card-text"><strong>R$ 199,90/mês</strong></p>
+                            <p class="card-text"><strong>R$ 199,90/m?s</strong></p>
                             <a href="plano1.jsp" class="btn btn-primary">Assinar</a>
                         </div>
                     </div>
