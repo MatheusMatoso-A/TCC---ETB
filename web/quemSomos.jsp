@@ -23,8 +23,6 @@
         <!-- Início do cabeçalho -->
         <header>
             <div class="container">
-                <!-- Inclusão do banner -->
-                <%@include file="banner.jsp" %>
                 <!-- Inclusão do menu de navegação -->
                 <%@include file="menu.jsp" %>
             </div>

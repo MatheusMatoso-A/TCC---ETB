@@ -1,23 +1,19 @@
-<div class="menu"> 
-
-    <ul>    
-        <li><a href="index.jsp">Inicio</a></li>
-        <li><a href="quemSomos.jsp">Quem Somos</a></li>    
-        <li><a href="login.jsp" >Login</a></li>
-    </ul>
-
-</div>
-
-<div class="social">
-
-    <ul>
-
-        <li><a href="https://www.instagram.com/taitelecombsb/"> <img src="imagens/instagram.png" alt="" title="Instagram" class="insta" /> </a></li>
-        <li><a href="https://www.facebook.com/taitelecombsb/"> <img src="imagens/facebook.png" alt="" title="Facebook" class="face" /> </a></li>
-
-    </ul>
-
-</div>
 
 <link rel="stylesheet" href="css/menu.css" type="text/css" />
-<link rel="stylesheet" href="css/social.css" type="text/css" />
+
+<nav class="navbar">
+    <div class="logo">
+        <img src="./imagens/tai.png" alt="Logo">
+    </div>
+    <ul class="menu">
+        <li><a href="index.jsp">Inicio</a></li>
+        <li><a href="quemSomos.jsp">Quem somos</a></li>
+        <li><a href="login.jsp">Login</a></li>
+    </ul>
+    <div class="social-icons">
+
+        <a href="https://www.instagram.com/taitelecombsb/" target="_blank" class="social-icon"><img src="./imagens/instagram.png" alt="Instagram"></a>
+        <a href="https://www.facebook.com/taitelecombsb/" target="_blank" class="social-icon"><img src="./imagens/facebook.png" alt="Facebook"></a>
+    </div>                
+
+</nav>
