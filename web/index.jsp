@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="icon" type="image/png" sizes="16x16" href="imagens/favicon.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="css/reset.css" type="text/css">
         <title>Taí Telecom - Fibra Óptica</title>
     </head>
@@ -24,64 +26,72 @@
         <div class="container-fluid p-0">
             <img src="imagens/imagem-index.png" class="img-fluid w-100" alt="Imagem de destaque"width="100" height="100">
 
-            
-        <!-- Fim do cabe?alho -->
-   
 
-                        </div>
+            <!-- Fim do cabe?alho -->
+
+
+        </div>
 
         <!-- Seção de Planos de Internet -->
-    <section class="my-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Nossos Planos de Internet</h2>
-            <div class="row">
-                <!-- Plano 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Plano Básico</h5>
-                            <p class="card-text">100 Mbps de velocidade</p>
-                            <p class="card-text">Download ilimitado</p>
-                            <p class="card-text">Suporte 24/7</p>
-                            <p class="card-text"><strong>R$ 99,90/mês</strong></p>
-                            <a href="plano1.jsp" class="btn btn-red vantagem-img">Assinar</a>
+        <section class="my-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Nossos Planos de Internet</h2>
+                <div class="row">
+                    <!-- Plano 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Plano Básico</h5>
+                                <p class="card-text">100 Mbps de velocidade</p>
+                                <p class="card-text">Download ilimitado</p>
+                                <p class="card-text">Suporte 24/7</p>
+                                <p class="card-text"><strong>R$ 99,90/mês</strong></p>
+                                <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal" data-bs-target="#myModal">
+                                    Assinar
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-<!-- Plano 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Plano Intermediário</h5>
-                            <p class="card-text">300 Mbps de velocidade</p>
-                            <p class="card-text">Download ilimitado</p>
-                            <p class="card-text">Suporte 24/7</p>
-                            <p class="card-text"><strong>R$ 149,90/mês</strong></p>
-                            <a href="plano2.jsp" class="btn btn-red vantagem-img">Assinar</a>
+                    <!-- Plano 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Plano Intermediário</h5>
+                                <p class="card-text">300 Mbps de velocidade</p>
+                                <p class="card-text">Download ilimitado</p>
+                                <p class="card-text">Suporte 24/7</p>
+                                <p class="card-text"><strong>R$ 149,90/mês</strong></p>
+                                <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal" data-bs-target="#myModal">
+                                    Assinar
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-<!-- Plano 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Plano Avançado</h5>
-                            <p class="card-text">500 Mbps de velocidade</p>
-                            <p class="card-text">Download ilimitado</p>
-                            <p class="card-text">Suporte 24/7</p>
-                            <p class="card-text"><strong>R$ 199,90/mês</strong></p>
-                            <a href="plano3.jsp" class="btn btn-red vantagem-img">Assinar</a>
+                    <!-- Plano 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Plano Avançado</h5>
+                                <p class="card-text">500 Mbps de velocidade</p>
+                                <p class="card-text">Download ilimitado</p>
+                                <p class="card-text">Suporte 24/7</p>
+                                <p class="card-text"><strong>R$ 199,90/mês</strong></p>
+                                <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal" data-bs-target="#myModal">
+                                    Assinar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <!-- Incluindo o modal.jsp -->
+        <jsp:include page="modal.jsp" />
 
- <!-- Seção de Vantagens -->
+        <!-- Seção de Vantagens -->
         <section class="bg-light py-5">
             <div class="container">
                 <h2 class="text-center mb-4">Vantagens de Escolher a Taí Telecom</h2>
