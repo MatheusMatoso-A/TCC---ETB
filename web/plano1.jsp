@@ -28,7 +28,7 @@
 
 
 
-                <form action="processarAssinatura.jsp" method="post">
+                <form action="processarAssinatura.jsp" method="post"> 
                     <!-- Formulário de dados -->
                     <h2 class="text-center mb-4">Preencha seus dados</h2>
                     <!-- Campo Nome Completo -->
@@ -56,8 +56,9 @@
 
                     <!-- Botão Continuar -->
                     <button type="submit" class="btn btn-red w-100 d-block">Continuar</button>
+                </form>
             </div>
-        </form>
+    
     </main>
 
     <footer class="text-white p-4 mt-4">
