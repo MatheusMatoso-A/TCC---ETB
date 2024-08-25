@@ -12,17 +12,17 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="cep" class="form-label">CEP</label>
-                <input type="text" class="form-control" id="cep" name="cep" required>
+                <input type="text" pattern="\d{5}-?\d{3}" maxlength="9" class="form-control" id="cep" name="cep" title="Digite um CEP válido no formato XXXXX-XXX" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="numero" class="form-label">Número</label>
-                <input type="text" class="form-control" id="numero" name="numero" required>
+                <input type="number" class="form-control" id="numero" name="numero" required>
             </div>
         </div>
         <!-- Campo Telefone -->
         <div class="mb-3">
             <label for="telefone" class="form-label">Telefone</label>
-            <input type="tel" class="form-control" id="telefone" name="telefone" required>
+            <input type="number"  class="form-control" id="telefone" name="telefone"  required>
         </div>
 
 
