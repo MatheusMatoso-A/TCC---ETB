@@ -16,7 +16,15 @@ public class Vendas {
     private Produtos produtos;
     private Funcionarios funcionario;
     private Clientes cliente;
-    
-    
 
+    public Vendas(int id, String tipoPag, boolean foiPago, Date dataVenda, Date dataVencimento, Produtos produtos, Funcionarios funcionario, Clientes cliente) {
+        this.id = id;
+        this.tipoPag = tipoPag;
+        this.foiPago = foiPago;
+        this.dataVenda = dataVenda;
+        this.dataVencimento = dataVencimento;
+        this.produtos = produtos;
+        this.funcionario = funcionario;
+        this.cliente = cliente;
+    }
 }

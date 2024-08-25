@@ -13,5 +13,13 @@ public class Funcionarios {
     private String cargo;
     private double salario;
     private String matricula;
-    
+
+    public Funcionarios(int id, String nome, String cpf, String cargo, double salario, String matricula) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.cargo = cargo;
+        this.salario = salario;
+        this.matricula = matricula;
+    }
 }
