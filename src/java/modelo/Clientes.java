@@ -15,10 +15,11 @@ public class Clientes {
     private String email;
     private String rg;
     private Date dataNascimento;
-    private Agenda agenda;
+    private String login;
+    private String senha;
     private PreCadastro preCadastro;
 
-    public Clientes(int id, String nome, String telefone, String cep, String cpf, String email, String rg, Date dataNascimento, Agenda agenda, PreCadastro preCadastro) {
+    public Clientes(int id, String nome, String telefone, String cep, String cpf, String email, String rg, String login, String senha, Date dataNascimento,PreCadastro preCadastro) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -27,7 +28,8 @@ public class Clientes {
         this.email = email;
         this.rg = rg;
         this.dataNascimento = dataNascimento;
-        this.agenda = agenda;
+        this.login = login;
+        this.senha = senha;
         this.preCadastro = preCadastro;
     }
 }

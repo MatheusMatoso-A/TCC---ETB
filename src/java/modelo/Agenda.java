@@ -11,11 +11,11 @@ public class Agenda {
     
     private int id;
     private LocalDateTime dataComparecimento;
-    private Funcionarios funcionario;
+    private Vendas vendas;
 
-    public Agenda(int id, LocalDateTime dataComparecimento, Funcionarios funcionario) {
+    public Agenda(int id, LocalDateTime dataComparecimento, Vendas vendas) {
         this.id = id;
         this.dataComparecimento = dataComparecimento;
-        this.funcionario = funcionario;
+        this.vendas = vendas;
     }
 }
