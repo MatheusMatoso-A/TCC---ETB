@@ -76,6 +76,8 @@
         </section>
         <!-- Fim da Seção de Valores -->
 
+         <%@include file="whatsapp.jsp"%>
+        
         <!-- Início do Rodapé -->
         <footer class=" color red text-white p-4">
             <div class="container text-center">

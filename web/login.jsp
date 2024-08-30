@@ -56,7 +56,9 @@
                 </div> 
             </section>
         </main>
-
+        
+         <%@include file="whatsapp.jsp"%>
+         
         <!-- Início do Rodapé -->
         <footer class="text-white p-4">
             <div class="container text-center">
