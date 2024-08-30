@@ -1,0 +1,125 @@
+.whatsapp-bar {
+
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 180px;
+    /* Largura do ícone */
+    height: 30px;
+    /* Altura do ícone */
+    background-color: #27be5f;
+    /* Cor de fundo do WhatsApp */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    margin: 5px;
+    transition: all 0.3s ease;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+
+
+}
+
+.whatsapp-bar i {
+
+    margin: 10px;
+
+}
+
+.whatsapp-bar:hover {
+    width: 200px;
+    height: 40px;
+
+}
+
+.whatsapp-menu {
+    display: none;
+    position: fixed;
+    right: 0;
+    bottom: 50px;
+    /* Ajuste conforme a altura da barra */
+    width: 200px;
+    /* Largura da barra de opções */
+    background-color: #27be5f;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9998;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-menu a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #ffffff;
+}
+
+.whatsapp-menu a:last-child {
+    border-bottom: none;
+    border-radius: 10px;
+}
+
+.whatsapp-menu a:hover {
+    background-color: #128C7E;
+}
+
+.whatsapp-menu h2 {
+    color: #ffffff;
+    /* Cor do título no estilo do WhatsApp */
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+
+}
+
+.menu-body {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+
+
+}
+
+.menu-body p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+
+}
+
+
+.menu-body img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    width: 100px;
+    height: 100px;
+}
+
+.menu-body a {
+    display: inline-block;
+    background-color: #25D366;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+
+}

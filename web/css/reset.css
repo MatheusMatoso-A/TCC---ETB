@@ -15,12 +15,19 @@ a{
 }
 
 
-
 /*css tem que arrumar  */
 /* pagina index */ 
 header{
     background-color: #f0f0f0;
 }
+
+.conteudo{
+    
+    margin-top: 60px; /* Adicione um espaço para que o conteúdo não fique sob a navbar */
+    padding: auto;
+    
+}
+
 .titulo {
 
     display: flex;
@@ -105,13 +112,13 @@ main {
 
 footer {
     height: 50px;
-    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: red;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0;
+    margin-top: auto;
 }
 
 /* cor dos botoes*/      

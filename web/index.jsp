@@ -21,7 +21,7 @@
         </header>
 
         <!-- Fim do cabeçalho -->
-
+        <div class="conteudo">
         <!-- Imagem de destaque -->
         <div class="container-fluid p-0">
             <img src="imagens/imagem-index.png" class="img-fluid w-100" alt="Imagem de destaque"width="100" height="100">
@@ -115,6 +115,11 @@
             </div>
         </section>
 
+        <!-- Incluindo o whatsapp -->
+        <%@include file="whatsapp.jsp"%>
+
+
+
         <!-- Início do Rodapé -->
         <footer class=" color red text-white p-4">
             <div class="container text-center">
@@ -123,6 +128,6 @@
         </footer>
         <!-- Fim do Rodapé -->
 
-
-    </body>
+    </div>
+</body>
 </html>
