@@ -109,7 +109,8 @@
                     <div class="col-md-4 text-center">
                         <img src="imagens/beneficio.png" alt="Custo-benefício" class="mb-3 vantagem-img" width="50" height="50">
                         <h5>Melhor Custo-Benefício</h5>
-                        <p>Planos acessíveis que cabem no seu bolso.</p>
+                        <p>Planos acessíveis que cabem no seu bolso.<br> 
+                            Planos especiais para negativados, para mais informações, clique em <span style="color: red" ><strong>Fale Conosco</strong></span> e entre em contato com a nossa central de atendimento.</p>
                     </div>
                 </div>
             </div>
