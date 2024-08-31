@@ -12,7 +12,7 @@
         <div class="menu-body">
             <p>Fale diretamente com nossa equipe de atendimento!</p>
             <img src="imagens/call-center.gif" alt="Atendimento WhatsApp">
-            <a href="https://wa.me/5561999999999 target=" _blank>Clique aqui para iniciar uma conversa</a>
+            <a href="https://wa.me/5561991844270" target="_blank">Clique aqui para iniciar uma conversa</a>
             <!-- Adicione mais links conforme necessário -->
         </div>
     </div>
