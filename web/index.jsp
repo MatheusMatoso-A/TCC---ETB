@@ -38,52 +38,17 @@
                 <h2 class="text-center mb-4">Nossos Planos de Internet</h2>
                 <div class="row">
                     <!-- Plano 1 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano Básico</h5>
-                                <p class="card-text">100 Mbps de velocidade</p>
-                                <p class="card-text">Download ilimitado</p>
-                                <p class="card-text">Suporte 24/7</p>
-                                <p class="card-text"><strong>R$ 99,90/mês</strong></p>
-                                <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal" data-bs-target="#myModal">
-                                    Assinar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <%@include file="basico.jsp" %>
 
                     <!-- Plano 2 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano Intermediário</h5>
-                                <p class="card-text">300 Mbps de velocidade</p>
-                                <p class="card-text">Download ilimitado</p>
-                                <p class="card-text">Suporte 24/7</p>
-                                <p class="card-text"><strong>R$ 149,90/mês</strong></p>
-                                <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal" data-bs-target="#myModal">
-                                    Assinar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <%@include file="intermediario.jsp" %>
 
                     <!-- Plano 3 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano Avançado</h5>
-                                <p class="card-text">500 Mbps de velocidade</p>
-                                <p class="card-text">Download ilimitado</p>
-                                <p class="card-text">Suporte 24/7</p>
-                                <p class="card-text"><strong>R$ 199,90/mês</strong></p>
-                                <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal" data-bs-target="#myModal">
-                                    Assinar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                 
+                    <%@include file="avancado.jsp" %>
+                    
                 </div>
             </div>
         </section>
