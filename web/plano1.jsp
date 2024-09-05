@@ -27,6 +27,6 @@
 
 
         <!-- Botão Continuar -->
-        <button type="submit" class="btn btn-red w-100 d-block">Continuar</button>
+        <a href="cadastro.jsp" class="botao"> <button type="submit" class="btn btn-red w-100 d-block">Continuar</button></a>
     </form>
 </div>
