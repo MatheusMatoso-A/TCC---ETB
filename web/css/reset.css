@@ -20,10 +20,10 @@ a{
 
 
 .conteudo{
-    
+
     margin-top: 100px; /* Adicione um espaço para que o conteúdo não fique sob a navbar */
     padding: auto;
-    
+
 }
 
 .titulo {
@@ -106,7 +106,7 @@ main {
     max-width: 300px;
     height: auto;
     margin-bottom: 20px;
-     /* Centralizar a imagem */
+    /* Centralizar a imagem */
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -138,7 +138,11 @@ footer {
     border-color: red;
 }
 
-
+/* Animação suave no hover */
+.card:hover {
+    transform: scale(1.05); /* Aumenta o tamanho do cartão */
+    transition: transform 0.3s ease-in-out; /* Suaviza a transição */
+}
 
 
 
