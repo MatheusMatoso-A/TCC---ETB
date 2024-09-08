@@ -27,7 +27,7 @@
 
         <main>
             <div class="container-fluid py-5">
-                <div class="row">
+                <div class="row justify-content-center">
                     <form action="" method="post" class="col-4 formulario-cadastro">
                         <h2 class="text-center title-form">Informe seus dados</h2>
                         <div class="form-floating mb-3">
@@ -111,12 +111,20 @@
                             </button> 
                         </div>
                     </form>
-                    
-                    <div class="col-5">
-                        
-                        
-                        
-                    </div>
+
+                    <div class="col-5 my-5">
+
+                            <div class="card text-dark border-dark my-4 ">
+                                <div class="card-header text-center bg-danger "><h4> <strong> Plano Básico </strong></h4></div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">100MBps de Velocidade </h5>
+                                    <p class="card-text text-center">Conexão ultra rápida para todos os usos</p>
+                                    <p class="card-text text-center">Download ilimitado</p>
+                                    <p class="card-text text-center">Suporte 24/7</p>
+                                    <p class="card-text text-center"><strong>R$ 99,90/mês</strong></p>
+                                </div>
+                            </div>
+                        </div>
 
 
                 </div>
