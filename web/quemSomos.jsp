@@ -1,9 +1,3 @@
-<%-- 
-    Document   : quemSomos
-    Created on : 20/08/2024, 15:33:53
-    Author     : lilia
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
