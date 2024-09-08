@@ -42,7 +42,7 @@
                     <div class="carousel slide carousel-dark " data-bs-ride="carousel" id="ads">
 
                         <div class="carousel-inner py-5">
-                            <div class="carousel-item active" data-bs-interval="3000">
+                            <div class="carousel-item active" data-bs-interval="5000">
                                 <div class="row justify-content-center">
 
                                     <!-- plano 1 -->
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-bs-interval="5000">
                                 <div class="row justify-content-center">
 
                                     <!-- plano 3 -->
@@ -79,7 +79,7 @@
             <jsp:include page="modal.jsp" />
 
             <!-- Seção de Vantagens -->
-            <section class="bg-light py-5">
+            <section class="bg-vantagens py-5">
                 <div class="container">
                     <h2 class="text-center mb-4">Vantagens de Escolher a Taí Telecom</h2>
                     <div class="row">

@@ -144,5 +144,8 @@ footer {
     transition: transform 0.3s ease-in-out; /* Suaviza a transição */
 }
 
-
+.bg-vantagens{
+    
+    background: #d5d5d5;
+}
 
