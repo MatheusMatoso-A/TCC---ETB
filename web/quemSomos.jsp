@@ -47,7 +47,7 @@
         <!-- Fim da Seção "Quem Somos" -->
 
         <!-- Início da Seção de Valores -->
-        <section class="bg-light py-5">
+        <section class="bg-vantagens py-5">
             <div class="container">
                 <h3 class="text-center mb-4 vantagem-img">Nossos Valores</h3>
                 <div class="row text-center">
