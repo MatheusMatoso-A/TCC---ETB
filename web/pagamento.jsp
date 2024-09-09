@@ -15,11 +15,25 @@
         <link rel="stylesheet" href="css/menu.css" type="text/css" />
         <link rel="stylesheet" href="css/reset.css" type="text/css">
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
+        <link rel="stylesheet" href="css/pagamento.css" type="text/css">
+
+        <style>
+
+            .alguma-coisa{
+
+                position: static;
+
+            }
+
+
+        </style>
+
+
         <title>Taí Telecom - Fibra Óptica</title>
     </head>
     <body>
 
-        <header>
+        <header class="alguma-coisa">
             <div class="container">
                 <nav class="navbar">
                     <div class="logo">
@@ -33,16 +47,28 @@
                     </div>                
 
                 </nav>
-                
-                <nav class="navbar">
-                    <div class="container-fluid">
-                        <button class="btn btn-danger" onclick="history.back()">Voltar</button>
-                    </div>
-                </nav>
+
+
+                <div class="d-flex justify-content-start mt-3">
+                    <button class="btn btn-danger" onclick="history.back()">Voltar</button>
+                </div>
+
             </div>
         </header>
 
-        <main>
+        <main>       
+            <div class="container justify-content-center mt-5">
+                <h2 class="mb-4">Selecione o dia de vencimento da sua fatura</h2>
+
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-start">
+                        <div class="fatura-option btn btn-danger mx-2">5</div>
+                        <div class="fatura-option btn btn-danger mx-2">10</div>
+                        <div class="fatura-option btn btn-danger mx-2">15</div>
+                        <div class="fatura-option btn btn-danger mx-2">20</div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Incluindo o whatsapp -->
             <%@include file="whatsapp.jsp"%>

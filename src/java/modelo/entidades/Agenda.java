@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.entidades;
 
 import java.time.LocalDateTime;
 import lombok.*;

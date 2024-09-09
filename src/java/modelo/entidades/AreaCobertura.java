@@ -1,4 +1,4 @@
-package modelo;
+package modelo.entidades;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package modelo;
+package modelo.entidades;
 
 import java.util.Date;
 import lombok.*;
