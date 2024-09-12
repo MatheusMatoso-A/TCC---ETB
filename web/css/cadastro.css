@@ -1,0 +1,55 @@
+.botao {
+    font-size: 1.25rem;
+    /* Ajuste o tamanho da fonte conforme necessário */
+    padding: 5px 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease
+}
+
+.botao:hover {
+
+
+    transform: scale(1.1);
+    /* Aumenta a escala do botão em 10% ao passar o cursor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.notice {
+    margin: 20px;
+    padding: 10px;
+    background-color: #868686;
+    border: 1px solid #868686;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 2.5rem;
+}
+
+.password-field .eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.formulario-cadastro{
+
+    margin-right: 50px;
+    margin-left:50px; 
+    margin-top: 50px;
+}
+.title-form{
+
+    padding: 20px;
+
+
+}
+

@@ -12,9 +12,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-
         <link rel="stylesheet" href="css/reset.css" type="text/css">
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
+        <link rel="stylesheet" href="css/cadastro.css" type="text/css">
         <title>Taí Telecom - Fibra Óptica</title>
     </head>
     <body>
@@ -105,26 +105,116 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="form-floating mb-3">
+                            <h3 class="my-3 text-center">Selecione o dia do vencimento de sua fatura</h3>
+                            <select class="form-select" id="due-date" name="due_date" onchange="updateSelectedDay()">
+                                <option value="" disabled selected>Selecione um dia</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+
+                        <div class="notice text-center">
+                            A fatura será enviada todo mês para seu e-mail.
+                        </div>
+
+
+                        <h3 class="my-3 text-center">Escolha as credencias para acesso a área do cliente</h3>
+
+                        <div class="form-floating mb-3">
+
+                            <input type="text" class="form-control" placeholder="Digite seu Login" id="login" name="login"
+                                   required>
+                            <label for="login">Login</label>
+                        </div>
+
+                        <div class="form-floating mb-3 password-field">
+                            <input type="password" class="form-control" id="senha" placeholder="Sua senha" required>
+                            <label for="senha">Senha</label>
+                            <i class="bi bi-eye eye-icon" id="togglePassword"></i>
+
+                        </div>
+
+                        <div class="form-floating mb-3 password-field">
+                            <input type="password" class="form-control" id="confirmSenha" placeholder="Confirme sua senha"
+                                   required>
+                            <label for="confirmSenha">Confirmar Senha</label>
+                            <i class="bi bi-eye eye-icon" id="toggleConfirmPassword"></i>
+                        </div>
+
+
+                        <script>
+                            // Função para alternar a visibilidade da senha
+                            function togglePasswordVisibility(passwordFieldId, iconId) {
+                                const passwordField = document.getElementById(passwordFieldId);
+                                const toggleIcon = document.getElementById(iconId);
+
+                                toggleIcon.addEventListener('click', function () {
+                                    const type = passwordField.type === 'password' ? 'text' : 'password';
+                                    passwordField.type = type;
+                                    toggleIcon.classList.toggle('bi-eye');
+                                    toggleIcon.classList.toggle('bi-eye-slash');
+                                });
+                            }
+                            ;
+
+                            // Inicializa a visibilidade da senha para ambos os campos
+                            togglePasswordVisibility('senha', 'togglePassword');
+                            togglePasswordVisibility('confirmSenha', 'toggleConfirmPassword');
+
+
+                        </script>
+
+                        <div class="notice text-center">
+                            Só poderá fazer login e ter acesso a área do cliente após o pagamento.
+                        </div>
+
+
+
                         <div class="text-center">
-                            <button type="submit" class="btn btn-red vantagem-img my-5">
+                            <button type="submit" class="btn btn-danger botao my-3" onclick="submitForm()">
                                 Enviar
                             </button> 
+
+
+
+                            <script>
+
+
+                                // Validação do formulário
+                                document.getElementById('paymentForm').addEventListener('submit', function (event) {
+                                    const senha = document.getElementById('senha').value;
+                                    const confirmSenha = document.getElementById('confirmSenha').value;
+                                    if (senha !== confirmSenha) {
+                                        alert('As senhas não correspondem.');
+                                        event.preventDefault(); // Impede o envio do formulário
+                                    }
+                                });
+                            </script>
+
+
+
+
                         </div>
                     </form>
 
                     <div class="col-5 my-5">
 
-                            <div class="card text-dark border-dark my-4 ">
-                                <div class="card-header text-center bg-danger "><h4> <strong> Plano Básico </strong></h4></div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">100MBps de Velocidade </h5>
-                                    <p class="card-text text-center">Conexão ultra rápida para todos os usos</p>
-                                    <p class="card-text text-center">Download ilimitado</p>
-                                    <p class="card-text text-center">Suporte 24/7</p>
-                                    <p class="card-text text-center"><strong>R$ 99,90/mês</strong></p>
-                                </div>
+                        <div class="card text-dark border-dark my-4 ">
+                            <div class="card-header text-center bg-danger "><h4> <strong> Plano Básico </strong></h4></div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title">100MBps de Velocidade </h5>
+                                <p class="card-text text-center">Conexão ultra rápida para todos os usos</p>
+                                <p class="card-text text-center">Download ilimitado</p>
+                                <p class="card-text text-center">Suporte 24/7</p>
+                                <p class="card-text text-center"><strong>R$ 99,90/mês</strong></p>
                             </div>
                         </div>
+                    </div>
 
 
                 </div>
