@@ -15,8 +15,9 @@ public class Funcionarios {
     private String matricula;
     private String login;
     private String senha;
+    private boolean ativo;
 
-    public Funcionarios(int id, String nome, String cpf, String cargo, double salario, String matricula, String login, String senha) {
+    public Funcionarios(int id, String nome, String cpf, String cargo, double salario, String matricula, String login, String senha, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -25,5 +26,6 @@ public class Funcionarios {
         this.matricula = matricula;
         this.login = login;
         this.senha = senha;
+        this.ativo = ativo;
     }
 }

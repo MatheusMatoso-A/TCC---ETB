@@ -17,9 +17,10 @@ public class Clientes {
     private Date dataNascimento;
     private String login;
     private String senha;
+    private Boolean ativo;
     private PreCadastro preCadastro;
 
-    public Clientes(int id, String nome, String telefone, String cep, String cpf, String email, String rg, String login, String senha, Date dataNascimento,PreCadastro preCadastro) {
+    public Clientes(int id, String nome, String telefone, String cep, String cpf, String email, String rg, String login, String senha, Boolean ativo, Date dataNascimento,PreCadastro preCadastro) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -30,6 +31,7 @@ public class Clientes {
         this.dataNascimento = dataNascimento;
         this.login = login;
         this.senha = senha;
+        this.ativo = ativo;
         this.preCadastro = preCadastro;
     }
 }
