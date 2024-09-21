@@ -2,12 +2,16 @@
     font-size: 1.25rem;
     /* Ajuste o tamanho da fonte conforme necessário */
     padding: 5px 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #FF6347;
+    border-color: #FF6347;
+    color: white;
 }
 
 .botao:hover {
 
-
+    background-color: red; /* Cor do botão ao passar o mouse */
+    border-color: red;
     transform: scale(1.1);
     /* Aumenta a escala do botão em 10% ao passar o cursor */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

@@ -176,7 +176,7 @@
 
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-danger botao my-3" onclick="submitForm()">
+                            <button type="submit" class="btn botao my-3" onclick="submitForm()">
                                 Enviar
                             </button> 
 
