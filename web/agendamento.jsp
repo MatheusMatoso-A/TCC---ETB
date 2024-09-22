@@ -10,6 +10,8 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/endereco.js"></script>
         <link rel="stylesheet" href="css/agendamento.css" type="text/css">
         <link rel="stylesheet" href="css/reset.css" type="text/css">
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
@@ -44,7 +46,24 @@
                     <div class="endereco-completo">
                         <div class="mb-3">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cep" placeholder="Digite o CEP" required>
+                            <input type="text" maxlength="9" class="form-control" id="cep" placeholder="Digite o CEP" onblur="buscarEndereco()" required>
+
+                            <script>
+                                document.getElementById('cep').addEventListener('input', function (e) {
+                                    // Remove qualquer caractere que não seja número
+                                    this.value = this.value.replace(/\D/g, '');
+
+                                    // Formata o CEP
+                                    let value = this.value;
+
+                                    if (value.length > 5) {
+                                        value = value.replace(/(\d{5})(\d{0,3})/, '$1-$2'); // Formato XXXXX-XXX
+                                    }
+
+                                    this.value = value;
+                                });
+                            </script>
+
                         </div>
 
                         <div class="mb-3">
@@ -154,38 +173,7 @@
                     alert('Visita agendada com sucesso!');
                 });
 
-                // Preenchimento automático do CEP
-                document.getElementById('cep').addEventListener('blur', function () {
-                    let cep = this.value.replace(/\D/g, '');
 
-                    document.getElementById('rua').disabled = true;
-                    document.getElementById('bairro').disabled = true;
-                    document.getElementById('cidade').disabled = true;
-                    document.getElementById('estado').disabled = true;
-
-                    if (cep.length === 8) {
-                        fetch(`/buscarCep?cep=${cep}`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (!data.erro) {
-                                        document.getElementById('rua').value = data.logradouro;
-                                        document.getElementById('bairro').value = data.bairro;
-                                        document.getElementById('cidade').value = data.localidade;
-                                        document.getElementById('estado').value = data.uf;
-
-                                        document.getElementById('rua').disabled = true;
-                                        document.getElementById('bairro').disabled = true;
-                                        document.getElementById('cidade').disabled = true;
-                                        document.getElementById('estado').disabled = true;
-                                    } else {
-                                        alert('CEP não encontrado.');
-                                    }
-                                })
-                                .catch(() => alert('Erro ao buscar o CEP.'));
-                    } else {
-                        alert('CEP inválido.');
-                    }
-                });
             </script>
 
             <%@include file="whatsapp.jsp"%>

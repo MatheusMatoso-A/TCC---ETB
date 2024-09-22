@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="cep" class="form-label">CEP</label>
-                <input type="text" maxlength="10" class="form-control" id="cep" name="cep" title="Digite um CEP válido no formato XXXXX-XXX" required>
+                <input type="text" maxlength="9" class="form-control" id="cep" name="cep" title="Digite um CEP válido no formato XXXXX-XXX" required>
 
 
                 <script>
