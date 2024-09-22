@@ -43,16 +43,27 @@
                                     <!-- plano 1 -->
                                     <%@include file="basico.jsp" %>
                                     <!-- plano 2 -->
+                                    <%@include file="essencial.jsp" %>
+                                </div>
+                            </div>
+                                
+                                <div class="carousel-item" data-bs-interval="5000">
+                                <div class="row justify-content-center">
+
+                                    <!-- plano 3 -->
                                     <%@include file="intermediario.jsp" %>
+                                    <!-- plano 4 -->
+                                    <%@include file="aprimorado.jsp" %>
+
                                 </div>
                             </div>
 
                             <div class="carousel-item" data-bs-interval="5000">
                                 <div class="row justify-content-center">
 
-                                    <!-- plano 3 -->
+                                    <!-- plano 5 -->
                                     <%@include file="avancado.jsp" %>
-                                    <!-- plano 4 -->
+                                    <!-- plano 6 -->
                                     <%@include file="ultra.jsp" %>
 
                                 </div>

@@ -8,7 +8,7 @@
             <p class="card-text text-center">Conexão ultra rápida para todos os usos</p>
             <p class="card-text text-center">Download ilimitado</p>
             <p class="card-text text-center">Suporte 24/7</p>
-            <p class="card-text text-center"><strong>R$ 299,90/mês</strong></p>
+            <p class="card-text text-center"><strong>R$ 229,90/mês</strong></p>
             <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal"
                     data-bs-target="#myModal">
                 Assinar
