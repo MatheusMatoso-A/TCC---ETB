@@ -16,6 +16,12 @@ public class PreCadastro {
     private String email;
     private AreaCobertura areaCobertura;
 
+    
+    
+    public PreCadastro(){
+        
+    }
+    
     public PreCadastro(int id, String nome, String cep, String telefone, String cidade, String email, AreaCobertura areaCobertura) {
         this.id = id;
         this.nome = nome;

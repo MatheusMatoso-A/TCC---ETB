@@ -19,6 +19,10 @@ public class Clientes {
     private String senha;
     private Boolean ativo;
     private PreCadastro preCadastro;
+    
+    public Clientes(){
+        
+    }
 
     public Clientes(int id, String nome, String telefone, String cep, String cpf, String email, String rg, String login, String senha, Boolean ativo, Date dataNascimento,PreCadastro preCadastro) {
         this.id = id;

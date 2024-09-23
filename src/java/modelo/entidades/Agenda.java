@@ -13,6 +13,11 @@ public class Agenda {
     private LocalDateTime dataComparecimento;
     private Vendas vendas;
 
+    
+    public Agenda(){
+        
+    }
+    
     public Agenda(int id, LocalDateTime dataComparecimento, Vendas vendas) {
         this.id = id;
         this.dataComparecimento = dataComparecimento;

@@ -13,6 +13,11 @@ public class Produtos {
     private double valor;
     private boolean ativo;
 
+    
+    public Produtos(){
+        
+    }
+    
     public Produtos(int id, String nome, String velocidade, double valor, boolean ativo) {
         this.id = id;
         this.nome = nome;

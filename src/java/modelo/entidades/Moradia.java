@@ -16,6 +16,11 @@ public class Moradia {
     private String pontoReferencia;
     private Clientes cliente;
 
+    
+    public Moradia(){
+        
+    }
+    
     public Moradia(int id, String tipo, String endereco, Integer numero, Integer apartamento, String bloco, String condominio, String pontoReferencia, Clientes cliente) {
 
         this.id = id;

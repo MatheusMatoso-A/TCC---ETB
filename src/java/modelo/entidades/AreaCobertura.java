@@ -11,6 +11,10 @@ public class AreaCobertura {
     private String cep;
     private String cidade;
     private String estado;
+    
+    public AreaCobertura(){
+        
+    }
 
     public AreaCobertura(int id, String cep, String cidade, String estado) {
         this.id = id;
