@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.entidades.AreaCobertura;
 import modelo.entidades.PreCadastro;
 
 public class PreCadastroDAO extends DataBaseDAO implements InterfaceDAO<Integer, PreCadastro> {
@@ -17,6 +18,16 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceDAO<Integer,
     @Override
     public void salvar(PreCadastro pc) throws Exception {
         
+        // Buscar a área de cobertura pelo CEP
+        AreaCobertura ac = daoAreacobertura.buscarPorCep(pc.getCep());
+        
+        // Verificar se a área de cobertura existe
+        if(ac != null){
+            
+            pc.setAreaCobertura(ac);    // Define a área de cobertura
+    
+        }
+        
         String sql = "INSERT INTO precadastro ( nome, cep, telefone, cidade, email, areacobertura_id ) VALUES (?, ?, ?, ?, ?, ?)";
         
         conectar();
@@ -28,7 +39,17 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceDAO<Integer,
         pst.setString(3, pc.getTelefone());
         pst.setString(4, pc.getCidade());
         pst.setString(5, pc.getEmail());
-        pst.setInt(6, pc.getAreaCobertura().getId());
+        
+        // Definir o areacobertura_id como nulo se a área de cobertura não for encontrada
+        if(pc.getAreaCobertura() != null){
+            
+             pst.setInt(6, pc.getAreaCobertura().getId()); 
+        } else {
+            
+            pst.setNull(6, java.sql.Types.INTEGER); // Define o areacobertura_id como nulo
+            
+        }
+       
         
         pst.execute();
         
