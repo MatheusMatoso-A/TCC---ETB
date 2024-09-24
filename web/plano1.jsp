@@ -13,7 +13,7 @@
         <!-- Campo Telefone -->
         <div class="mb-3">
             <label for="telefone" class="form-label">Celular (WhatsApp)</label>
-            <input type="tel"  class="form-control" id="telefone" name="telefone" maxlength="15" required>
+            <input type="tel"  class="form-control" id="telefone" name="telefone" maxlength="14" required>
 
             <script>
                 document.getElementById('telefone').addEventListener('input', function (e) {
