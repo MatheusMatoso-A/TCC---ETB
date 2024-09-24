@@ -122,4 +122,40 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
     }
 
+    public AreaCobertura buscarPorCep(String cep) throws Exception {
+        // Consulta otimizada: buscar apenas o campo id
+        String sql = "SELECT id FROM areacobertura WHERE cep = ?";
+
+        // Criamos o objeto AreaCobertura, que será retornado se o CEP for encontrado
+        AreaCobertura ac = null;
+
+        // Conectar ao banco de dados
+        conectar();
+
+        // Preparar o statement para a consulta
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, cep); // Substitui o ? pelo CEP fornecido
+
+        
+        // Executa a consulta
+        ResultSet rs = pst.executeQuery();
+        
+         // Verifica se a consulta retornou algum registro
+        if (rs.next()) {
+
+             // Apenas cria o objeto com o id
+            ac = new AreaCobertura();
+            ac.setId(rs.getInt("id"));
+
+            // Não é necessário preencher os outros campos, como cidade e estado
+        }
+
+        // Fechar a conexão
+        desconectar();
+
+        // Retorna o objeto AreaCobertura contendo apenas o id, ou null se o CEP não foi encontrado
+        return ac;
+
+    }
+
 }
