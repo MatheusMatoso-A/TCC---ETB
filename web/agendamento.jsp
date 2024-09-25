@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="css/agendamento.css" type="text/css">
         <link rel="stylesheet" href="css/reset.css" type="text/css">
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
-        <title>Taí Telecom - Fibra Óptica</title>
+        <title>Taí Telecom - Agendar visita</title>
     </head>
     <body>
         <header>

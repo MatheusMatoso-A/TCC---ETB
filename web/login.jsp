@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
         <link rel="stylesheet" href="css/login.css" type="text/css">
      
-        <title>Taí Telecom - Fibra Óptica</title>
+        <title>Taí Telecom - Login</title>
     </head>
     <body>
         <!-- Início do cabeçalho -->

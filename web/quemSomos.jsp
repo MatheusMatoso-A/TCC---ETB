@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/quemSomos.css" type="text/css">
         <meta charset="UTF-8">
 
-        <title>Taí Telecom - Fibra Óptica</title>
+        <title>Taí Telecom - Quem somos</title>
     </head>
     <body>
         <!-- Início do cabeçalho -->

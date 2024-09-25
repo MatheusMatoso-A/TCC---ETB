@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/reset.css" type="text/css">
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
         <link rel="stylesheet" href="css/informativo.css" type="text/css">
-        <title>Taí Telecom - Fibra Óptica</title>
+        <title>Taí Telecom - Informativo Importante</title>
     </head>
     <body>
         
