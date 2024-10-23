@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/reset.css" type="text/css">
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
         <link rel="stylesheet" href="css/login.css" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      
         <title>Taí Telecom - Login</title>
     </head>
@@ -18,7 +19,9 @@
         <header>
             <div class="container">
                 <!-- Inclusão do menu de navegação -->
-                <%@include file="menu.jsp" %>
+                
+                
+                <div class="text-bg-danger p-3"><i class="bi bi-arrow-left-square"></i></div>
             </div>
         </header>
         <!-- Fim do cabeçalho -->
@@ -53,14 +56,5 @@
             </section>
         </main>
         
-         <%@include file="whatsapp.jsp"%>
-         
-        <!-- Início do Rodapé -->
-        <footer class="text-white p-4">
-            <div class="container text-center">
-                <p>&copy; 2024 Taí Telecom. Todos os direitos reservados.</p>
-            </div>
-        </footer>
-        <!-- Fim do Rodapé -->
     </body>
 </html>
