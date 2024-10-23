@@ -8,7 +8,7 @@
     <ul class="menu">
         <li><a href="index.jsp">Inicio</a></li>
         <li><a href="quemSomos.jsp">Quem somos</a></li>
-        <li><a href="login.jsp">Login</a></li>
+        <li><a href="login.jsp" target="blank">Login</a></li>
     </ul>
     <div class="social-icons">
 
