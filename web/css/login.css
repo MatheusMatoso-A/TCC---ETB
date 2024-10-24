@@ -1,16 +1,33 @@
 /* pagina login */     
+
+body{
+    
+    background: url(../imagens/fundo-login.jpg) center;
+    background-size: cover;
+    
+}
+
+header {
+    
+    padding: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+}
+
 main {
 
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#fff ;
     height: 700px;
 
 }
 
 .login-image {
-    width: 80%;
+    width: 60%;
     max-width: 300px;
     height: auto;
     margin-bottom: 20px;
@@ -18,7 +35,32 @@ main {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: auto; 
+    background-color: transparent;
+}
 
-    /* Descer um pouco mais a imagem */
-    margin-top: 100px; /* Ajuste este valor conforme necessário */
+.seta{
+      width: 50px;
+      height: 50px;  
+}
+
+.botao {
+    font-size: 1.25rem;
+    /* Ajuste o tamanho da fonte conforme necessário */
+    padding: 5px 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #FF6347;
+    border-color: #FF6347;
+    color: white;
+}
+
+.botao:hover {
+
+    background-color: red; /* Cor do botão ao passar o mouse */
+    border-color: red;
+    color: black;
+    transform: scale(1.1);
+    /* Aumenta a escala do botão em 10% ao passar o cursor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
 }

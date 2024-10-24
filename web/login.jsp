@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
         <link rel="stylesheet" href="css/login.css" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-     
+
         <title>Taí Telecom - Login</title>
     </head>
     <body>
@@ -19,21 +19,21 @@
         <header>
             <div class="container">
                 <!-- Inclusão do menu de navegação -->
-                
-                
-                <div class="text-bg-danger p-3"><i class="bi bi-arrow-left-square"></i></div>
-            </div>
+
+                <a href="index.jsp" class="d-inline-flex align-items-center">
+                    <button class="btn botao"> Voltar </button>
+                </a>
         </header>
         <!-- Fim do cabeçalho -->
-       
+
         <main>
             <section>
                 <!-- Imagem acima do login -->
-                <img src="imagens/logo-tai.png" alt="Banner" class="login-image" />
+                <img src="imagens/tai.png" alt="Banner" class="login-image" />
 
                 <!-- Formulário de login -->
                 <div class="container my-5">
-                    <h2 class="text-center mb-4">Login</h2>
+                    <h2 class="text-center mb-4">Acessar Conta</h2>
                     <form action="processarLogin.jsp" method="post">
                         <!-- Campo Login -->
                         <div class="mb-3">
@@ -55,6 +55,6 @@
                 </div> 
             </section>
         </main>
-        
+
     </body>
 </html>

@@ -1,14 +1,16 @@
 
 <link rel="stylesheet" href="css/menu.css" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <nav class="navbar">
     <div class="logo">
         <img src="./imagens/tai.png" alt="Logo">
     </div>
     <ul class="menu">
-        <li><a href="index.jsp">Inicio</a></li>
-        <li><a href="quemSomos.jsp">Quem somos</a></li>
-        <li><a href="login.jsp" target="blank">Login</a></li>
+        <li><a href="index.jsp"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="quemSomos.jsp"><i class="fas fa-users"></i> Quem Somos</a></li>
+        <li><a href="login.jsp" target="blank"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        
     </ul>
     <div class="social-icons">
 
