@@ -32,23 +32,20 @@
                 <img src="imagens/tai.png" alt="Banner" class="login-image" />
 
                 <!-- Formulário de login -->
-                <div class="container my-5">
+                <div class="container my-4">
                     <h2 class="text-center mb-4">Acessar Conta</h2>
                     <form action="processarLogin.jsp" method="post">
                         <!-- Campo Login -->
                         <div class="mb-3">
-                            <label for="login" class="form-label">Login:</label>
+                            <label for="login" class="form-label"> <strong>Login:</strong></label>
                             <input type="text" class="form-control" id="login" name="login" required>
                         </div>
                         <!-- Campo Senha -->
                         <div class="mb-3">
-                            <label for="senha" class="form-label">Senha:</label>
+                            <label for="senha" class="form-label"><strong>Senha:</strong></label>
                             <input type="password" class="form-control" id="senha" name="senha" required>
                         </div>
-                        <!-- Link Esqueci a Senha -->
-                        <div class="mb-3 text-end">
-                            <a href="#" class="link-primary">Esqueci minha senha</a>
-                        </div>
+                        
                         <!-- Botão Entrar -->
                         <button type="submit" class="btn btn-red w-100">Entrar</button>
                     </form>
