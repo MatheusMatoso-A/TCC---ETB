@@ -9,7 +9,7 @@ public abstract class DataBaseDAO {
     //Driver JDBC
     public static final String DRIVER = "com.mysql.jdbc.Driver";
     //URL de conexao com o banco
-    public static final String URL = "jdbc:mysql://localhost:3306/taitelecom";
+    public static final String URL = "jdbc:mysql://localhost:3306/tccbd";
     //Usuario do banco
     private static final String DB_USER = "root";
     //Senha do banco

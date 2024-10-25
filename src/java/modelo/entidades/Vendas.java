@@ -9,7 +9,6 @@ import lombok.*;
 public class Vendas {
     
     private int id;
-    private String tipoPag;
     private boolean foiPago;
     private Date dataVenda;
     private Date dataVencimento;
@@ -22,9 +21,8 @@ public class Vendas {
         
     }
     
-    public Vendas(int id, String tipoPag, boolean foiPago, Date dataVenda, Date dataVencimento, Produtos produtos, Funcionarios funcionario, Clientes cliente) {
+    public Vendas(int id, boolean foiPago, Date dataVenda, Date dataVencimento, Produtos produtos, Funcionarios funcionario, Clientes cliente) {
         this.id = id;
-        this.tipoPag = tipoPag;
         this.foiPago = foiPago;
         this.dataVenda = dataVenda;
         this.dataVencimento = dataVencimento;

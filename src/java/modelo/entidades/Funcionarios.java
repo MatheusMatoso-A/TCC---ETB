@@ -7,7 +7,6 @@ import lombok.*;
 public class Funcionarios extends Usuarios {
 
     private int id;
-    private String cargo;
     private double salario;
     private String matricula;
     private Usuarios usuario;
@@ -16,9 +15,8 @@ public class Funcionarios extends Usuarios {
 
     }
 
-    public Funcionarios(int id, String cargo, double salario, String matricula, Usuarios usuario) {
+    public Funcionarios(int id, double salario, String matricula, Usuarios usuario) {
         this.id = id;
-        this.cargo = cargo;
         this.salario = salario;
         this.matricula = matricula;
         this.usuario = usuario;
