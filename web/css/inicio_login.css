@@ -1,0 +1,36 @@
+.menu-body {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+
+
+}
+
+.menu-body p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+
+}
+
+.menu-body a {
+    display: inline-block;
+    background-color: #25D366;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+
+}
+
+.menu-body a:hover {
+    background-color: #128C7E;
+}
+
+
