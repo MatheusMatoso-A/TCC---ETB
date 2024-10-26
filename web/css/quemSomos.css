@@ -8,12 +8,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
-h1 {color: red;
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #0056b3;
-    text-align: center;
-}
+
 p { 
     line-height: 1.6;
     margin-bottom: 15px;
@@ -28,3 +23,8 @@ p {
     transform: scale(1.2); /* Aumenta 20% do tamanho original */
 }
 
+.sobre{
+    margin-top: 80px;
+    background-color: whitesmoke
+    
+}

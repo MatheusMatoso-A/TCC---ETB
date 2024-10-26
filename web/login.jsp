@@ -23,6 +23,7 @@
                 <a href="index.jsp" class="d-inline-flex align-items-center">
                     <button class="btn botao"> Voltar </button>
                 </a>
+            </div>
         </header>
         <!-- Fim do cabeçalho -->
 

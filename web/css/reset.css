@@ -28,8 +28,9 @@ p {
 
 .conteudo{
 
-    margin-top: 100px; /* Adicione um espaço para que o conteúdo não fique sob a navbar */
+    margin-top: 115px; /* Adicione um espaço para que o conteúdo não fique sob a navbar */
     padding: auto;
+    background-color: whitesmoke;
 
 }
 

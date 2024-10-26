@@ -20,24 +20,23 @@
         <header>
             <div class="container">
                 <!-- Inclusão do menu de navegação -->
-                <%@include file="menu.jsp" %>
-            </div>
+                <%@include file="menu.jsp" %> 
         </header>
 
         <!-- Início da Seção "Quem Somos" -->
-        <section class="py-5 ">
+        <section class="py-5 sobre">
             <div class="container">
-                <h2 class="text-center mb-5 ">Quem Somos</h2>
+                <h1 class="text-center mb-5 ">Quem Somos?</h1>
 
                 <p class="text-center mb-4">A Taí Telecom é uma empresa devidamente autorizada pela Anatel, com soluções em sistemas de internet para redes corporativas, residenciais e com especialização em infraestrutura em condomínios. Em nosso quadro contamos com profissionais capacitados, motivo pelo qual, contamos com a nossa capacidade de satisfazer as aspirações de nossos clientes, parceiros e colaboradores.</p>
-
+                <br>
                 <div class="row">
                     <div class="col-md-6 vantagem-img">
                         <img src="imagens/mundo.png" alt="Nossa Equipe" class="img-fluid rounded" width="70%" height="70%">
                     </div>
                     <div class="col-md-6 ">
                         <h3>Nossa Missão</h3>
-                        <p>Prover conectividade de alta qualidade com atendimento humanizado, assegurando a melhor experiência para nossos clientes.</p>
+                        <p>Prover conectividade de alta qualidade com atendimento humanizado, assegurando a melhor experiência para nossos clientes.</p> <br>
                         <h3>Nossa Visão</h3>
                         <p>Ser a principal escolha para soluções de internet, expandindo nossa presença e impactando positivamente a comunidade.</p>
                     </div>
@@ -48,7 +47,7 @@
         <!-- Fim da Seção "Quem Somos" -->
 
         <!-- Início da Seção de Valores -->
-        <section class="bg-vantagens py-5">
+        <section class="bg-vantagens py-5 ">
             <div class="container">
                 <h3 class="text-center mb-4 vantagem-img">Nossos Valores</h3>
                 <div class="row text-center">
