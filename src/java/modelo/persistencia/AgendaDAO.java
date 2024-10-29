@@ -1,5 +1,7 @@
 package modelo.persistencia;
 
+import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.util.List;
 import modelo.entidades.Agenda;
 
@@ -17,8 +19,9 @@ public class AgendaDAO  extends DataBaseDAO implements InterfaceDAO<Integer, Age
           
           conectar();
                   
-        
-        
+          PreparedStatement pst = conn.prepareStatement(sql);
+          
+         pst.setTimestamp(1, Timestamp.valueOf(ag.getDataComparecimento()));
         
     }
 
