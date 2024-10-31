@@ -1,0 +1,23 @@
+.btn-transparent {
+    background-color: rgba(205, 255, 255, 1); /* Cor de fundo */
+    color: #333; /* Cor do texto */
+    border: 2px solid #000; /* Borda preta */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Sombras ao redor da borda */
+    width: 80%;
+    height: 200px; /* Altura do botão */
+    font-size: 1.5rem; /* Tamanho da fonte */
+    position: relative; /* Para posicionar a imagem dentro */
+    overflow: hidden; /* Para esconder parte da imagem, se necessário */
+    margin-top: 100px;
+    box-sizing: border-box; /* Inclui a borda e padding no tamanho total do botão */
+    padding: 10px; /* Espaço interno */
+}
+
+.btn-transparent img {
+    position: absolute; /* Posiciona a imagem dentro do botão */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta para o centro */
+    width: 100px; /* Tamanho da imagem */
+    height: 100px; /* Tamanho da imagem */
+}
