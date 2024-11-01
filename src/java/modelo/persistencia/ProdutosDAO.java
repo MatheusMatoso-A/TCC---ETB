@@ -2,17 +2,28 @@ package modelo.persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import modelo.entidades.Produtos;
 
 /**
  *
  * @author mathe
  */
-public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Produtos> {
+public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Produtos>, InterfaceLoggable {
+
+    private static final Logger LOGGER = Logger.getLogger(ProdutosDAO.class.getName());
 
     public ProdutosDAO() throws Exception {
+
+    }
+
+    @Override
+    public Logger getLogger() {
+
+        return LOGGER;
 
     }
 
@@ -23,15 +34,29 @@ public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Pr
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setString(1, p.getNome());
-        pst.setString(2, p.getVelocidade());
-        pst.setDouble(3, p.getValor());
+            logInfo("Executando SQL: ", sql);
+            logFine("Nome: {0}, Velocidade: {1}, Valor: {2}", new Object[]{p.getNome(), p.getVelocidade(), p.getValor()});
 
-        pst.execute();
+            pst.setString(1, p.getNome());
+            pst.setString(2, p.getVelocidade());
+            pst.setDouble(3, p.getValor());
 
-        desconectar();
+            pst.execute();
+
+            logInfo("Inserção bem-sucedida no banco de dados para Nome: {0}, Velocidade: {1}, Valor: {2}", new Object[]{p.getNome(), p.getVelocidade(), p.getValor()});
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao inserir no banco de dados: {0}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+        }
+
     }
 
     @Override
@@ -104,17 +129,17 @@ public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Pr
 
         PreparedStatement pst = conn.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             Produtos p = new Produtos();
             p.setId(rs.getInt("id"));
             p.setNome(rs.getString("nome"));
             p.setVelocidade(rs.getString("velocidade"));
             p.setValor(rs.getDouble("valor"));
             p.setAtivo(rs.getBoolean("ativo"));
-            
+
             listaP.add(p);
-            
+
         }
         desconectar();
         return listaP;

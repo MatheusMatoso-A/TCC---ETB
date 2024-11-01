@@ -61,17 +61,32 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setString(1, ac.getCep());
-        pst.setString(2, ac.getCidade());
-        pst.setString(3, ac.getEstado());
+            logInfo("Executando SQL: ", sql);
+            logFine("CEP: {0}, Cidade: {1}, Estado: {2}, ID: {3}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado(), ac.getId()});
 
-        pst.setInt(4, ac.getId());
+            pst.setString(1, ac.getCep());
+            pst.setString(2, ac.getCidade());
+            pst.setString(3, ac.getEstado());
 
-        pst.execute();
+            pst.setInt(4, ac.getId());
 
-        desconectar();
+            pst.execute();
+
+            logInfo("Modificação bem-sucedida no banco de dados para CEP: {0}, Cidade: {1}, Estado: {2}, ID: {3}  ", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado(), ac.getId()});
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        }
 
     }
 
@@ -82,13 +97,28 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setInt(1, ac.getId());
+            logInfo("Executando SQL: ", sql);
+            logFine("ID: {0}", ac.getId());
 
-        pst.execute();
+            pst.setInt(1, ac.getId());
 
-        desconectar();
+            pst.execute();
+
+            logInfo("Exclusão bem-sucedida no banco de dados para ID: {0}", ac.getId());
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao deletar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        }
 
     }
 
@@ -101,20 +131,39 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1, id);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        ResultSet rs = pst.executeQuery();
-        if (rs.next()) {
+            logInfo("Executando SQL : ", sql);
+            logFine("ID: {0}", ac.getId());
 
-            ac.setId(rs.getInt("id"));
-            ac.setCep(rs.getString("cep"));
-            ac.setCidade(rs.getString("cidade"));
-            ac.setEstado(rs.getString("estado"));
+            pst.setInt(1, id);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    ac.setId(rs.getInt("id"));
+                    ac.setCep(rs.getString("cep"));
+                    ac.setCidade(rs.getString("cidade"));
+                    ac.setEstado(rs.getString("estado"));
+
+                }
+            }
+
+            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", ac.getId());
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar por ID no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
 
         }
 
-        desconectar();
         return ac;
 
     }
@@ -127,21 +176,37 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
         List<AreaCobertura> listaAc = new ArrayList<AreaCobertura>();
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
 
-        while (rs.next()) {
+            logInfo("Executando SQL: ", sql);
 
-            AreaCobertura ac = new AreaCobertura();
+            while (rs.next()) {
 
-            ac.setId(rs.getInt("id"));
-            ac.setCep(rs.getString("cep"));
-            ac.setCidade(rs.getString("cidade"));
-            ac.setEstado(rs.getString("estado"));
+                AreaCobertura ac = new AreaCobertura();
 
-            listaAc.add(ac);
+                ac.setId(rs.getInt("id"));
+                ac.setCep(rs.getString("cep"));
+                ac.setCidade(rs.getString("cidade"));
+                ac.setEstado(rs.getString("estado"));
+
+                listaAc.add(ac);
+            }
+            
+            logInfo("Pesquisa realizada com sucesso", "");
+            
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
         }
-        desconectar();
+
         return listaAc;
 
     }

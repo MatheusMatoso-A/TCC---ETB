@@ -4,18 +4,18 @@ import lombok.*;
 
 @Getter
 @Setter
-public class Funcionarios extends Usuarios {
+public class Funcionarios extends Usuario {
 
     private int id;
     private double salario;
     private String matricula;
-    private Usuarios usuario;
+    private Usuario usuario;
     
     public Funcionarios() {
 
     }
 
-    public Funcionarios(int id, double salario, String matricula, Usuarios usuario) {
+    public Funcionarios(int id, double salario, String matricula, Usuario usuario) {
         this.id = id;
         this.salario = salario;
         this.matricula = matricula;
