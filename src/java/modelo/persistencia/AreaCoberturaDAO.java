@@ -2,13 +2,24 @@ package modelo.persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import modelo.entidades.AreaCobertura;
 
-public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Integer, AreaCobertura> {
+public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Integer, AreaCobertura>, InterfaceLoggable {
+
+    private static final Logger LOGGER = Logger.getLogger(AreaCoberturaDAO.class.getName());
 
     public AreaCoberturaDAO() throws Exception {
+
+    }
+
+    @Override
+    public Logger getLogger() {
+
+        return LOGGER;
 
     }
 
@@ -19,16 +30,29 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setString(1, ac.getCep());
-        pst.setString(2, ac.getCidade());
-        pst.setString(3, ac.getEstado());
+            logInfo("Executando SQL: ", sql);
+            logFine("CEP: {0}, Cidade: {1}, Estado: {2}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado()});
 
-        pst.execute();
+            pst.setString(1, ac.getCep());
+            pst.setString(2, ac.getCidade());
+            pst.setString(3, ac.getEstado());
 
-        desconectar();
+            pst.execute();
 
+            logInfo("Inserção bem-sucedida no banco de dados para CEP: {0}, Cidade: {1}, Estado: {2}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado()});
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao inserir no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        }
     }
 
     @Override
@@ -136,14 +160,13 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setString(1, cep); // Substitui o ? pelo CEP fornecido
 
-        
         // Executa a consulta
         ResultSet rs = pst.executeQuery();
-        
-         // Verifica se a consulta retornou algum registro
+
+        // Verifica se a consulta retornou algum registro
         if (rs.next()) {
 
-             // Apenas cria o objeto com o id
+            // Apenas cria o objeto com o id
             ac = new AreaCobertura();
             ac.setId(rs.getInt("id"));
 

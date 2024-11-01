@@ -11,7 +11,7 @@ import modelo.entidades.Menu;
 import modelo.entidades.Perfil;
 import modelo.entidades.PerfilMenu;
 
-public class PerfilMenuDAO extends DataBaseDAO {
+public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable{
 
     private static final Logger LOGGER = Logger.getLogger(PerfilMenuDAO.class.getName());
 
@@ -19,6 +19,13 @@ public class PerfilMenuDAO extends DataBaseDAO {
 
     }
 
+    @Override
+    public Logger getLogger() {
+        
+        return LOGGER;
+    
+    }
+    
     public List<PerfilMenu> perfilMenuVinculado(Integer perfil_id) throws Exception {
 
         List<PerfilMenu> listaPM = new ArrayList<PerfilMenu>();
@@ -134,7 +141,7 @@ public class PerfilMenuDAO extends DataBaseDAO {
 
             // Logging de informações sobre o SQL e IDs que estão sendo processados
             LOGGER.log(Level.INFO, "Executando SQL: ", sql);
-            LOGGER.log(Level.INFO, "Menu ID: {0}, Perfil ID: {1}", new Object[]{pm.getMenu().getId(), pm.getPerfil().getId()});
+            LOGGER.log(Level.FINE, "Menu ID: {0}, Perfil ID: {1}", new Object[]{pm.getMenu().getId(), pm.getPerfil().getId()});
 
             pst.setInt(1, pm.getMenu().getId());
             pst.setInt(2, pm.getPerfil().getId());
@@ -166,7 +173,7 @@ public class PerfilMenuDAO extends DataBaseDAO {
 
             // Logging de informações sobre o SQL e IDs que estão sendo processados
             LOGGER.log(Level.INFO, "Executando SQL: ", sql);
-            LOGGER.log(Level.INFO, "Menu ID: {0}, Perfil ID: {1}", new Object[]{pm.getMenu().getId(), pm.getPerfil().getId()});
+            LOGGER.log(Level.FINE, "Menu ID: {0}, Perfil ID: {1}", new Object[]{pm.getMenu().getId(), pm.getPerfil().getId()});
 
             pst.setInt(1, pm.getMenu().getId());
             pst.setInt(2, pm.getPerfil().getId());
@@ -187,5 +194,7 @@ public class PerfilMenuDAO extends DataBaseDAO {
         }
 
     }
+
+    
 
 }
