@@ -37,7 +37,7 @@
                 <i class="bi bi-people"></i>
                 Nome do Usuário
             </button>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" href="#">Alterar Cadastro</a></li>
                 <li><a class="dropdown-item" href="index.jsp">Sair</a></li>
             </ul>
