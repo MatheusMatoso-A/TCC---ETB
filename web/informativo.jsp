@@ -47,7 +47,7 @@
 
 
     <!-- Início do Rodapé -->
-    <footer class=" color red text-white p-4 my-5">
+    <footer class="arrumando-footer">
         <div class="container text-center">
             <p>&copy; 2024 Taí Telecom. Todos os direitos reservados.</p>
         </div>

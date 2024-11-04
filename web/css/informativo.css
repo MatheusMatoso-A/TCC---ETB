@@ -1,7 +1,7 @@
 body {
-            background-color: #f5f5f5;
-            color: #333;
-        }
+    background-color: #f5f5f5;
+    color: #333;
+}
 .infomacoes {
     background-color: #fff;
     border-radius: 8px;
@@ -34,3 +34,8 @@ body {
     height: auto;
 }
 
+.arrumando-footer{
+    
+    margin-top: 50px;
+    
+}
