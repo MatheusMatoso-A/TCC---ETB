@@ -8,7 +8,7 @@
     font-size: 1.5rem; /* Tamanho da fonte */
     position: relative; /* Para posicionar a imagem dentro */
     overflow: hidden; /* Para esconder parte da imagem, se necessário */
-    margin-top: 100px;
+    margin-top: 200px;
     box-sizing: border-box; /* Inclui a borda e padding no tamanho total do botão */
     padding: 10px; /* Espaço interno */
 }
