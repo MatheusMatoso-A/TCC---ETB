@@ -1,11 +1,10 @@
 package modelo.entidades;
 
-import java.util.Date;
 import lombok.*;
 
 @Getter
 @Setter
-public class Clientes extends Usuario{
+public class Clientes {
 
     private int id;
     private Usuario usuario;

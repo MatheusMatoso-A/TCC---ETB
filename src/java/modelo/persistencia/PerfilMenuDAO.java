@@ -11,7 +11,7 @@ import modelo.entidades.Menu;
 import modelo.entidades.Perfil;
 import modelo.entidades.PerfilMenu;
 
-public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable{
+public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable {
 
     private static final Logger LOGGER = Logger.getLogger(PerfilMenuDAO.class.getName());
 
@@ -21,11 +21,11 @@ public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable{
 
     @Override
     public Logger getLogger() {
-        
+
         return LOGGER;
-    
+
     }
-    
+
     public List<PerfilMenu> perfilMenuVinculado(Integer perfil_id) throws Exception {
 
         List<PerfilMenu> listaPM = new ArrayList<PerfilMenu>();
@@ -76,6 +76,9 @@ public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable{
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Erro inesperado ao consultar PerfilMenu vinculados: {0}", e.getMessage());
             throw e; // Re-lançar a exceção para que ela possa ser tratada em um nível superior
+        } finally {
+
+            desconectar();
         }
 
         return listaPM;
@@ -126,6 +129,9 @@ public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable{
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Erro inesperado ao consultar PerfilMenu vinculados: {0}", e.getMessage());
             throw e; // Re-lançar a exceção para que ela possa ser tratada em um nível superior
+        } finally {
+
+            desconectar();
         }
 
         return listaPM;
@@ -159,6 +165,9 @@ public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable{
             // Logging de erro para exceções gerais
             LOGGER.log(Level.SEVERE, "Erro inesperado: {0}", e.getMessage());
             throw e;
+        } finally {
+
+            desconectar();
         }
 
     }
@@ -191,10 +200,11 @@ public class PerfilMenuDAO extends DataBaseDAO implements InterfaceLoggable{
             // Logging de erro para exceções gerais
             LOGGER.log(Level.SEVERE, "Erro inesperado: {0}", e.getMessage());
             throw e;
+        } finally {
+
+            desconectar();
         }
 
     }
-
-    
 
 }

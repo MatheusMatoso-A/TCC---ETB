@@ -55,6 +55,9 @@ public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Pr
             // Logging de erro para exceções gerais
             logSevere("Erro inesperado: {0}", e.getMessage());
             throw e;
+        } finally {
+
+            desconectar();
         }
 
     }

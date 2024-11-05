@@ -7,7 +7,7 @@ import lombok.*;
 
 @Getter
 @Setter
-public abstract class Usuario {
+public class Usuario {
     
     private int id;
     private String nome;

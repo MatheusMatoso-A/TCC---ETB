@@ -4,7 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
-public class Funcionarios extends Usuario {
+public class Funcionarios  {
 
     private int id;
     private double salario;

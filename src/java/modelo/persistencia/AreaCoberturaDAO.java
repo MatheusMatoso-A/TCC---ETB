@@ -41,7 +41,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
             pst.execute();
 
-            logInfo("Inserção bem-sucedida no banco de dados para CEP: {0}, Cidade: {1}, Estado: {2}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado()});
+            logInfo("Inserido com sucesso no banco de dados para CEP: {0}, Cidade: {1}, Estado: {2}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado()});
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
             logSevere("Erro ao inserir no banco de dados: {0}", e.getMessage());
@@ -52,6 +52,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
             logSevere("Erro inesperado: {0}", e.getMessage());
             throw e;
 
+        } finally {
+
+            desconectar();
         }
     }
 
@@ -74,7 +77,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
             pst.execute();
 
-            logInfo("Modificação bem-sucedida no banco de dados para CEP: {0}, Cidade: {1}, Estado: {2}, ID: {3}  ", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado(), ac.getId()});
+            logInfo("Modificado com sucesso no banco de dados para CEP: {0}, Cidade: {1}, Estado: {2}, ID: {3}  ", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado(), ac.getId()});
 
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
@@ -86,6 +89,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
             logSevere("Erro inesperado: {0}", e.getMessage());
             throw e;
 
+        } finally {
+
+            desconectar();
         }
 
     }
@@ -106,7 +112,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
             pst.execute();
 
-            logInfo("Exclusão bem-sucedida no banco de dados para ID: {0}", ac.getId());
+            logInfo("Excluido com sucesso no banco de dados para ID: {0}", ac.getId());
 
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
@@ -118,6 +124,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
             logSevere("Erro inesperado: {0}", e.getMessage());
             throw e;
 
+        } finally {
+
+            desconectar();
         }
 
     }
@@ -150,7 +159,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
                 }
             }
 
-            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", ac.getId());
+            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", id);
 
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
@@ -162,6 +171,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
             logSevere("Erro inesperado: {0}", e.getMessage());
             throw e;
 
+        } finally {
+
+            desconectar();
         }
 
         return ac;
@@ -192,9 +204,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
                 listaAc.add(ac);
             }
-            
+
             logInfo("Pesquisa realizada com sucesso", "");
-            
+
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
             logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
@@ -205,6 +217,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
             logSevere("Erro inesperado: {0}", e.getMessage());
             throw e;
 
+        } finally {
+
+            desconectar();
         }
 
         return listaAc;
@@ -221,25 +236,44 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
         // Conectar ao banco de dados
         conectar();
 
-        // Preparar o statement para a consulta
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, cep); // Substitui o ? pelo CEP fornecido
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        // Executa a consulta
-        ResultSet rs = pst.executeQuery();
+              logInfo("Executando SQL: ", sql);
+            
+            // Preparar o statement para a consulta
+            pst.setString(1, cep); // Substitui o ? pelo CEP fornecido
 
-        // Verifica se a consulta retornou algum registro
-        if (rs.next()) {
+            // Executa a consulta
+            try (ResultSet rs = pst.executeQuery()) {
 
-            // Apenas cria o objeto com o id
-            ac = new AreaCobertura();
-            ac.setId(rs.getInt("id"));
+                // Verifica se a consulta retornou algum registro
+                if (rs.next()) {
 
-            // Não é necessário preencher os outros campos, como cidade e estado
+                    // Apenas cria o objeto com o id
+                    ac = new AreaCobertura();
+                    ac.setId(rs.getInt("id"));
+
+                    // Não é necessário preencher os outros campos, como cidade e estado
+                }
+
+            }
+            
+            logInfo("Pesquisa por CEP bem-sucedida no banco de dados para o ID: {0}", cep);
+            
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
         }
-
-        // Fechar a conexão
-        desconectar();
 
         // Retorna o objeto AreaCobertura contendo apenas o id, ou null se o CEP não foi encontrado
         return ac;
