@@ -15,15 +15,15 @@
 <div class="sidebar p-3">
     <h1 class="text-center"> <img src="imagens/tai.png" alt="Logo"></h1>
     <nav class="nav flex-column">
-        <a class="nav-link" href="#"><i class="fas fa-home"></i> Início</a>
-        <a class="nav-link" href="#"><i class="fas fa-user"></i> Clientes</a>
-        <a class="nav-link" href="#"><i class="fas fa-file-invoice-dollar"></i> Fatura</a>
-        <a class="nav-link" href="#"><i class="fas fa-box"></i> Produtos</a>
-        <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Agenda</a>
-        <a class="nav-link" href="#"><i class="fas fa-map-marked-alt"></i> Área de Cobertura</a>
-        <a class="nav-link" href="#"><i class="fas fa-users"></i> Funcionários</a>
-        <a class="nav-link" href="#"><i class="fas fa-tags"></i> Vendas</a>
-        <a class="nav-link" href="#"><i class="fas fa-user-plus"></i> Possíveis Clientes</a>
+        <a class="nav-link" href="#"><i class="fas fa-home"></i> Início </a>
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Clientes </a>
+        <a class="nav-link" href="#"><i class="fas fa-file-invoice-dollar"></i> Fatura </a>
+        <a class="nav-link" href="#"><i class="fas fa-box"></i> Produtos </a>
+        <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Agenda </a>
+        <a class="nav-link" href="#"><i class="fas fa-map-marked-alt"></i> Área de Cobertura </a>
+        <a class="nav-link" href="#"><i class="fas fa-users"></i> Funcionários </a>
+        <a class="nav-link" href="#"><i class="fas fa-tags"></i> Vendas </a>
+        <a class="nav-link" href="#"><i class="fas fa-user-plus"></i> Possíveis Clientes </a>
     </nav>
 </div>
 
@@ -39,7 +39,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" href="#">Alterar Cadastro</a></li>
-                <li><a class="dropdown-item" href="index.jsp">Sair</a></li>
+                <li><a class="dropdown-item" href="logout.do">Sair</a></li>
             </ul>
         </div>
     </div>
