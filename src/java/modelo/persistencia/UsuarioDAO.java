@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -12,6 +13,7 @@ import modelo.entidades.Usuario;
 public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, InterfaceDAO<Integer, Usuario> {
 
     private static final Logger LOGGER = Logger.getLogger(UsuarioDAO.class.getName());
+    private PerfilDAO daoPerfil = new PerfilDAO();
 
     public UsuarioDAO() throws Exception {
 
@@ -189,6 +191,7 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
                     u.setLogin(rs.getString("login"));
                     u.setSenha(rs.getString("senha"));
                     u.setAtivo(rs.getBoolean("ativo"));
+                    u.setPerfil(daoPerfil.buscarPorId(rs.getInt("perfil_id")));
 
                 } else {
 
@@ -245,6 +248,7 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
                 u.setLogin(rs.getString("login"));
                 u.setSenha(rs.getString("senha"));
                 u.setAtivo(rs.getBoolean("ativo"));
+                u.setPerfil(daoPerfil.buscarPorId(rs.getInt("perfil_id")));
 
                 listaU.add(u);
 
@@ -252,7 +256,6 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
 
             logInfo("Pesquisa realizada com sucesso", "");
 
-            
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
             logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
@@ -314,6 +317,63 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
         // Retorna false se nenhum campo estiver em uso. 
         return false;
 
+    }
+
+    public Usuario logar(String login, String senha) throws Exception {
+
+        String sql = "SELECT * FROM usuarios WHERE login=?";
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL {0} para o Login {1} :", new Object[]{sql, login});
+            logFine("Login: {0}", login);
+
+            pst.setString(1, login);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                Usuario u = new Usuario();
+
+                if (rs.next()) {
+
+                    if (senha.equals(rs.getString("senha"))) {
+
+                        u.setId(rs.getInt("id"));
+                        u.setNome(rs.getString("nome"));
+                        u.setCpf(rs.getString("cpf"));
+                        u.setTelefone(rs.getString("telefone"));
+                        u.setEmail(rs.getString("email"));
+                        u.setDataNascimento(rs.getDate("dataNascimento"));
+                        u.setLogin(rs.getString("login"));
+                        u.setSenha(rs.getString("senha"));
+                        u.setAtivo(rs.getBoolean("ativo"));
+                        u.setPerfil(daoPerfil.buscarPorId(rs.getInt("perfil_id")));
+
+                        return u;
+
+                    }
+                }
+
+            }
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao verificar o login: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return null;
     }
 
 }
