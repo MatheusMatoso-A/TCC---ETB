@@ -32,7 +32,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            logInfo("Executando SQL: ", sql);
+            logInfo("Executando SQL: {0} ", sql);
             logFine("CEP: {0}, Cidade: {1}, Estado: {2}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado()});
 
             pst.setString(1, ac.getCep());
@@ -66,7 +66,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            logInfo("Executando SQL: ", sql);
+            logInfo("Executando SQL: {0} ", sql);
             logFine("CEP: {0}, Cidade: {1}, Estado: {2}, ID: {3}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado(), ac.getId()});
 
             pst.setString(1, ac.getCep());
@@ -105,7 +105,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            logInfo("Executando SQL: ", sql);
+            logInfo("Executando SQL: {0} ", sql);
             logFine("ID: {0}", ac.getId());
 
             pst.setInt(1, ac.getId());
@@ -142,8 +142,8 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            logInfo("Executando SQL : ", sql);
-            logFine("ID: {0}", ac.getId());
+            logInfo("Executando SQL: {0} ", sql);
+            logFine("ID: {0}", id);
 
             pst.setInt(1, id);
 
@@ -191,7 +191,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
         try (PreparedStatement pst = conn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery()) {
 
-            logInfo("Executando SQL: ", sql);
+            logInfo("Executando SQL: {0} ", sql);
 
             while (rs.next()) {
 
@@ -238,7 +238,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-              logInfo("Executando SQL: ", sql);
+              logInfo("Executando SQL: {0} ", sql);
             
             // Preparar o statement para a consulta
             pst.setString(1, cep); // Substitui o ? pelo CEP fornecido

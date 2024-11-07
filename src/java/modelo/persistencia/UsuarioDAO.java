@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import modelo.entidades.Usuario;
@@ -141,7 +142,7 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
             pst.execute();
 
             logInfo("Excluido com sucesso no banco de dados para ID: {0}", u.getId());
-            
+
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
             logSevere("Erro ao deletar no banco de dados: {0}", e.getMessage());
@@ -161,21 +162,113 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
 
     @Override
     public Usuario buscarPorId(Integer id) throws Exception {
-        
-        String sql = "SELECT * FROM usuarios WHERE id=?";
-        
-        Usuario u = new Usuario() ;
 
-        
-        
-        
-        
-        return null;
+        String sql = "SELECT * FROM usuarios WHERE id=?";
+
+        Usuario u = new Usuario();
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", id);
+
+            pst.setInt(1, id);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    u.setId(rs.getInt("id"));
+                    u.setNome(rs.getString("nome"));
+                    u.setCpf(rs.getString("cpf"));
+                    u.setTelefone(rs.getString("telefone"));
+                    u.setEmail(rs.getString("email"));
+                    u.setDataNascimento(rs.getDate("dataNascimento"));
+                    u.setLogin(rs.getString("login"));
+                    u.setSenha(rs.getString("senha"));
+                    u.setAtivo(rs.getBoolean("ativo"));
+
+                } else {
+
+                    return null;
+                }
+
+            }
+
+            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", id);
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar por ID no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return u;
+
     }
 
     @Override
     public List<Usuario> listar() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        String sql = "SELECT * FROM usuarios";
+
+        List<Usuario> listaU = new ArrayList<Usuario>();
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
+
+            logInfo("Executando SQL: ", sql);
+
+            while (rs.next()) {
+
+                Usuario u = new Usuario();
+
+                u.setId(rs.getInt("id"));
+                u.setNome(rs.getString("nome"));
+                u.setCpf(rs.getString("cpf"));
+                u.setTelefone(rs.getString("telefone"));
+                u.setEmail(rs.getString("email"));
+                u.setDataNascimento(rs.getDate("dataNascimento"));
+                u.setLogin(rs.getString("login"));
+                u.setSenha(rs.getString("senha"));
+                u.setAtivo(rs.getBoolean("ativo"));
+
+                listaU.add(u);
+
+            }
+
+            logInfo("Pesquisa realizada com sucesso", "");
+
+            
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return listaU;
     }
 
     // Método para verificar se o Email,CPF ou Login já está em uso 
