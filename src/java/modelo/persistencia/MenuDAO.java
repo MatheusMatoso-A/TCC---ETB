@@ -2,13 +2,24 @@ package modelo.persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import modelo.entidades.Menu;
 
-public class MenuDAO extends DataBaseDAO implements InterfaceDAO<Integer, Menu> {
+public class MenuDAO extends DataBaseDAO implements InterfaceDAO<Integer, Menu>, InterfaceLoggable {
+
+    private static final Logger LOGGER = Logger.getLogger(MenuDAO.class.getName());
 
     public MenuDAO() throws Exception {
+
+    }
+
+    @Override
+    public Logger getLogger() {
+
+        return LOGGER;
 
     }
 
@@ -19,15 +30,31 @@ public class MenuDAO extends DataBaseDAO implements InterfaceDAO<Integer, Menu> 
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setString(1, m.getIcone());
-        pst.setString(2, m.getMenu());
-        pst.setString(3, m.getLink());
+            logInfo("Executando SQL: {0}", sql);
+            logFine("Icone: {0}, Menu: {1}, Link: {2}", new Object[]{m.getIcone(), m.getMenu(), m.getLink()});
 
-        pst.execute();
+            pst.setString(1, m.getIcone());
+            pst.setString(2, m.getMenu());
+            pst.setString(3, m.getLink());
 
-        desconectar();
+            pst.execute();
+
+            logInfo("Inserido com sucesso no banco de dados para Icone: {0}, Menu: {1}, Link: {2}", new Object[]{m.getIcone(), m.getMenu(), m.getLink()});
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao inserir no banco de dados: {0}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+        } finally {
+
+            desconectar();
+        }
 
     }
 
@@ -38,17 +65,35 @@ public class MenuDAO extends DataBaseDAO implements InterfaceDAO<Integer, Menu> 
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setString(1, m.getIcone());
-        pst.setString(2, m.getMenu());
-        pst.setString(3, m.getLink());
+            logInfo("Executando SQL: {0}", sql);
+            logFine("Icone: {0}, Menu: {1}, Link: {2}, ID: {4} ", new Object[]{m.getIcone(), m.getMenu(), m.getLink(), m.getId()});
 
-        pst.setInt(4, m.getId());
+            pst.setString(1, m.getIcone());
+            pst.setString(2, m.getMenu());
+            pst.setString(3, m.getLink());
 
-        pst.execute();
+            pst.setInt(4, m.getId());
 
-        desconectar();
+            pst.execute();
+
+            logInfo("Modificado com sucesso no banco de dados paraIcone: {0}, Menu: {1}, Link: {2}, ID: {4} ", new Object[]{m.getIcone(), m.getMenu(), m.getLink(), m.getId()});
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
 
     }
 
@@ -59,14 +104,31 @@ public class MenuDAO extends DataBaseDAO implements InterfaceDAO<Integer, Menu> 
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setInt(1, m.getId());
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", m.getId());
 
-        pst.execute();
+            pst.setInt(1, m.getId());
 
-        desconectar();
+            pst.execute();
 
+            logInfo("Excluido com sucesso no banco de dados para ID: {0}", m.getId());
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao deletar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
     }
 
     @Override
@@ -78,22 +140,46 @@ public class MenuDAO extends DataBaseDAO implements InterfaceDAO<Integer, Menu> 
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setInt(1, id);
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", id);
 
-        ResultSet rs = pst.executeQuery();
+            pst.setInt(1, id);
 
-        if (rs.next()) {
+            try (ResultSet rs = pst.executeQuery()) {
 
-            m.setId(rs.getInt("id"));
-            m.setIcone(rs.getString("icone"));
-            m.setMenu(rs.getString("menu"));
-            m.setLink(rs.getString("link"));
+                if (rs.next()) {
 
+                    m.setId(rs.getInt("id"));
+                    m.setIcone(rs.getString("icone"));
+                    m.setMenu(rs.getString("menu"));
+                    m.setLink(rs.getString("link"));
+
+                } else {
+
+                    return null;
+
+                }
+            }
+
+            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", id);
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar por ID no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
         }
 
-        desconectar();
         return m;
 
     }
@@ -106,23 +192,39 @@ public class MenuDAO extends DataBaseDAO implements InterfaceDAO<Integer, Menu> 
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
 
-        while (rs.next()) {
+            logInfo("Executando SQL: ", sql);
 
-            Menu m = new Menu();
+            while (rs.next()) {
 
-            m.setId(rs.getInt("id"));
-            m.setIcone(rs.getString("icone"));
-            m.setMenu(rs.getString("menu"));
-            m.setLink(rs.getString("link"));
+                Menu m = new Menu();
 
-            listaM.add(m);
+                m.setId(rs.getInt("id"));
+                m.setIcone(rs.getString("icone"));
+                m.setMenu(rs.getString("menu"));
+                m.setLink(rs.getString("link"));
 
+                listaM.add(m);
+
+            }
+            logInfo("Pesquisa realizada com sucesso", "");
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
         }
-
-        desconectar();
 
         return listaM;
 

@@ -2,13 +2,24 @@ package modelo.persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import modelo.entidades.Perfil;
 
-public class PerfilDAO extends DataBaseDAO implements InterfaceDAO<Integer, Perfil> {
+public class PerfilDAO extends DataBaseDAO implements InterfaceDAO<Integer, Perfil>, InterfaceLoggable {
+
+    private static final Logger LOGGER = Logger.getLogger(PerfilDAO.class.getName());
 
     public PerfilDAO() throws Exception {
+
+    }
+
+    @Override
+    public Logger getLogger() {
+
+        return LOGGER;
 
     }
 
@@ -19,13 +30,31 @@ public class PerfilDAO extends DataBaseDAO implements InterfaceDAO<Integer, Perf
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setString(1, p.getPerfil());
+            logInfo("Executando SQL: {0}", sql);
+            logFine("Perfil: {0} ", p.getPerfil());
 
-        pst.execute();
+            pst.setString(1, p.getPerfil());
 
-        desconectar();
+            pst.execute();
+
+            logInfo("Inserido com sucesso no banco de dados para Perfil: {0} ", p.getPerfil());
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao inserir no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
 
     }
 
@@ -36,15 +65,32 @@ public class PerfilDAO extends DataBaseDAO implements InterfaceDAO<Integer, Perf
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setString(1, p.getPerfil());
+            logInfo("Executando SQL: {0}", sql);
+            logFine("Perfil: {0}, ID: {1} ", new Object[]{p.getPerfil(), p.getId()});
 
-        pst.setInt(2, p.getId());
+            pst.setString(1, p.getPerfil());
 
-        pst.execute();
+            pst.setInt(2, p.getId());
 
-        desconectar();
+            pst.execute();
+            logInfo("Modificado com sucesso no banco de dados para Perfil: {0}, ID: {1} ", new Object[]{p.getPerfil(), p.getId()});
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
 
     }
 
@@ -55,13 +101,31 @@ public class PerfilDAO extends DataBaseDAO implements InterfaceDAO<Integer, Perf
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setInt(1, p.getId());
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", p.getId());
 
-        pst.execute();
+            pst.setInt(1, p.getId());
 
-        desconectar();
+            pst.execute();
+
+            logInfo("Excluido com sucesso no banco de dados para ID: {0}", p.getId());
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao deletar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
 
     }
 
@@ -74,18 +138,43 @@ public class PerfilDAO extends DataBaseDAO implements InterfaceDAO<Integer, Perf
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1, id);
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        ResultSet rs = pst.executeQuery();
-        if (rs.next()) {
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", id);
 
-            p.setId(rs.getInt("id"));
-            p.setPerfil(rs.getString("perfil"));
+            pst.setInt(1, id);
 
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    p.setId(rs.getInt("id"));
+                    p.setPerfil(rs.getString("perfil"));
+
+                } else {
+
+                    return null;
+
+                }
+            }
+
+            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", id);
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar por ID no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
         }
-
-        desconectar();
 
         return p;
 
@@ -100,21 +189,36 @@ public class PerfilDAO extends DataBaseDAO implements InterfaceDAO<Integer, Perf
 
         conectar();
 
-        PreparedStatement pst = conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
 
-        while (rs.next()) {
+            logInfo("Executando SQL: ", sql);
 
-            Perfil p = new Perfil();
+            while (rs.next()) {
 
-            p.setId(rs.getInt("id"));
-            p.setPerfil(rs.getString("perfil"));
+                Perfil p = new Perfil();
 
-            listaP.add(p);
+                p.setId(rs.getInt("id"));
+                p.setPerfil(rs.getString("perfil"));
 
+                listaP.add(p);
+
+            }
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
         }
-
-        desconectar();
 
         return listaP;
 
