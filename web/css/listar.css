@@ -1,0 +1,48 @@
+.imagem-tabela {
+
+    height: 40px;
+    width: 40px;
+
+
+}
+
+#tabela th:first-child,
+#tabela td:first-child {
+    text-align: center;
+}
+
+/* Estilo para os botões de navegação */
+.dt-paging-button.page-item .page-link {
+    background-color: #dc3545; /* Cor de fundo vermelho */
+    color: white; /* Cor do texto branco */
+    border: 1px solid transparent; /* Borda fina e transparente para evitar desproporções */
+    padding: 6px 12px; /* Ajuste no padding para um tamanho mais proporcional */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 14px; /* Tamanho da fonte */
+    line-height: 1.5; /* Ajusta o espaçamento vertical */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilo para o botão ativo */
+.dt-paging-button.page-item.active .page-link {
+    background-color: #c82333; /* Cor de fundo vermelho escuro quando ativo */
+    border-color: #0e0304; /* Mantém a borda com a mesma cor do fundo ativo */
+}
+
+/* Estilo para o botão desabilitado */
+.dt-paging-button.page-item.disabled .page-link {
+    background-color: #f5c6cb; /* Cor de fundo vermelho claro para desabilitado */
+    color: #666; /* Cor do texto para desabilitado */
+    border-color: #0e0304; /* Cor da borda para desabilitado */
+}
+
+/* Estilo para quando passar o mouse sobre o botão */
+.dt-paging-button.page-item .page-link:hover {
+    background-color: #bd2130; /* Cor de fundo vermelho mais escuro */
+    color: white; /* Cor do texto ao passar o mouse */
+    border-color: #bd2130; /* Borda mais escura ao passar o mouse */
+}
+table {
+    table-layout: fixed;
+    width: 100%;
+}
