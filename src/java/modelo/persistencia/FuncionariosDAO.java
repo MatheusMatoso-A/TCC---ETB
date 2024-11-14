@@ -66,15 +66,12 @@ public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, I
         String sql = "UPDATE funcionarios SET salario=?, matricula=?, usuarios_id=? WHERE id=?";
 
         conectar();
-        
+
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
-            
+
             logInfo("Executando SQL: {0}", sql);
             logFine("Salario: {0}, Matricula{1}, Usuarios_ID: {2}, ID: {3} ", new Object[]{f.getSalario(), f.getMatricula(), f.getUsuario().getId()}, f.getId());
-            
-            
-            
-            
+
         } catch (Exception e) {
         }
 
@@ -82,7 +79,36 @@ public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, I
 
     @Override
     public void deletar(Funcionarios f) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        String sql = "DELETE FROM funcionarios WHERE id=?";
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", f.getId());
+
+            pst.setInt(1, f.getId());
+            pst.execute();
+
+            logInfo("Excluido com sucesso no banco de dados para ID: {0}", f.getId());
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao deletar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
     }
 
     @Override

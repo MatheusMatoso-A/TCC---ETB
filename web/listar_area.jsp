@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,18 +53,21 @@
                     </thead>
 
                     <tbody>
+                        
+                        <jsp:useBean class="modelo.persistencia.AreaCoberturaDAO" id="aDB"/>
+                        <c:forEach var="a" items="${aDB.listar()}">
 
                         <tr>
 
-                            <th>1</th>
-                            <td>Gaston</td>
-                            <td>000.000.000-00</td>
-                            <td>teste@teste.com</td>
-                            <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
-                            <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                            <th>${a.id}</th>
+                            <td>${a.cep}</td>
+                            <td>${a.cidade}</td>
+                            <td>${a.estado}</td>
+                            <td> <a href="form_alterar_area.jsp?id=${a.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
+                            <td> <a href="excluir_area.do?id=${a.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
 
                         </tr>
-
+                        </c:forEach>
                     </tbody>
                     <tfoot class="table-danger border-top border-bottom border-danger">
                         <tr>

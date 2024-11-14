@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,18 +54,29 @@
 
                     <tbody>
 
-                        <tr>
+                        <jsp:useBean class="modelo.persistencia.ProdutosDAO" id="pDB"/>
 
-                            <th>1</th>
-                            <td>Gaston</td>
-                            <td>000.000.000-00</td>
-                            <td>teste@teste.com</td>
-                            <td>(00) 0 0000-0000</td>
-                            <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
-                            <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                        <c:forEach var="p" items="${pDB.listar()}">
 
-                        </tr>
+                            <tr>
 
+                                <th>${p.id}</th>
+                                <td>${p.nome}</td>
+                                <td>${p.velocidade}</td>
+                                <td>${p.valor}</td>
+
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${p.ativo}">Ativo</c:when>
+                                        <c:otherwise>Inativo</c:otherwise>
+                                    </c:choose> 
+                                </td>
+
+                                <td> <a href="form_alterar_produto.jsp?id=${p.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
+                                <td> <a href="excluir_produto.do?id=${p.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
+
+                            </tr>
+                        </c:forEach>
                     </tbody>
                     <tfoot class="table-danger border-top border-bottom border-danger">
                         <tr>
