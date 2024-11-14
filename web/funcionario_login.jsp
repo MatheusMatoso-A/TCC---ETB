@@ -32,7 +32,7 @@
                     </a>
                 </div>
                 <div class="col-md-5">
-                    <a href="#" class="btn btn-transparent">
+                    <a href="listar_funcionarios.jsp" class="btn btn-transparent">
                         <img src="imagens/gerenciar_funcionario.png" alt="Visualizar Funcionarios"> <!-- Imagem para Visualizar -->
                         Gerenciar Funcionários
                     </a>

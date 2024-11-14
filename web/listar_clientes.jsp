@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/obrigatorio_login.css" type="text/css">
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
 
+
         <!-- Script jQuery (necessário para o DataTables) -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -29,7 +30,7 @@
         <link rel="stylesheet" href="./css/listar.css" type="text/css">
 
 
-        <title>Taí Telecom - Gerenciar produtos</title>
+        <title>Taí Telecom - Gerenciar clientes</title>
     </head>
     <body>
 
@@ -38,13 +39,20 @@
         <div class="main-content">
             <div class="table-responsive">
                 <table id="tabela" class="table table-hover border-top border-danger caption-top">
-                    <caption>Lista de produtos</caption>
+                    <caption>Lista de clientes</caption>
                     <thead class="table-danger border-top border-bottom border-danger">
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Velocidade</th>
-                            <th>Valor</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Login</th>
+                            <th>CEP</th>
+                            <th>Tipo de Endereço</th>
+                            <th>Endereço</th>
+                            <th>Complemento</th>
+                            <th>Ponto de referência</th>
                             <th>Ativo</th>
                             <th>Alterar</th>
                             <th>Excluir</th>
@@ -60,18 +68,33 @@
                             <td>000.000.000-00</td>
                             <td>teste@teste.com</td>
                             <td>(00) 0 0000-0000</td>
+                            <td> zezinho caipira</td>
+                            <td>Vida longa e prospera</td>
+                            <td>2aaaaaaaaaaaaaaaaaaaaaaa</td>
+                            <td>3aaaaaaaaaaaaaaaaaaaaa</td>
+                            <td>4aaaaaaaaaaaaaaaaaaaaaaa</td>
+                            <td>5aaaaaaaaaaaaaaaaaaaaa</td>
+                            <td>6aaaaaaaaaaaaaaaaaa</td>
                             <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 
                         </tr>
 
                     </tbody>
+
                     <tfoot class="table-danger border-top border-bottom border-danger">
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Velocidade</th>
-                            <th>Valor</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Login</th>
+                            <th>CEP</th>
+                            <th>Tipo de Endereço</th>
+                            <th>Endereço</th>
+                            <th>Complemento</th>
+                            <th>Ponto de referência</th>
                             <th>Ativo</th>
                             <th>Alterar</th>
                             <th>Excluir</th>

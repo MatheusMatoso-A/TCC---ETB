@@ -43,6 +43,11 @@
     border-color: #bd2130; /* Borda mais escura ao passar o mouse */
 }
 table {
-    table-layout: fixed;
+    table-layout: auto;
     width: 100%;
+}
+
+/* Aumentar o espaçamento da barra de rolagem */
+.table-responsive {
+    padding-bottom: 10px;  /* Adiciona um espaçamento abaixo da tabela, para não sobrepor o conteúdo */
 }

@@ -32,7 +32,7 @@
                     </a>
                 </div>
                 <div class="col-md-5">
-                    <a href="#" class="btn btn-transparent">
+                    <a href="listar_clientes.jsp" class="btn btn-transparent">
                         <img src="imagens/gerenciar_cliente.png" alt="Visualizar Clientes"> <!-- Imagem para Visualizar -->
                         Gerenciar Clientes
                     </a>

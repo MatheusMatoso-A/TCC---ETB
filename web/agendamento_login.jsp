@@ -32,7 +32,7 @@
                     </a>
                 </div>
                 <div class="col-md-5">
-                    <a href="#" class="btn btn-transparent">
+                    <a href="listar_agenda.jsp" class="btn btn-transparent">
                         <img src="imagens/gerenciar_agendamento.png" alt="Visualizar Funcionarios"> <!-- Imagem para Visualizar -->
                         Gerenciar Agendamento
                     </a>
