@@ -48,9 +48,10 @@
                             <th>Telefone</th>
                             <th>E-mail</th>
                             <th>Login</th>
-                            <th>CEP</th>
                             <th>Tipo de Endereço</th>
+                            <th>CEP</th>
                             <th>Endereço</th>
+                            <th>Número</th>
                             <th>Complemento</th>
                             <th>Ponto de referência</th>
                             <th>Ativo</th>
@@ -75,6 +76,7 @@
                             <td>4aaaaaaaaaaaaaaaaaaaaaaa</td>
                             <td>5aaaaaaaaaaaaaaaaaaaaa</td>
                             <td>6aaaaaaaaaaaaaaaaaa</td>
+                            <td>fsdfdsfdsf</td>
                             <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 

@@ -10,9 +10,7 @@ public class Clientes {
     private String tipo;
     private String endereco;
     private Integer numero;
-    private Integer apartamento;
-    private String bloco;
-    private String condominio;
+    private String complemento;
     private String pontoReferencia;
     private Usuario usuario;
     private PreCadastro preCadastro;
@@ -21,7 +19,7 @@ public class Clientes {
 
     }
 
-    public Clientes(int id, Usuario usuario, PreCadastro preCadastro, String tipo, String endereco, Integer numero, Integer apartamento, String bloco, String condominio, String pontoReferencia) {
+    public Clientes(int id, Usuario usuario, PreCadastro preCadastro, String tipo, String endereco, Integer numero, String complemento, String pontoReferencia) {
 
         this.id = id;
         this.usuario = usuario;
@@ -29,9 +27,7 @@ public class Clientes {
         this.tipo = tipo;
         this.endereco = endereco;
         this.numero = numero;
-        this.apartamento = apartamento;
-        this.bloco = bloco;
-        this.condominio = condominio;
+        this.complemento = complemento;
         this.pontoReferencia = pontoReferencia;
     }
 }
