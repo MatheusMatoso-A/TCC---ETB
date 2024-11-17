@@ -31,22 +31,22 @@
                 <h2 class="text-center mb-4">Agendamento de Visita Técnica</h2>
 
                 <!-- Formulário -->
-                <form id="agendamento-form">
+                <form id="agendamento-form" method="post" action="processaDados.jsp">
                     <!-- Seletor de Tipo de Residência -->
                     <div class="mb-3">
                         <label for="tipo-residencia" class="form-label">Tipo de Residência</label>
-                        <select class="form-select" id="tipo-residencia" required>
+                        <select class="form-select" id="tipo-residencia" name="tipoResidencia" required>
                             <option value="" disabled selected>Selecione o tipo de residência...</option>
                             <option value="casa">Casa</option>
-                            <option value="condominio">Condomínio/Prédio</option>
+                            <option value="apartamento">Apartamento</option>
                         </select>
                     </div>
 
                     <!-- Campos Comuns de Endereço (exibidos após selecionar o tipo) -->
-                    <div class="endereco-completo">
+                    <div id="campo-comum" style="display: none;">
                         <div class="mb-3">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" maxlength="9" class="form-control" id="cep" placeholder="Digite o CEP" onblur="buscarEndereco()" required>
+                            <input type="text" name="cep" maxlength="9" class="form-control" id="cep" placeholder="Digite o CEP" onblur="buscarEndereco()" required>
 
                             <script>
                                 document.getElementById('cep').addEventListener('input', function (e) {
@@ -63,120 +63,83 @@
                                     this.value = value;
                                 });
                             </script>
-
                         </div>
 
                         <div class="mb-3">
                             <label for="rua" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="rua" placeholder="Rua" disabled>
+                            <input type="text" name="endereco" class="form-control" id="rua" placeholder="Rua" required disabled>
                         </div>
                         <div class="mb-3">
+                            <label for="numero" class="form-label">Número</label>
+                            <input type="text" name="numero" class="form-control" id="numero" placeholder="Número" required>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" placeholder="Bairro" disabled>
+                            <input type="text" name="bairro" class="form-control" id="bairro" placeholder="Bairro" required disabled>
                         </div>
                         <div class="mb-3">
                             <label for="cidade" class="form-label">Cidade</label>
-                            <input type="text" class="form-control" id="cidade" placeholder="Cidade" disabled>
+                            <input type="text" name="cidade" class="form-control" id="cidade" placeholder="Cidade" required disabled>
                         </div>
                         <div class="mb-3">
                             <label for="estado" class="form-label">Estado</label>
-                            <input type="text" class="form-control" id="estado" placeholder="Estado" disabled>
+                            <input type="text" name="estado" class="form-control" id="estado" placeholder="Estado" required disabled>
                         </div>
 
-                    </div>
-
-                    <!-- Campos Específicos para Condomínio/Prédio -->
-                    <div id="campo-apartamento">
+                        <!-- Campo Complemento com Exemplo -->
                         <div class="mb-3">
-                            <label for="bloco" class="form-label">Bloco</label>
-                            <input type="text" class="form-control" id="bloco" placeholder="Bloco">
+                            <label for="complemento" class="form-label">Complemento</label>
+                            <input type="text" name="complemento" class="form-control" id="complemento" placeholder="Exemplo: Número do apartamento, nome do condomínio, bloco">
                         </div>
-                        <div class="mb-3">
-                            <label for="numero-apartamento" class="form-label">Número do Apartamento</label>
-                            <input type="text" class="form-control" id="numero-apartamento" placeholder="Número do Apartamento" required>
-                        </div>
-                    </div>
 
-                    <!-- Campos Específicos para Casa -->
-                    <div id="campo-casa">
-                        <div class="mb-3">
-                            <label for="numero-casa" class="form-label">Número da Casa</label>
-                            <input type="text" class="form-control" id="numero-casa" placeholder="Número da Casa" required>
-                        </div>
-                    </div>
-
-
-                    <div class="endereco-completo"  id="campo-condominio">
-                        <div class="mb-3">
-                            <label for="condominio" class="form-label">Condomínio</label>
-                            <input type="text" class="form-control" id="condominio" placeholder="Condomínio">
-                        </div>
+                        <!-- Ponto de Referência -->
                         <div class="mb-3">
                             <label for="ponto-referencia" class="form-label">Ponto de Referência</label>
-                            <input type="text" class="form-control" id="ponto-referencia" placeholder="Ponto de Referência">
+                            <input type="text" name="pontoReferencia" class="form-control" id="ponto-referencia" placeholder="Ponto de Referência">
                         </div>
-                    </div>
 
-                    <!-- Seletor de Data e Hora Disponíveis -->
-                    <div class="mb-3 endereco-completo">
-                        <label for="horario" class="form-label">Selecione o Dia e Hora</label>
-                        <select class="form-select" id="horario" required>
-                            <option value="">Escolha um horário disponível</option>
-                            <option value="2024-09-19 08:00">19/09/2024 08:00</option>
-                            <option value="2024-09-19 10:00">19/09/2024 10:00</option>
-                            <option value="2024-09-19 14:00">19/09/2024 14:00</option>
-                        </select>
+                        <!-- Seletor de Data e Hora Disponíveis -->
+                        <div class="mb-3">
+                            <label for="horario" class="form-label">Selecione o Dia e Hora</label>
+                            <select class="form-select" name="horario" id="horario" required>
+                                <option value="">Escolha um horário disponível</option>
+                                <option value="2024-09-19 08:00">19/09/2024 08:00</option>
+                                <option value="2024-09-19 10:00">19/09/2024 10:00</option>
+                                <option value="2024-09-19 14:00">19/09/2024 14:00</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="d-flex justify-content-center">
                         <!-- Botão de Enviar -->
-                        <button type="submit" class="btn botao my-3 endereco-completo">Agendar Visita</button>
+                        <button type="submit" class="btn botao my-3">Agendar Visita</button>
                     </div>
                 </form>
-            </div>
 
-            <script>
-                // Função para exibir campos de endereço completo
-                const tipoResidencia = document.getElementById('tipo-residencia');
-                const camposEnderecoCompleto = document.querySelectorAll('.endereco-completo');
-                const campoApartamento = document.getElementById('campo-apartamento');
-                const campoCasa = document.getElementById('campo-casa');
-                const campoCondominio = document.getElementById('campo-condominio');
 
-                tipoResidencia.addEventListener('change', function () {
-                    // Mostrar campos de endereço completo após seleção do tipo de residência
-                    if (this.value === 'casa' || this.value === 'condominio') {
-                        camposEnderecoCompleto.forEach(campo => campo.style.display = 'block');
+                <script>
+                    const tipoResidencia = document.getElementById('tipo-residencia');
+                    const campoComum = document.getElementById('campo-comum');
 
-                        if (this.value === 'condominio') {
-                            campoApartamento.style.display = 'block';
-                            campoCasa.style.display = 'none';
-                        } else if (this.value === 'casa') {
-                            campoCasa.style.display = 'block';
-                            campoApartamento.style.display = 'none';
+                    tipoResidencia.addEventListener('change', function () {
+                        // Mostrar os campos comuns após a seleção do tipo de residência
+                        if (this.value === 'casa' || this.value === 'apartamento') {
+                            campoComum.style.display = 'block'; // Exibir os campos comuns (CEP, endereço, etc.)
+                        } else {
+                            // Ocultar os campos se nenhum tipo de residência estiver selecionado
+                            campoComum.style.display = 'none';
                         }
+                    });
 
-                        // Mostrar campos comuns "Condomínio" e "Ponto de Referência" após os campos específicos
-                        campoCondominio.style.display = 'block';
-                    } else {
-                        // Ocultar todos os campos se nenhum tipo de residência estiver selecionado
-                        camposEnderecoCompleto.forEach(campo => campo.style.display = 'none');
-                        campoApartamento.style.display = 'none';
-                        campoCasa.style.display = 'none';
-                        campoCondominio.style.display = 'none';
-                    }
-                });
+                    // Submissão do formulário
+                    document.getElementById('agendamento-form').addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        alert('Visita agendada com sucesso!');
+                    });
+                </script>
 
-                // Submissão do formulário
-                document.getElementById('agendamento-form').addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    alert('Visita agendada com sucesso!');
-                });
-
-
-            </script>
-
-            <%@include file="whatsapp.jsp"%>
+                <%@include file="whatsapp.jsp"%>
         </main>
 
         <footer class=" color red text-white p-4">

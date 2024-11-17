@@ -11,6 +11,7 @@ public class Agenda {
     
     private int id;
     private LocalDateTime dataComparecimento;
+    private String status;
     private Vendas vendas;
 
     
@@ -18,9 +19,10 @@ public class Agenda {
         
     }
     
-    public Agenda(int id, LocalDateTime dataComparecimento, Vendas vendas) {
+    public Agenda(int id, LocalDateTime dataComparecimento, String status, Vendas vendas) {
         this.id = id;
         this.dataComparecimento = dataComparecimento;
+        this.status = status;
         this.vendas = vendas;
     }
 }

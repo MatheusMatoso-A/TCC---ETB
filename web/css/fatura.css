@@ -1,0 +1,27 @@
+.status-paga {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+.status-pendente {
+    background-color: #ffc107; /* Amarelo */
+    color: black;
+}
+.status-vencida {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}
+.card-custom {
+    margin-bottom: 15px;
+}
+.list-group-item-paga {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+.list-group-item-pendente {
+    background-color: #ffc107; /* Amarelo */
+    color: black;
+}
+.list-group-item-vencida {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}

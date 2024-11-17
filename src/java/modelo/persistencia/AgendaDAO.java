@@ -15,13 +15,14 @@ public class AgendaDAO  extends DataBaseDAO implements InterfaceDAO<Integer, Age
     @Override
     public void salvar(Agenda ag) throws Exception {
         
-          String sql = "INSERT INTO agenda ( dataComparecimento, vendas_id) VALUES (?, ?)";
+          String sql = "INSERT INTO agenda ( dataComparecimento, status,  vendas_id) VALUES (?, ?, ?)";
           
           conectar();
                   
           PreparedStatement pst = conn.prepareStatement(sql);
           
          pst.setTimestamp(1, Timestamp.valueOf(ag.getDataComparecimento()));
+         pst.setString(2, ag.getStatus());
         
     }
 

@@ -49,7 +49,6 @@
                             <th>Cidade</th>
                             <th>E-mail</th>
                             <th>Área de cobertura</th>
-                            <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
                     </thead>
@@ -65,7 +64,6 @@
                             <td>(00) 0 0000-0000</td>
                             <td> zezinho caipira</td>
                             <td>Vida longa e prospera</td>
-                            <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 
                         </tr>
@@ -81,7 +79,6 @@
                             <th>Cidade</th>
                             <th>E-mail</th>
                             <th>Área de cobertura</th>
-                            <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
                     </tfoot>
