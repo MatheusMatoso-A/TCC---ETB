@@ -43,19 +43,19 @@
             <!-- Histórico de Faturas -->
             <h4 class="mb-3">Histórico de Faturas</h4>
             <div class="list-group">
-                <div class="list-group-item d-flex justify-content-between align-items-center status-pendente">
+                <div class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center">
                     <span>Fatura 001</span>
                     <span>R$ 200,00</span>
                     <span>15/10/2024</span>
                     <span class="badge badge-light">Pendente</span>
                 </div>
-                <div class="list-group-item d-flex justify-content-between align-items-center status-vencida">
+                <div class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center">
                     <span>Fatura 002</span>
                     <span>R$ 150,00</span>
                     <span>05/10/2024</span>
                     <span class="badge badge-light">Vencida</span>
                 </div>
-                <div class="list-group-item d-flex justify-content-between align-items-center status-paga">
+                <div class="list-group-item list-group-item-success d-flex justify-content-between align-items-center ">
                     <span>Fatura 003</span>
                     <span>R$ 300,00</span>
                     <span>20/09/2024</span>
