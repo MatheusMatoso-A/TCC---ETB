@@ -7,7 +7,7 @@ import lombok.*;
 public class Clientes {
 
     private int id;
-    private String tipo;
+    private String tipoEndereco;
     private String endereco;
     private Integer numero;
     private String complemento;
@@ -19,12 +19,12 @@ public class Clientes {
 
     }
 
-    public Clientes(int id, Usuario usuario, PreCadastro preCadastro, String tipo, String endereco, Integer numero, String complemento, String pontoReferencia) {
+    public Clientes(int id, Usuario usuario, PreCadastro preCadastro, String tipoEndereco, String endereco, Integer numero, String complemento, String pontoReferencia) {
 
         this.id = id;
         this.usuario = usuario;
         this.preCadastro = preCadastro;
-        this.tipo = tipo;
+        this.tipoEndereco = tipoEndereco;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
