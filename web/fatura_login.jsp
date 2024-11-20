@@ -13,7 +13,6 @@
 
 
         <link rel="stylesheet" href="css/obrigatorio_login.css" type="text/css">
-        <link rel="stylesheet" href="css/fatura.css" type="text/css">
 
 
         <title>Taí Telecom - Clientes</title>
@@ -33,7 +32,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <p><strong>Valor:</strong> R$ 250,00</p>
-                        <p class="status-paga p-2 rounded">Status: Paga</p>
+                        <p class="bg-success text-white p-2 rounded"><strong>Status: Paga</strong></p>
                     </div>
                     <p><strong>Data de Vencimento:</strong> 15/11/2024</p>
                     <p><strong>Forma de Pagamento:</strong> Cartão de Crédito</p>
@@ -43,23 +42,23 @@
             <!-- Histórico de Faturas -->
             <h4 class="mb-3">Histórico de Faturas</h4>
             <div class="list-group">
-                <div class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center">
+                <div class="list-group-item bg-warning d-flex justify-content-between align-items-center">
                     <span>Fatura 001</span>
-                    <span>R$ 200,00</span>
+                    <span>R$ 250,00</span>
                     <span>15/10/2024</span>
-                    <span class="badge badge-light">Pendente</span>
+                    <span class="badge text-bg-warning">Pendente</span>
                 </div>
-                <div class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center">
+                <div class="list-group-item bg-danger d-flex justify-content-between align-items-center">
                     <span>Fatura 002</span>
-                    <span>R$ 150,00</span>
+                    <span>R$ 250,00</span>
                     <span>05/10/2024</span>
-                    <span class="badge badge-light">Vencida</span>
+                    <span class="badge text-bg-danger">Vencida</span>
                 </div>
-                <div class="list-group-item list-group-item-success d-flex justify-content-between align-items-center ">
+                <div class="list-group-item bg-success d-flex justify-content-between align-items-center ">
                     <span>Fatura 003</span>
-                    <span>R$ 300,00</span>
+                    <span>R$ 250,00</span>
                     <span>20/09/2024</span>
-                    <span class="badge badge-light">Paga</span>
+                    <span class="badge text-bg-success">Paga</span>
                 </div>
             </div>
         </div>
