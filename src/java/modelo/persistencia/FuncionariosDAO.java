@@ -11,7 +11,7 @@ import modelo.entidades.Funcionarios;
 public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, InterfaceDAO<Integer, Funcionarios> {
 
     private static final Logger LOGGER = Logger.getLogger(FuncionariosDAO.class.getName());
-    UsuarioDAO daoUsuario = new UsuarioDAO();
+    private UsuarioDAO daoUsuario = new UsuarioDAO();
 
     public FuncionariosDAO() throws Exception {
 
@@ -65,16 +65,36 @@ public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, I
     @Override
     public void modificar(Funcionarios f) throws Exception {
 
-        String sql = "UPDATE funcionarios SET salario=?, matricula=?, usuarios_id=? WHERE id=?";
+        String sql = "UPDATE funcionarios SET salario=?, matricula=? WHERE id=?";
 
         conectar();
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
             logInfo("Executando SQL: {0}", sql);
-            logFine("Salario: {0}, Matricula{1}, Usuarios_ID: {2}, ID: {3} ", new Object[]{f.getSalario(), f.getMatricula(), f.getUsuario().getId()}, f.getId());
+            logFine("Salario: {0}, Matricula{1}, ID: {2} ", new Object[]{f.getSalario(), f.getMatricula(), f.getId()});
 
+            pst.setDouble(1, f.getSalario());
+            pst.setString(2, f.getMatricula());
+
+            pst.setInt(3, f.getId());
+
+            pst.execute();
+
+            logInfo("Modificado com sucesso no banco de dados para Salario: {0}, Matricula{1}, ID: {2} ",
+                    new Object[]{f.getSalario(), f.getMatricula(), f.getId()});
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
         } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+        } finally {
+
+            desconectar();
         }
 
     }

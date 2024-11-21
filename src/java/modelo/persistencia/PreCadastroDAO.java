@@ -11,7 +11,7 @@ import modelo.entidades.PreCadastro;
 
 public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, InterfaceDAO<Integer, PreCadastro> {
 
-    AreaCoberturaDAO daoAreacobertura = new AreaCoberturaDAO();
+    private AreaCoberturaDAO daoAreacobertura = new AreaCoberturaDAO();
     private static final Logger LOGGER = Logger.getLogger(PreCadastroDAO.class.getName());
 
     public PreCadastroDAO() throws Exception {
@@ -212,7 +212,6 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
             desconectar();
         }
 
-        desconectar();
         return pc;
 
     }
