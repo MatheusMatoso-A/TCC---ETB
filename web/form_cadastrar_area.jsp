@@ -16,36 +16,44 @@
         <link rel="stylesheet" href="css/obrigatorio_login.css" type="text/css">
         <link rel="stylesheet" href="css/escolha_login.css" type="text/css">
 
-        <!-- Flatpickr CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <!-- Flatpickr Locale PT-BR -->
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
-        <title>Taí Telecom - Cadastrar Agendamento</title>
+        <title>Taí Telecom - Cadastrar Área de Cobertura</title>
     </head>
     <body>
 
         <%@include file="menu_login.jsp" %>
 
         <div class="main-content">
-            <h2 class="text-center mb-4">Cadastrar Agendamento</h2>
+            <h2 class="text-center mb-4">Cadastrar Área de Cobertura</h2>
 
-            <!-- Formulário de Cadastro de Agendamento -->
+            <!-- Formulário de Cadastro de Área de cobertura -->
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4"> <!-- Usando 4 colunas para telas grandes e 6 colunas para telas médias -->
-                    <form action="cadastrar_agendamento.do" method="post">
+                    <form action="cadastrar_area.do" method="post">
                         <div class="mb-3">
-
-                            <label for="dataHora" class="form-label">Data e Hora</label>
-                            <input type="text" class="form-control" id="dataHora" name="dataHora" placeholder="Selecione data e hora" required>
-
+                            <!-- Nome do Produto -->
+                            <label for="cep" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="cep" name="cep"  required>
                         </div>
+
+                        <div class="mb-3">
+                            <!-- Velocidade -->
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" name="cidade"  required>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Valor -->
+                            <label for="estado" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="estado" name="estado"  required>
+                        </div>
+
 
                         <!-- Botão Enviar -->
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-danger">Cadastrar Agendamento</button>
+                            <button type="submit" class="btn btn-danger">Cadastrar Área</button>
                         </div>
+
 
                     </form>
 
@@ -53,14 +61,6 @@
 
             </div>
 
-            <script>
-                flatpickr("#dataHora", {
-                    enableTime: true, // Habilita o seletor de hora
-                    dateFormat: "d-m-Y H:i", // Formato de data e hora
-                    minDate: "today", // A data mínima é o dia de hoje
-                    locale: "pt", // Define o idioma para português brasileiro
-                });
-            </script>
         </div>
     </body>
 </html>

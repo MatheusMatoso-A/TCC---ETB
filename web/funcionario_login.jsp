@@ -26,7 +26,7 @@
         <div class="container text-center mt-5">
             <div class="row g-2"> <!-- Define o `gutter` como 2 (espaço reduzido entre colunas) -->
                 <div class="col-md-5 offset-md-2"> <!-- Aumenta o alinhamento à esquerda -->
-                    <a href="#" class="btn btn-transparent">
+                    <a href="form_cadastrar_funcionario.jsp" class="btn btn-transparent">
                         <img src="imagens/cadastrar_funcionario.png" alt="Cadastrar Funcionarios"> <!-- Imagem para Cadastrar -->
                         Cadastrar Funcionários
                     </a>

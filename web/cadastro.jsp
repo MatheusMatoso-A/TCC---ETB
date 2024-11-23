@@ -42,7 +42,7 @@
 
 
                         <div class="form-floating mb-3">
-                            <input type="tel"  class="form-control" placeholder="Digite seu telefone" id="telefone" name="telefone" maxlength="14"  required>
+                            <input type="tel"  class="form-control" placeholder="Digite seu telefone" id="telefone" name="telefone" maxlength="15"  required>
                             <label for="telefone">Celular (WhatsApp)</label>
 
 
@@ -96,6 +96,7 @@
                                             this.value = value;
                                         });
                                     </script>
+
                                 </div>
                             </div>
                             <div class="col-md">
