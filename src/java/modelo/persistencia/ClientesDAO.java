@@ -29,30 +29,34 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
     @Override
     public void salvar(Clientes c) throws Exception {
 
-        String sql = "INSERT INTO cliente ( tipoEndereco, endereco, numero, complemento, "
-                + "pontoReferencia, preCadasto_id, usuarios_id ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cliente ( tipoEndereco, cep, endereco, numero, complemento, "
+                + "pontoReferencia, preCadasto_id, usuarios_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         conectar();
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
             logInfo("Executando SQL: {0}", sql);
-            logFine("TipoEndereco: {0}, Endereco: {1}, Numero: {2}, Complemento: {3}, PontoReferencia: {4}, PreCadastro_ID: {5}, Usuarios_ID: {6} ",
-                    new Object[]{c.getTipoEndereco(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(),
+            logFine("TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, PontoReferencia: {5}, "
+                    + "PreCadastro_ID: {6}, Usuarios_ID: {7} ",
+                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(),
                         c.getPreCadastro().getId(), c.getUsuario().getId()});
 
             pst.setString(1, c.getTipoEndereco());
-            pst.setString(2, c.getEndereco());
-            pst.setInt(3, c.getNumero());
-            pst.setString(4, c.getComplemento());
-            pst.setString(5, c.getPontoReferencia());
-            pst.setInt(6, c.getPreCadastro().getId());
-            pst.setInt(7, c.getUsuario().getId());
+            pst.setString(2, c.getCep());
+            pst.setString(3, c.getEndereco());
+            pst.setInt(4, c.getNumero());
+            pst.setString(5, c.getComplemento());
+            pst.setString(6, c.getPontoReferencia());
+            pst.setInt(7, c.getPreCadastro().getId());
+            pst.setInt(8, c.getUsuario().getId());
 
             pst.execute();
 
-            logInfo("Inserido com sucesso no banco de dados para TipoEndereco: {0}, Endereco: {1}, Numero: {2}, Complemento: {3}, PontoReferencia: {4}, "
-                    + "PreCadastro_ID: {5}, Usuarios_ID: {6} ", new Object[]{c.getTipoEndereco(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(),
+            logInfo("Inserido com sucesso no banco de dados para TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, "
+                    + "PontoReferencia: {5}, "
+                    + "PreCadastro_ID: {6}, Usuarios_ID: {7} ",
+                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(),
                         c.getPreCadastro().getId(), c.getUsuario().getId()});
 
         } catch (SQLException e) {
@@ -75,27 +79,29 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
     @Override
     public void modificar(Clientes c) throws Exception {
 
-        String sql = "UPDATE cliente SET tipoEndereco=?, endereco=?, numero=?, complemento=?, pontoReferencia=? WHERE id=?";
+        String sql = "UPDATE cliente SET tipoEndereco=?, cep=?, endereco=?, numero=?, complemento=?, pontoReferencia=? WHERE id=?";
 
         conectar();
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
             logInfo("Executando SQL: {0}", sql);
-            logFine("TipoEndereco: {0}, Endereco: {1}, Numero: {2}, Complemento: {3}, PontoReferencia: {4}, ID: {5} ",
-                    new Object[]{c.getTipoEndereco(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(), c.getId()});
+            logFine("TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, PontoReferencia: {5}, ID: {6} ",
+                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(), 
+                        c.getId()});
 
             pst.setString(1, c.getTipoEndereco());
-            pst.setString(2, c.getEndereco());
-            pst.setInt(3, c.getNumero());
-            pst.setString(4, c.getComplemento());
-            pst.setString(5, c.getPontoReferencia());
+            pst.setString(2, c.getCep());
+            pst.setString(3, c.getEndereco());
+            pst.setInt(4, c.getNumero());
+            pst.setString(5, c.getComplemento());
+            pst.setString(6, c.getPontoReferencia());
 
-            pst.setInt(6, c.getId());
+            pst.setInt(7, c.getId());
 
-            logInfo("Modificado com sucesso no banco de dados para TipoEndereco: {0}, Endereco: {1}, Numero: {2}, Complemento: {3}, "
-                    + "PontoReferencia: {4}, ID: {5}  ", new Object[]{c.getTipoEndereco(), c.getEndereco(), c.getNumero(),
-                        c.getComplemento(), c.getPontoReferencia(), c.getId()});
+            logInfo("Modificado com sucesso no banco de dados para TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, PontoReferencia: {5}, ID: {6} ",
+                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(), 
+                        c.getId()});
 
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
@@ -169,6 +175,7 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
 
                     c.setId(rs.getInt("id"));
                     c.setTipoEndereco(rs.getString("tipoEndereco"));
+                    c.setCep(rs.getString("cep"));
                     c.setEndereco(rs.getString("endereco"));
                     c.setNumero(rs.getInt("numero"));
                     c.setComplemento(rs.getString("complemento"));
@@ -223,6 +230,7 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
 
                 c.setId(rs.getInt("id"));
                 c.setTipoEndereco(rs.getString("tipoEndereco"));
+                c.setCep(rs.getString("cep"));
                 c.setEndereco(rs.getString("endereco"));
                 c.setNumero(rs.getInt("numero"));
                 c.setComplemento(rs.getString("complemento"));
