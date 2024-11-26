@@ -62,15 +62,15 @@
                         <tr>
 
                             <th>1</th>
-                            <td>Gaston</td>
-                            <td>000.000.000-00</td>
-                            <td>teste@teste.com</td>
-                            <td>(00) 0 0000-0000</td>
-                            <td> zezinho caipira</td>
-                            <td>Vida longa e prospera</td>
-                            <td>2aaaaaaaaaaaaaaaaaaaaaaa</td>
-                            <td>3aaaaaaaaaaaaaaaaaaaaa</td>
-                            <td>4aaaaaaaaaaaaaaaaaaaaaaa</td>
+                            <td>Gaston Correia</td>
+                            <td>123.456.789-10</td>
+                            <td>gaston@gmail.com</td>
+                            <td>(61) 9 9999-9999</td>
+                            <td> Gaston Admin</td>
+                            <td>Admin</td>
+                            <td>5000,00</td>
+                            <td>001</td>
+                            <td>Sim</td>
                             <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 

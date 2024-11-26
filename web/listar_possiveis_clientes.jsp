@@ -57,13 +57,13 @@
 
                         <tr>
 
-                            <th>1</th>
-                            <td>Gaston</td>
-                            <td>000.000.000-00</td>
-                            <td>teste@teste.com</td>
-                            <td>(00) 0 0000-0000</td>
-                            <td> zezinho caipira</td>
-                            <td>Vida longa e prospera</td>
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 
                         </tr>

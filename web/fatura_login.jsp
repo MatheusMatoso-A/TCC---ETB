@@ -35,7 +35,7 @@
                         <p class="bg-success text-white p-2 rounded"><strong>Status: Paga</strong></p>
                     </div>
                     <p><strong>Data de Vencimento:</strong> 15/11/2024</p>
-                    <p><strong>Forma de Pagamento:</strong> Cartão de Crédito</p>
+                    <p><strong>Forma de Pagamento:</strong> Boleto </p>
                 </div>
             </div>
 

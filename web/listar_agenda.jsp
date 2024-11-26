@@ -43,11 +43,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Data de comparecimento</th>
-                            <th>Cliente</th>
-                            <th>Endereço</th>
-                            <th>Complemento</th>
-                            <th>Ponto de referência</th>
-                            <th>Telefone Cliente</th>
+                            <th>Status</th>
                             <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
@@ -58,12 +54,8 @@
                         <tr>
 
                             <th>1</th>
-                            <td>Gaston</td>
-                            <td>000.000.000-00</td>
-                            <td>teste@teste.com</td>
-                            <td>(00) 0 0000-0000</td>
-                            <td></td>
-                            <td></td>
+                            <td>10/12/2024 14:00</td>
+                            <td>Disponível</td>
                             <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 
@@ -74,11 +66,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Data de comparecimento</th>
-                            <th>Cliente</th>
-                            <th>Endereço</th>
-                            <th>Complemento</th>
-                            <th>Ponto de referência</th>
-                            <th>Telefone Cliente</th>
+                            <th>Status</th>
                             <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>

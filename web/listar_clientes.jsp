@@ -65,18 +65,18 @@
                         <tr>
 
                             <th>1</th>
-                            <td>Gaston</td>
-                            <td>000.000.000-00</td>
-                            <td>teste@teste.com</td>
-                            <td>(00) 0 0000-0000</td>
-                            <td> zezinho caipira</td>
-                            <td>Vida longa e prospera</td>
-                            <td>2aaaaaaaaaaaaaaaaaaaaaaa</td>
-                            <td>3aaaaaaaaaaaaaaaaaaaaa</td>
-                            <td>4aaaaaaaaaaaaaaaaaaaaaaa</td>
-                            <td>5aaaaaaaaaaaaaaaaaaaaa</td>
-                            <td>6aaaaaaaaaaaaaaaaaa</td>
-                            <td>fsdfdsfdsf</td>
+                            <td>Cleiton da Silva</td>
+                            <td>344.525.176-12</td>
+                            <td>(61) 9 8450-3235</td>
+                            <td>cleiton@gmail.com</td>
+                            <td> Cleitin </td>
+                            <td> Casa </td>
+                            <td>7213524</td>
+                            <td>QI 24</td>
+                            <td>12</td>
+                            <td>Bairro Setor Industrial</td>
+                            <td>Ao lado do mercado vilela</td>
+                            <td>Sim</td>
                             <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 
@@ -92,9 +92,10 @@
                             <th>Telefone</th>
                             <th>E-mail</th>
                             <th>Login</th>
-                            <th>CEP</th>
                             <th>Tipo de Endereço</th>
+                            <th>CEP</th>
                             <th>Endereço</th>
+                            <th>Número</th>
                             <th>Complemento</th>
                             <th>Ponto de referência</th>
                             <th>Ativo</th>
