@@ -263,4 +263,60 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
         return listaAg;
     }
 
+    
+      public List<Agenda> buscarPorStatus() throws Exception {
+
+        String sql = "SELECT * FROM agenda WHERE status='Disponível'";
+
+        List<Agenda> listaAgs = new ArrayList<Agenda>();
+
+        conectar();
+
+        
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
+
+            logInfo("Executando SQL: ", sql);
+
+            while (rs.next()) {
+
+                Agenda ag = new Agenda();
+
+                ag.setId(rs.getInt("id"));
+
+                // Converte o DATETIME do banco para LocalDateTime
+                Timestamp timestamp = rs.getTimestamp("dataComparecimento");
+                if (timestamp != null) {
+                    ag.setDataComparecimento(timestamp.toLocalDateTime());
+                } else {
+                    ag.setDataComparecimento(null); // Ou defina um valor padrão se necessário
+                }
+
+                ag.setStatus(rs.getString("status"));
+                ag.setVendas(daoVendas.buscarPorId(rs.getInt("vendas_id")));
+
+                listaAgs.add(ag);
+            }
+
+            logInfo("Pesquisa realizada com sucesso", "");
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return listaAgs;
+    }
+
+    
 }

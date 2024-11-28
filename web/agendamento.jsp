@@ -1,4 +1,11 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="modelo.entidades.Agenda"%>
+<%@page import="java.util.List"%>
+<%@page import="modelo.persistencia.AgendaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -101,12 +108,40 @@
 
                         <!-- Seletor de Data e Hora Disponíveis -->
                         <div class="mb-3">
+
+
                             <label for="horario" class="form-label">Selecione o Dia e Hora</label>
                             <select class="form-select" name="horario" id="horario" required>
                                 <option value="">Escolha um horário disponível</option>
-                                <option value="2024-09-19 08:00">19/09/2024 08:00</option>
-                                <option value="2024-09-19 10:00">19/09/2024 10:00</option>
-                                <option value="2024-09-19 14:00">19/09/2024 14:00</option>
+
+                                <%
+                                    try {
+                                        AgendaDAO agDAO = new AgendaDAO();
+                                        List<Agenda> lista = agDAO.buscarPorStatus();
+
+                                        for (Agenda ag : lista) {
+                                %>
+
+
+                                <option value="<%=ag.getDataComparecimento() %>">
+
+                                    <%
+                                        // Convertendo e formatando a data
+                                        LocalDateTime dataComparecimento = ag.getDataComparecimento();
+                                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                                        String dataFormatada = dataComparecimento.format(formatter);
+                                    %>
+                                    <%= dataFormatada%>
+
+
+                                </option>
+                                <%                                        }
+                                    } catch (Exception e) {
+                                        out.print(e);
+                                    }
+
+                                %>
+
                             </select>
                         </div>
                     </div>

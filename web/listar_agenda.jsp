@@ -1,4 +1,11 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="modelo.entidades.Agenda"%>
+<%@page import="java.util.List"%>
+<%@page import="modelo.persistencia.AgendaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,29 +51,74 @@
                             <th>ID</th>
                             <th>Data de comparecimento</th>
                             <th>Status</th>
+                            <th>Vendas</th>
                             <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
                     </thead>
 
+
+
                     <tbody>
+
+                        <%
+                            try {
+                                AgendaDAO agDAO = new AgendaDAO();
+                                List<Agenda> lista = agDAO.listar();
+
+                                for (Agenda ag : lista) {
+                        %>
+
 
                         <tr>
 
-                            <th>1</th>
-                            <td>10/12/2024 14:00</td>
-                            <td>Disponível</td>
+                            <th><%=ag.getId()%></th>
+
+                            <td>
+                                <%
+                                    // Convertendo e formatando a data
+                                    LocalDateTime dataComparecimento = ag.getDataComparecimento();
+                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                                    String dataFormatada = dataComparecimento.format(formatter);
+                                %>
+                                <%= dataFormatada%>
+                            </td>
+
+                            <td><%=ag.getStatus()%></td>
+
+                            <td>
+
+                                <%
+                                    // Verifica se o objeto 'vendas' é null
+                                    if (ag.getVendas() == null) {
+                                        // Se for null, exibe um valor vazio
+                                        out.print("");
+                                    } else {
+                                        // Caso contrário, exibe um atributo do objeto vendas
+                                        out.print(ag.getVendas().getId()); // Supondo que 'nome' seja um campo do objeto 'vendas'
+                                    }
+                                %>
+
+                            </td>
+
                             <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
                             <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 
-                        </tr>
 
+                            <%                                        }
+                                } catch (Exception e) {
+                                    out.print(e);
+                                }
+
+                            %>
+                        </tr>
                     </tbody>
                     <tfoot class="table-danger border-top border-bottom border-danger">
                         <tr>
                             <th>ID</th>
                             <th>Data de comparecimento</th>
                             <th>Status</th>
+                            <th>Vendas</th>
                             <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
