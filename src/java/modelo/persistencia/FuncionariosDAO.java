@@ -232,4 +232,54 @@ public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, I
 
     }
 
+    public Funcionarios buscarPorUsuarioId(Integer id) throws Exception {
+
+        String sql = "SELECT * FROM funcionarios WHERE usuarios_id=?";
+
+        Funcionarios f = new Funcionarios();
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", id);
+
+            pst.setInt(1, id);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    f.setId(rs.getInt("id"));
+                    f.setSalario(rs.getDouble("salario"));
+                    f.setMatricula(rs.getString("matricula"));
+                    f.setUsuario(daoUsuario.buscarPorId(rs.getInt("usuarios_id")));
+
+                } else {
+
+                    return null;
+                }
+
+            }
+
+            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", id);
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar por ID no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return f;
+    }
 }

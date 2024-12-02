@@ -1,3 +1,8 @@
+<%@page import="modelo.entidades.PreCadastro"%>
+<%@page import="modelo.persistencia.PreCadastroDAO"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="modelo.entidades.Produtos"%>
+<%@page import="modelo.persistencia.ProdutosDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -22,27 +27,42 @@
         <header>
             <div class="container">
                 <%@include file="menu.jsp" %>
+                <%@include file="toast.jsp" %>
             </div>
         </header>
 
         <main>
             <div class="container-fluid py-5">
                 <div class="row justify-content-center">
-                    <form action="" method="post" class="col-4 formulario-cadastro">
+                    <form action="inserir_usuario_c.do" method="post" class="col-4 formulario-cadastro">
                         <h2 class="text-center title-form">Informe seus dados</h2>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control"  placeholder="Digite seu Nome Completo" id="nome" name="nome" required>
-                            <label for="nome">Nome Completo</label>
-                        </div>
+
+                        <%
+                            int planoId = Integer.parseInt(request.getParameter("planoId"));
+                            int preCadastroId = Integer.parseInt(request.getParameter("preCadastroId"));
+
+                            try {
+
+                                PreCadastroDAO pcDAO = new PreCadastroDAO();
+
+                                PreCadastro pc = pcDAO.buscarPorId(preCadastroId);
+
+                                if (pc.getId() > 0) {
+
+                        %>
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="text" class="form-control"  placeholder="Digite seu Nome Completo" id="nome" name="nome" value="<%= pc.getNome()%>" required>
+                            <label for="nome">Nome Completo</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="email" placeholder="name@example.com" value="<%= pc.getEmail()%>" name="email" required>
                             <label for="floatingInput"> Infome seu e-mail</label>
                         </div>
 
 
                         <div class="form-floating mb-3">
-                            <input type="tel"  class="form-control" placeholder="Digite seu telefone" id="telefone" name="telefone" maxlength="15"  required>
+                            <input type="text"  class="form-control" placeholder="Digite seu telefone" id="telefone" name="telefone" maxlength="15"  value=" <%= pc.getTelefone()%>" required>
                             <label for="telefone">Celular (WhatsApp)</label>
 
 
@@ -110,7 +130,7 @@
 
                         <div class="form-floating mb-3">
                             <h3 class="my-3 text-center">Selecione o dia do vencimento de sua fatura</h3>
-                            <select class="form-select" id="due-date" name="due_date" onchange="updateSelectedDay()">
+                            <select class="form-select" id="dataVencimento" name="dataVencimento" onchange="updateSelectedDay()">
                                 <option value="" disabled selected>Selecione um dia</option>
                                 <option value="5">5</option>
                                 <option value="10">10</option>
@@ -134,7 +154,7 @@
                         </div>
 
                         <div class="form-floating mb-3 password-field">
-                            <input type="password" class="form-control" id="senha" placeholder="Sua senha" required>
+                            <input type="password" class="form-control" id="senha" name="senha" placeholder="Sua senha" required>
                             <label for="senha">Senha</label>
                             <i class="bi bi-eye eye-icon" id="togglePassword"></i>
 
@@ -174,14 +194,16 @@
                             Só poderá fazer login e ter acesso a área do cliente após o pagamento.
                         </div>
 
+                        <input type="hidden" id="preCadastroId" name="preCadastroId" value="<%=pc.getId()%>"/>
 
+                        <input type="hidden" id="perfil" name="perfil" value="4"/>
+                        
+                        <input type="hidden" id="planoId" name="planoId" value="<%=planoId%>"/>
 
                         <div class="text-center">
                             <button type="submit" class="btn botao my-3" onclick="submitForm()">
                                 Enviar
                             </button> 
-
-
 
                             <script>
 
@@ -197,26 +219,51 @@
                                 });
                             </script>
 
-
-
-
                         </div>
                     </form>
 
+                    <% }
+
+                        } catch (Exception e) {
+                            out.print(e);
+                            
+                        }%>
+
+
+
                     <div class="col-5 my-5">
+                        <%                            try {
+
+                                ProdutosDAO pDAO = new ProdutosDAO();
+
+                                Produtos p = pDAO.buscarPorId(planoId);
+                                if (p.getId() > 0) {
+                                    // Formatação do valor
+                                    DecimalFormat df = new DecimalFormat("#,##0.00");
+                                    String valorFormatado = df.format(p.getValor());
+
+                        %>
 
                         <div class="card text-dark border-dark my-4 ">
-                            <div class="card-header text-center bg-danger "><h4> <strong> Plano Básico </strong></h4></div>
+                            <div class="card-header text-center bg-danger "><h4> <strong> Plano <%=p.getNome()%> </strong></h4></div>
                             <div class="card-body text-center">
-                                <h5 class="card-title">100MBps de Velocidade </h5>
+                                <h5 class="card-title"><%=p.getVelocidade()%> de Velocidade </h5>
                                 <p class="card-text text-center">Conexão ultra rápida para todos os usos</p>
                                 <p class="card-text text-center">Download ilimitado</p>
                                 <p class="card-text text-center">Suporte 24/7</p>
-                                <p class="card-text text-center"><strong>R$ 99,90/mês</strong></p>
+                                <p class="card-text text-center"><strong>R$ <%=valorFormatado%>/mês</strong></p>
                             </div>
                         </div>
-                    </div>
 
+                        <%                                    }
+
+                            } catch (Exception e) {
+                                out.print(e);
+                            }
+
+                        %>
+
+                    </div>
 
                 </div>
             </div>

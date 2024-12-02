@@ -258,7 +258,7 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
             }
             
-            logInfo("Pesquisa por CEP bem-sucedida no banco de dados para o ID: {0}", cep);
+            logInfo("Pesquisa por CEP bem-sucedida no banco de dados para o CEP: {0}", cep);
             
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException

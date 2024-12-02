@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class VendasDAO extends DataBaseDAO implements InterfaceLoggable, Interfa
 
         conectar();
 
-        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             logInfo("Executando SQL: {0}", sql);
             logFine("FoiPago: {0}, DataVenda: {1}, DataVencimento: {2}, Produtos_ID: {3}, "
@@ -43,13 +44,24 @@ public class VendasDAO extends DataBaseDAO implements InterfaceLoggable, Interfa
                         v.getProdutos().getId(), v.getFuncionario().getId(), v.getCliente().getId()});
 
             pst.setBoolean(1, v.isFoiPago());
-            pst.setDate(2, (Date) v.getDataVenda());
-            pst.setDate(3, (Date) v.getDataVencimento());
+            pst.setDate(2, new java.sql.Date(v.getDataVenda().getTime()));
+            pst.setString(3, v.getDataVencimento());
             pst.setInt(4, v.getProdutos().getId());
             pst.setInt(5, v.getFuncionario().getId());
             pst.setInt(6, v.getCliente().getId());
 
-            pst.execute();
+            int valoresInseridos = pst.executeUpdate();
+
+            if (valoresInseridos > 0) {
+                try (ResultSet rs = pst.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        v.setId(rs.getInt(1));
+
+                    }
+
+                }
+
+            }
 
             logInfo("Inserido com sucesso no banco de dados para FoiPago: {0}, DataVenda: {1}, DataVencimento: {2}, Produtos_ID: {3}, "
                     + "Funcionarios_ID: {4}, Clientes_ID: {5} ", new Object[]{v.isFoiPago(), v.getDataVenda(), v.getDataVencimento(),
@@ -86,8 +98,8 @@ public class VendasDAO extends DataBaseDAO implements InterfaceLoggable, Interfa
                         v.getProdutos().getId(), v.getFuncionario().getId(), v.getCliente().getId(), v.getId()});
 
             pst.setBoolean(1, v.isFoiPago());
-            pst.setDate(2, (Date) v.getDataVenda());
-            pst.setDate(3, (Date) v.getDataVencimento());
+            pst.setDate(2, new java.sql.Date(v.getDataVenda().getTime()));
+            pst.setString(3, v.getDataVencimento());
             pst.setInt(4, v.getProdutos().getId());
             pst.setInt(5, v.getFuncionario().getId());
             pst.setInt(6, v.getCliente().getId());
@@ -171,7 +183,7 @@ public class VendasDAO extends DataBaseDAO implements InterfaceLoggable, Interfa
                     v.setId(rs.getInt("id"));
                     v.setFoiPago(rs.getBoolean("foiPago"));
                     v.setDataVenda(rs.getDate("dataVenda"));
-                    v.setDataVencimento(rs.getDate("dataVencimento"));
+                    v.setDataVencimento(rs.getString("dataVencimento"));
                     v.setProdutos(daoProdutos.buscarPorId(rs.getInt("produtos_id")));
                     v.setFuncionario(daoFuncionarios.buscarPorId(rs.getInt("funcionarios_id")));
                     v.setCliente(daoClientes.buscarPorId(rs.getInt("cliente_id")));
@@ -225,7 +237,7 @@ public class VendasDAO extends DataBaseDAO implements InterfaceLoggable, Interfa
                 v.setId(rs.getInt("id"));
                 v.setFoiPago(rs.getBoolean("foiPago"));
                 v.setDataVenda(rs.getDate("dataVenda"));
-                v.setDataVencimento(rs.getDate("dataVencimento"));
+                v.setDataVencimento(rs.getString("dataVencimento"));
                 v.setProdutos(daoProdutos.buscarPorId(rs.getInt("produtos_id")));
                 v.setFuncionario(daoFuncionarios.buscarPorId(rs.getInt("funcionarios_id")));
                 v.setCliente(daoClientes.buscarPorId(rs.getInt("cliente_id")));

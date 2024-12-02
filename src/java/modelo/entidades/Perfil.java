@@ -20,4 +20,8 @@ public class Perfil {
         this.perfil = perfil;
 
     }
+     @Override
+    public String toString() {
+        return String.valueOf(this.id); // Substitua "id" pela chave primária ou outro atributo relevante
+    }
 }

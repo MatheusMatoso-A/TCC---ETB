@@ -8,7 +8,7 @@
             <p class="card-text text-center">Suporte 24/7</p>
             <p class="card-text text-center"><strong>R$ 99,90/mês</strong></p>
             <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal"
-                    data-bs-target="#myModal">
+                    data-bs-target="#myModal" data-id="1">
                 Assinar
             </button>
         </div>

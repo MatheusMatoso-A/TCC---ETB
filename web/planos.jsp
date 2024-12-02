@@ -1,14 +1,14 @@
 <div class="col-md-4 ">
     <div class="card text-dark border-dark mb-3 carousel-card">
-        <div class="card-header text-center bg-danger"><h4> <strong>Plano Essencial</strong></h4></div>
+        <div class="card-header text-center bg-danger"><h4> <strong> Plano ${p.nome} </strong></h4></div>
         <div class="card-body text-center">
-            <h5 class="card-title">200MBps de Velocidade</h5>
+            <h5 class="card-title">${p.velocidade} de Velocidade </h5>
             <p class="card-text text-center">Conexão ultra rápida para todos os usos</p>
             <p class="card-text text-center">Download ilimitado</p>
             <p class="card-text text-center">Suporte 24/7</p>
-            <p class="card-text text-center"><strong>R$ 109,90/mês</strong></p>
+            <p class="card-text text-center"><strong>R$ <fmt:formatNumber value="${p.valor}" pattern="#,##0.00" />/mês</strong></p>
             <button id="openModal" class="btn btn-red vantagem-img" data-bs-toggle="modal"
-                    data-bs-target="#myModal" data-id="2">
+                    data-bs-target="#myModal" data-id="${p.id}">
                 Assinar
             </button>
         </div>

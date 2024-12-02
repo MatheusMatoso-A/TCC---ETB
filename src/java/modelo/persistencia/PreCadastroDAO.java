@@ -3,10 +3,11 @@ package modelo.persistencia;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-import modelo.entidades.AreaCobertura;
 import modelo.entidades.PreCadastro;
 
 public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, InterfaceDAO<Integer, PreCadastro> {
@@ -27,29 +28,21 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
     @Override
     public void salvar(PreCadastro pc) throws Exception {
 
-        // Buscar a área de cobertura pelo CEP
-        AreaCobertura ac = daoAreacobertura.buscarPorCep(pc.getCep());
-
-        // Verificar se a área de cobertura existe
-        if (ac != null) {
-
-            pc.setAreaCobertura(ac);    // Define a área de cobertura
-
-        }
-
-        String sql = "INSERT INTO precadastro ( nome, cep, telefone, cidade, email, areacobertura_id ) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO precadastro (nome, cep, telefone, cidade, email, areacobertura_id) VALUES (?, ?, ?, ?, ?, ?)";
 
         conectar();
 
-        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            logInfo("Executando SQL: {0}", sql);
+            logFine("Executando SQL: {0}", sql);
             logFine("Nome: {0}, Cep: {1}, Telefone: {2}, Cidade: {3}, Email: {4}, "
                     + "Areacobertura_ID: {5} ", new Object[]{pc.getNome(), pc.getCep(),
                         pc.getTelefone(), pc.getCidade(), pc.getEmail(), pc.getAreaCobertura().getId()});
 
             pst.setString(1, pc.getNome());
+
             pst.setString(2, pc.getCep());
+
             pst.setString(3, pc.getTelefone());
             pst.setString(4, pc.getCidade());
             pst.setString(5, pc.getEmail());
@@ -64,7 +57,19 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
 
             }
 
-            pst.execute();
+            int valoresInseridos = pst.executeUpdate();
+
+            if (valoresInseridos > 0) {
+                try (ResultSet rs = pst.getGeneratedKeys()) {
+                    if(rs.next()){
+                        pc.setId(rs.getInt(1));
+                    
+                    
+                    }
+                    
+                }
+
+            }
 
             logInfo("Inserido com sucesso no banco de dados para Nome: {0}, Cep: {1}, Telefone: {2}, Cidade: {3}, Email: {4}, "
                     + "Areacobertura_ID: {5} ", new Object[]{pc.getNome(), pc.getCep(),
@@ -227,8 +232,8 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
         try (PreparedStatement pst = conn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery()) {
 
-             logInfo("Executando SQL: ", sql);
-            
+            logInfo("Executando SQL: ", sql);
+
             while (rs.next()) {
 
                 PreCadastro pc = new PreCadastro();
@@ -265,4 +270,52 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
 
     }
 
+     public List<PreCadastro> buscarUsariosSemArea() throws Exception {
+
+        String sql = "SELECT * FROM precadastro WHERE areacobertura_id='17'";
+
+        List<PreCadastro> listaPc = new ArrayList<PreCadastro>();
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
+
+            logInfo("Executando SQL: ", sql);
+
+            while (rs.next()) {
+
+                PreCadastro pc = new PreCadastro();
+
+                pc.setId(rs.getInt("id"));
+                pc.setNome(rs.getString("nome"));
+                pc.setCep(rs.getString("cep"));
+                pc.setTelefone(rs.getString("telefone"));
+                pc.setCidade(rs.getString("cidade"));
+                pc.setEmail(rs.getString("email"));
+                pc.setAreaCobertura(daoAreacobertura.buscarPorId(rs.getInt("areacobertura_id")));
+
+                listaPc.add(pc);
+            }
+
+            logInfo("Pesquisa realizada com sucesso", "");
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return listaPc;
+
+    }
+    
 }

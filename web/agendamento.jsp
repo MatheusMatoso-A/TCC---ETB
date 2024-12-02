@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@page import="modelo.persistencia.AgendaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
@@ -27,8 +28,8 @@
     <body>
         <header>
             <div class="container">
-                <!-- Inclus?o do menu de navega??o -->
                 <%@include file="menu.jsp" %>
+                <%@include file="toast.jsp" %>
             </div>
         </header>
 
@@ -36,9 +37,15 @@
 
             <div class="container conteudo-agenda">
                 <h2 class="text-center mb-4">Agendamento de Visita Técnica</h2>
-
                 <!-- Formulário -->
-                <form id="agendamento-form" method="post" action="processaDados.jsp">
+                <form id="agendamento-form" method="post" action="inserir_agendamento_vendas_c.do">
+
+                    <%
+                        int usuarioId = Integer.parseInt(request.getParameter("usuarioId"));
+                        int preCadastroId = Integer.parseInt(request.getParameter("preCadastroId"));
+                        String dataVencimento = request.getParameter("dataVencimento");
+                        int planoId = Integer.parseInt(request.getParameter("planoId"));
+                    %>
                     <!-- Seletor de Tipo de Residência -->
                     <div class="mb-3">
                         <label for="tipo-residencia" class="form-label">Tipo de Residência</label>
@@ -53,28 +60,13 @@
                     <div id="campo-comum" style="display: none;">
                         <div class="mb-3">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" name="cep" maxlength="9" class="form-control" id="cep" placeholder="Digite o CEP" onblur="buscarEndereco()" required>
+                            <input type="text" name="cep" maxlength="8" class="form-control" id="cep" placeholder="Digite o CEP" onblur="buscarEndereco()" required>
 
-                            <script>
-                                document.getElementById('cep').addEventListener('input', function (e) {
-                                    // Remove qualquer caractere que não seja número
-                                    this.value = this.value.replace(/\D/g, '');
-
-                                    // Formata o CEP
-                                    let value = this.value;
-
-                                    if (value.length > 5) {
-                                        value = value.replace(/(\d{5})(\d{0,3})/, '$1-$2'); // Formato XXXXX-XXX
-                                    }
-
-                                    this.value = value;
-                                });
-                            </script>
                         </div>
 
                         <div class="mb-3">
                             <label for="rua" class="form-label">Endereço</label>
-                            <input type="text" name="endereco" class="form-control" id="rua" placeholder="Rua" required disabled>
+                            <input type="text" name="rua" class="form-control" id="rua" placeholder="Rua" required>
                         </div>
                         <div class="mb-3">
                             <label for="numero" class="form-label">Número</label>
@@ -108,14 +100,11 @@
 
                         <!-- Seletor de Data e Hora Disponíveis -->
                         <div class="mb-3">
-
-
                             <label for="horario" class="form-label">Selecione o Dia e Hora</label>
                             <select class="form-select" name="horario" id="horario" required>
                                 <option value="">Escolha um horário disponível</option>
 
-                                <%
-                                    try {
+                                <%                                    try {
                                         AgendaDAO agDAO = new AgendaDAO();
                                         List<Agenda> lista = agDAO.buscarPorStatus();
 
@@ -123,7 +112,7 @@
                                 %>
 
 
-                                <option value="<%=ag.getDataComparecimento() %>">
+                                <option value="<%=ag.getDataComparecimento()%>">
 
                                     <%
                                         // Convertendo e formatando a data
@@ -144,7 +133,34 @@
 
                             </select>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="funcionario" class="form-label"> Selecione um Técnico para Instalação </label>
+                            <select class="form-select" name="funcionario" id="funcionario" required>
+                                <option value="">Escolha um técnico disponível</option>
+
+                                <jsp:useBean class="modelo.persistencia.UsuarioDAO" id="uDB" />
+                                <c:forEach var="u" items="${uDB.listarTecnico()}" >
+
+                                    <option value="${u.id}">
+
+                                        ${u.nome}
+
+                                    </option>
+
+                                </c:forEach>
+                            </select>
+                        </div> 
                     </div>
+
+                    <input type="hidden" id="usuarioId" name="usuarioId" value="<%=usuarioId%>"/>      
+
+                    <input type="hidden" id="preCadastroId" name="preCadastroId" value="<%=preCadastroId%>"/>
+
+                    <input type="hidden" id="dataVencimento" name="dataVencimento" value="<%=dataVencimento%>"/>
+
+                    <input type="hidden" id="planoId" name="planoId" value="<%=planoId%>"/>
+
 
                     <div class="d-flex justify-content-center">
                         <!-- Botão de Enviar -->
@@ -167,11 +183,6 @@
                         }
                     });
 
-                    // Submissão do formulário
-                    document.getElementById('agendamento-form').addEventListener('submit', function (e) {
-                        e.preventDefault();
-                        alert('Visita agendada com sucesso!');
-                    });
                 </script>
 
                 <%@include file="whatsapp.jsp"%>

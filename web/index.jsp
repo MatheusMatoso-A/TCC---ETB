@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -20,6 +23,7 @@
             <div class="container">
                 <!-- Inclus?o do menu de navega??o -->
                 <%@include file="menu.jsp" %>
+                <%@include file="toast.jsp" %>
             </div>
         </header>
 
@@ -33,42 +37,26 @@
             <!-- Seção de Planos de Internet -->
             <section class="my-5">
                 <div class="container">
+                    <link rel="stylesheet" href="css/animacao.css" type="text/css" />
                     <h2 class="text-center mb-4">Nossos Planos de Internet</h2>
                     <div class="carousel slide carousel-dark " data-bs-ride="carousel" id="ads">
 
                         <div class="carousel-inner py-5">
-                            <div class="carousel-item active" data-bs-interval="5000">
-                                <div class="row justify-content-center">
+                              <jsp:useBean class="modelo.persistencia.ProdutosDAO" id="pDB"/>
 
-                                    <!-- plano 1 -->
-                                    <%@include file="basico.jsp" %>
-                                    <!-- plano 2 -->
-                                    <%@include file="essencial.jsp" %>
-                                </div>
-                            </div>
-                                
-                                <div class="carousel-item" data-bs-interval="5000">
-                                <div class="row justify-content-center">
+                            <c:forEach var="p" items="${pDB.listar()}" varStatus="status">
+                                <c:if test="${status.index % 2 == 0}"> <!-- Início de um novo slide -->
+                                    <div class="carousel-item ${status.index == 0 ? 'active' : ''}" data-bs-interval="5000">
+                                        <div class="row justify-content-center">
+                                            </c:if>
 
-                                    <!-- plano 3 -->
-                                    <%@include file="intermediario.jsp" %>
-                                    <!-- plano 4 -->
-                                    <%@include file="aprimorado.jsp" %>
+                                            <%@include file="planos.jsp" %>
 
-                                </div>
-                            </div>
-
-                            <div class="carousel-item" data-bs-interval="5000">
-                                <div class="row justify-content-center">
-
-                                    <!-- plano 5 -->
-                                    <%@include file="avancado.jsp" %>
-                                    <!-- plano 6 -->
-                                    <%@include file="ultra.jsp" %>
-
-                                </div>
-                            </div>
-                        </div>
+                                            <c:if test="${status.index % 2 == 1 || status.last}"> <!-- Fim do slide -->
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
 
                         <button class="carousel-control-prev" data-bs-target="#ads" data-bs-slide="prev"><span
                                 class="carousel-control-prev-icon"></span></button>

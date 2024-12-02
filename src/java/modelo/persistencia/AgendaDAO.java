@@ -263,8 +263,7 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
         return listaAg;
     }
 
-    
-      public List<Agenda> buscarPorStatus() throws Exception {
+    public List<Agenda> buscarPorStatus() throws Exception {
 
         String sql = "SELECT * FROM agenda WHERE status='Disponível'";
 
@@ -272,7 +271,6 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
 
         conectar();
 
-        
         try (PreparedStatement pst = conn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery()) {
 
@@ -318,5 +316,50 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
         return listaAgs;
     }
 
-    
+    public void modificarStatus (Agenda ag) throws Exception {
+
+        String sql = "UPDATE agenda SET status=?, vendas_id=? WHERE dataComparecimento=?";
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: {0}", sql);
+            logFine("Status{0}, DataComparecimento: {1} ",
+                    new Object[]{ ag.getStatus(), ag.getDataComparecimento()});
+
+            
+             pst.setString(1, ag.getStatus());
+             
+             pst.setInt(2, ag.getVendas().getId());
+             
+            // Converte LocalDateTime para Timestamp e insere no PreparedStatement
+            if (ag.getDataComparecimento() != null) {
+
+                pst.setTimestamp(3, Timestamp.valueOf(ag.getDataComparecimento()));
+
+            } else {
+                pst.setNull(3, java.sql.Types.TIMESTAMP); // Caso seja null
+            }
+
+
+            pst.executeUpdate();
+
+            logInfo("Modificado com sucesso no banco de dados para DataComparecimento: {0}, Status{1}, ID: {2} ",
+                    new Object[]{ag.getDataComparecimento(), ag.getStatus(), ag.getId()});
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+        } finally {
+
+            desconectar();
+        }
+
+    }
 }

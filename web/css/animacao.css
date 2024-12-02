@@ -1,0 +1,27 @@
+/* Animação de rotação para transição de slides */
+.carousel-item {
+  opacity: 0;
+  transform: rotateY(-90deg); /* Começa fora de vista */
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+/* Definir estado inicial do item ativo */
+.carousel-item.active {
+  opacity: 1;
+  transform: rotateY(0deg); /* Fica visível */
+}
+
+/* Animação do item ao sair (quando não ativo) */
+.carousel-item-next,
+.carousel-item-prev {
+  opacity: 0;
+  transform: rotateY(90deg); /* Sai para o lado oposto */
+}
+
+/* Quando o carrossel é ativado e o item está em transição */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  opacity: 1;
+  transform: rotateY(0deg); /* A transição de rotação é feita para a posição correta */
+}

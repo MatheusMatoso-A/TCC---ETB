@@ -39,7 +39,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" href="#">Alterar Cadastro</a></li>
-                <li><a class="dropdown-item" href="logout.do">Sair</a></li>
+                <li><a class="dropdown-item" href="sair.do">Sair</a></li>
             </ul>
         </div>
     </div>

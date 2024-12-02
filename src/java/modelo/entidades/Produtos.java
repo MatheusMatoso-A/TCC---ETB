@@ -25,4 +25,8 @@ public class Produtos {
         this.valor = valor;
         this.ativo = ativo;
     }
+     @Override
+    public String toString() {
+        return String.valueOf(this.id); // Substitua "id" pela chave primária ou outro atributo relevante
+    }
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
 
         conectar();
 
-        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             logInfo("Executando SQL: ", sql);
             logFine("Nome: {0}, CPF: {1}, Telefone: {2}, Email: {3}, DataNascimento: {4}, Login: {5}, "
@@ -45,13 +46,24 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
             pst.setString(2, u.getCpf());
             pst.setString(3, u.getTelefone());
             pst.setString(4, u.getEmail());
-            pst.setDate(5, (Date) u.getDataNascimento());
+            pst.setDate(5, new java.sql.Date(u.getDataNascimento().getTime()));
             pst.setString(6, u.getLogin());
             pst.setString(7, u.getSenha());
             pst.setBoolean(8, u.getAtivo());
             pst.setInt(9, u.getPerfil().getId());
 
-            pst.execute();
+            int valoresInseridos = pst.executeUpdate();
+
+            if (valoresInseridos > 0) {
+                try (ResultSet rs = pst.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        u.setId(rs.getInt(1));
+
+                    }
+
+                }
+
+            }
 
             logInfo("Inserido com sucesso no banco de dados para Nome: {0}, CPF: {1}, Telefone: {2}, Email: {3}, DataNascimento: {4}, Login: {5}, "
                     + "Senha: {6}, Ativo: {7}, Perfil_ID: {8} ", new Object[]{u.getNome(), u.getCpf(),
@@ -95,7 +107,7 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
             pst.setString(2, u.getCpf());
             pst.setString(3, u.getTelefone());
             pst.setString(4, u.getEmail());
-            pst.setDate(5, (Date) u.getDataNascimento());
+            pst.setDate(5, new java.sql.Date(u.getDataNascimento().getTime()));
             pst.setString(6, u.getLogin());
             pst.setString(7, u.getSenha());
             pst.setBoolean(8, u.getAtivo());
@@ -374,6 +386,58 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
         }
 
         return null;
+    }
+
+    public List<Usuario> listarTecnico() throws Exception {
+
+        String sql = "SELECT * FROM usuarios WHERE perfil_id='3' AND ativo='1'";
+
+        List<Usuario> listaTec = new ArrayList<Usuario>();
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
+
+            logInfo("Executando SQL: ", sql);
+
+            while (rs.next()) {
+
+                Usuario u = new Usuario();
+
+                u.setId(rs.getInt("id"));
+                u.setNome(rs.getString("nome"));
+                u.setCpf(rs.getString("cpf"));
+                u.setTelefone(rs.getString("telefone"));
+                u.setEmail(rs.getString("email"));
+                u.setDataNascimento(rs.getDate("dataNascimento"));
+                u.setLogin(rs.getString("login"));
+                u.setSenha(rs.getString("senha"));
+                u.setAtivo(rs.getBoolean("ativo"));
+                u.setPerfil(daoPerfil.buscarPorId(rs.getInt("perfil_id")));
+
+                listaTec.add(u);
+
+            }
+
+            logInfo("Pesquisa realizada com sucesso", "");
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return listaTec;
     }
 
 }

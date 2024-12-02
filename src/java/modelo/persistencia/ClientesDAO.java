@@ -3,6 +3,7 @@ package modelo.persistencia;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -30,11 +31,11 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
     public void salvar(Clientes c) throws Exception {
 
         String sql = "INSERT INTO cliente ( tipoEndereco, cep, endereco, numero, complemento, "
-                + "pontoReferencia, preCadasto_id, usuarios_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                + "pontoReferencia, preCadastro_id, usuarios_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         conectar();
 
-        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             logInfo("Executando SQL: {0}", sql);
             logFine("TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, PontoReferencia: {5}, "
@@ -51,7 +52,18 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
             pst.setInt(7, c.getPreCadastro().getId());
             pst.setInt(8, c.getUsuario().getId());
 
-            pst.execute();
+             int valoresInseridos = pst.executeUpdate();
+
+            if (valoresInseridos > 0) {
+                try (ResultSet rs = pst.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        c.setId(rs.getInt(1));
+
+                    }
+
+                }
+
+            }
 
             logInfo("Inserido com sucesso no banco de dados para TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, "
                     + "PontoReferencia: {5}, "

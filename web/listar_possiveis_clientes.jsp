@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,25 +51,29 @@
                             <th>Cidade</th>
                             <th>E-mail</th>
                             <th>Área de cobertura</th>
+                            <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        <jsp:useBean class="modelo.persistencia.PreCadastroDAO" id="pcDB" />
 
-                        <tr>
+                        <c:forEach var="pc" items="${pcDB.buscarUsariosSemArea()}">
+                            <tr>
 
-                            <th></th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                                <th>${pc.id}</th>
+                                <td>${pc.nome}</td>
+                                <td>${pc.cep}</td>
+                                <td>${pc.telefone}</td>
+                                <td>${pc.cidade}</td>
+                                <td>${pc.email}</td>
+                                <td>${pc.areaCobertura}</td>
+                                <td> <a href="form_alterar_produto.jsp?id=${p.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
+                                <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
 
-                        </tr>
-
+                            </tr>
+                        </c:forEach>
                     </tbody>
 
                     <tfoot class="table-danger border-top border-bottom border-danger">
@@ -79,6 +85,7 @@
                             <th>Cidade</th>
                             <th>E-mail</th>
                             <th>Área de cobertura</th>
+                            <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
                     </tfoot>

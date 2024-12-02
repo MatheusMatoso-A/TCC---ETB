@@ -72,3 +72,9 @@ a {
     color: #000;
     /* Cor ao passar o mouse */
 }
+
+/* Mudar a cor do item do dropdown quando clicado */
+.dropdown-item:active {
+  background-color: #dc3545; /* Cor vermelha */
+  color: white; /* Cor do texto */
+}

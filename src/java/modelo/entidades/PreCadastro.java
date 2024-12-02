@@ -15,6 +15,7 @@ public class PreCadastro {
     private String cidade;
     private String email;
     private AreaCobertura areaCobertura;
+    
 
     
     
@@ -30,5 +31,21 @@ public class PreCadastro {
         this.cidade = cidade;
         this.email = email;
         this.areaCobertura = areaCobertura;
+    }
+
+    public void setAreaCobertura(int na) {
+        
+        this.areaCobertura = new AreaCobertura();
+        this.areaCobertura.setId(na);
+    }
+
+    public void setAreaCobertura(AreaCobertura ac) {
+
+        this.areaCobertura = ac;
+        
+    }
+     @Override
+    public String toString() {
+        return String.valueOf(this.id); // Substitua "id" pela chave primária ou outro atributo relevante
     }
 }

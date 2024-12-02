@@ -32,4 +32,9 @@ public class Clientes {
         this.complemento = complemento;
         this.pontoReferencia = pontoReferencia;
     }
+    
+     @Override
+    public String toString() {
+        return String.valueOf(this.id); // Substitua "id" pela chave primária ou outro atributo relevante
+    }
 }
