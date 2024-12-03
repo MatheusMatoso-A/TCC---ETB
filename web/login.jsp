@@ -35,7 +35,7 @@
                 <!-- Formulário de login -->
                 <div class="container my-4">
                     <h2 class="text-center mb-4">Acessar Conta</h2>
-                    <form action="processarLogin.jsp" method="post">
+                    <form action="efetuar_login.do" method="post">
                         <!-- Campo Login -->
                         <div class="mb-3">
                             <label for="login" class="form-label"> <strong>Login:</strong></label>

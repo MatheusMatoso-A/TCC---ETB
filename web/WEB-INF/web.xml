@@ -16,6 +16,10 @@
         <servlet-name>InserirAgendamentoVendasC</servlet-name>
         <servlet-class>controle.InserirAgendamentoVendasC</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EfetuarLogin</servlet-name>
+        <servlet-class>controle.EfetuarLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Sair</servlet-name>
         <url-pattern>/sair.do</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>InserirAgendamentoVendasC</servlet-name>
         <url-pattern>/inserir_agendamento_vendas_c.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EfetuarLogin</servlet-name>
+        <url-pattern>/efetuar_login.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,3 +1,4 @@
+<%@page import="modelo.entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <meta charset="UTF-8">
@@ -11,19 +12,18 @@
 <link rel="stylesheet" href="css/menu_login.css" type="text/css">
 
 
-
 <div class="sidebar p-3">
     <h1 class="text-center"> <img src="imagens/tai.png" alt="Logo"></h1>
     <nav class="nav flex-column">
-        <a class="nav-link" href="#"><i class="fas fa-home"></i> Início </a>
-        <a class="nav-link" href="#"><i class="fas fa-user"></i> Clientes </a>
-        <a class="nav-link" href="#"><i class="fas fa-file-invoice-dollar"></i> Fatura </a>
-        <a class="nav-link" href="#"><i class="fas fa-box"></i> Produtos </a>
-        <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Agenda </a>
-        <a class="nav-link" href="#"><i class="fas fa-map-marked-alt"></i> Área de Cobertura </a>
-        <a class="nav-link" href="#"><i class="fas fa-users"></i> Funcionários </a>
-        <a class="nav-link" href="#"><i class="fas fa-tags"></i> Vendas </a>
-        <a class="nav-link" href="#"><i class="fas fa-user-plus"></i> Possíveis Clientes </a>
+        <a class="nav-link" href="inicio_login.jsp"><i class="fas fa-home"></i> Início </a>
+        <a class="nav-link" href="cliente_login.jsp"><i class="fas fa-user"></i> Clientes </a>
+        <a class="nav-link" href="fatura_login.jsp"><i class="fas fa-file-invoice-dollar"></i> Fatura </a>
+        <a class="nav-link" href="produtos_login.jsp"><i class="fas fa-box"></i> Produtos </a>
+        <a class="nav-link" href="agendamento_login.jsp"><i class="fas fa-calendar-alt"></i> Agenda </a>
+        <a class="nav-link" href="areaCobertura_login.jsp"><i class="fas fa-map-marked-alt"></i> Área de Cobertura </a>
+        <a class="nav-link" href="funcionario_login.jsp"><i class="fas fa-users"></i> Funcionários </a>
+        <a class="nav-link" href="listar_vendas.jsp"><i class="fas fa-tags"></i> Vendas </a>
+        <a class="nav-link" href="listar_possiveis_clientes.jsp"><i class="fas fa-user-plus"></i> Possíveis Clientes </a>
     </nav>
 </div>
 
@@ -32,15 +32,39 @@
     <h1></h1>
     <div class="header-content">
         <div class="user-menu dropdown">
+            <%
+
+                Usuario usuario = new Usuario();
+                try {
+
+                    usuario = (Usuario) session.getAttribute("usuario");
+
+            %>
+
             <button class="btn btn-danger dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
                     aria-expanded="false">
                 <i class="bi bi-people"></i>
-                Nome do Usuário
+                <%=usuario.getNome()%>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" href="#">Alterar Cadastro</a></li>
                 <li><a class="dropdown-item" href="sair.do">Sair</a></li>
             </ul>
+
+            <%           if (usuario == null) {
+                        response.sendRedirect("login.jsp");
+
+                    }
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                    response.sendRedirect("login.jsp");
+
+                }
+
+            %>
+
+
         </div>
     </div>
 </div>
