@@ -39,8 +39,8 @@ public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Pr
             logInfo("Executando SQL: {0}", sql);
             logFine("Nome: {0}, Velocidade: {1}, Valor: {2}", new Object[]{p.getNome(), p.getVelocidade(), p.getValor()});
 
-            pst.setString(1, p.getNome());
-            pst.setString(2, p.getVelocidade());
+            pst.setString(1, new String(p.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(p.getVelocidade().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setDouble(3, p.getValor());
 
             pst.execute();
@@ -75,8 +75,8 @@ public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Pr
             logFine("Nome: {0}, Velocidade: {1}, Valor: {2}, "
                     + "Ativo: {3}, ID: {4} ", new Object[]{p.getNome(), p.getVelocidade(), p.getValor(), p.isAtivo(), p.getId()});
 
-            pst.setString(1, p.getNome());
-            pst.setString(2, p.getVelocidade());
+            pst.setString(1, new String(p.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(p.getVelocidade().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setDouble(3, p.getValor());
             pst.setBoolean(4, p.isAtivo());
 
@@ -228,7 +228,53 @@ public class ProdutosDAO extends DataBaseDAO implements InterfaceDAO<Integer, Pr
 
             desconectar();
         }
-        
+
+        return listaP;
+
+    }
+
+    public List<Produtos> listarAtivos() throws Exception {
+
+        String sql = "SELECT * FROM produtos WHERE ativo=1";
+        List<Produtos> listaP = new ArrayList<Produtos>();
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
+
+            logInfo("Executando SQL: ", sql);
+
+            while (rs.next()) {
+
+                Produtos p = new Produtos();
+
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setVelocidade(rs.getString("velocidade"));
+                p.setValor(rs.getDouble("valor"));
+                p.setAtivo(rs.getBoolean("ativo"));
+
+                listaP.add(p);
+
+            }
+
+            logInfo("Pesquisa realizada com sucesso", "");
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
         return listaP;
 
     }

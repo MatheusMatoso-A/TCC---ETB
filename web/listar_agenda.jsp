@@ -41,6 +41,10 @@
     <body>
 
         <%@include file="menu_login.jsp" %>
+        <%@include file="toast.jsp" %>
+        <%@include file="toast_danger.jsp" %>
+        <%@include file="toast_warning.jsp" %>
+
 
         <div class="main-content">
             <div class="table-responsive">
@@ -61,8 +65,7 @@
 
                     <tbody>
 
-                        <%
-                            try {
+                        <%                            try {
                                 AgendaDAO agDAO = new AgendaDAO();
                                 List<Agenda> lista = agDAO.listar();
 
@@ -101,8 +104,8 @@
 
                             </td>
 
-                            <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
-                            <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                            <td> <a href="form_alterar_agenda.jsp?id=<%=ag.getId()%>"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"></a> </td>
+                            <td> <a href="gerenciar_agendamento.do?action=excluir&id=<%=ag.getId()%>"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"></a> </td>
 
 
                             <%                                        }

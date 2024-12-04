@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,6 +36,10 @@
     <body>
 
         <%@include file="menu_login.jsp" %>
+        <%@include file="toast.jsp" %>
+        <%@include file="toast_danger.jsp" %>
+        <%@include file="toast_warning.jsp" %>
+
 
         <div class="main-content">
             <div class="table-responsive">
@@ -42,13 +48,12 @@
                     <thead class="table-danger border-top border-bottom border-danger">
                         <tr>
                             <th>ID</th>
-                            <th>Tipo de pagamento</th>
                             <th>Foi pago</th>
                             <th>Data da venda</th>
-                            <th>Data de vencimento</th>
+                            <th>Dia do vencimento</th>
                             <th>Produto</th>
                             <th>Cliente</th>
-                            <th>Vendedor</th>
+                            <th>Funcionário</th>
                             <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
@@ -56,32 +61,40 @@
 
                     <tbody>
 
-                        <tr>
+                        <jsp:useBean class="modelo.persistencia.VendasDAO" id="vDB"/>
 
-                            <th>1</th>
-                            <td>Gaston</td>
-                            <td>000.000.000-00</td>
-                            <td>teste@teste.com</td>
-                            <td>(00) 0 0000-0000</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
-                            <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                        <c:forEach var="v" items="${vDB.listar()}">
 
-                        </tr>
 
+                            <tr>
+
+                                <th>${v.id}</th>
+                                <td><c:choose>
+                                        <c:when test="${v.foiPago}">Sim</c:when>
+                                        <c:otherwise>Não</c:otherwise>
+                                    </c:choose> 
+                                </td>
+                                <td>${v.dataVenda}</td>
+                                <td>${v.dataVencimento}</td>
+                                <td>${v.produtos.nome} </td>
+                                <td>${v.cliente.usuario.nome}</td>
+                                <td>${v.funcionario.usuario.nome}</td>
+
+                                <td> <a href="form_alterar_vendas.jsp?id=${v.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
+                                <td> <a href="gerenciar_vendas.do?action=excluir&id=${v.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
+
+                            </tr>
+                        </c:forEach>
                     </tbody>
                     <tfoot class="table-danger border-top border-bottom border-danger">
                         <tr>
                             <th>ID</th>
-                            <th>Tipo de pagamento</th>
                             <th>Foi pago</th>
                             <th>Data da venda</th>
-                            <th>Data de vencimento</th>
+                            <th>Dia do vencimento</th>
                             <th>Produto</th>
                             <th>Cliente</th>
-                            <th>Vendedor</th>
+                            <th>Funcionário</th>
                             <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>

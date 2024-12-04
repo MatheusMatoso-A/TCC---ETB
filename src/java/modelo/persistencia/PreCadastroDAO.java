@@ -39,13 +39,11 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
                     + "Areacobertura_ID: {5} ", new Object[]{pc.getNome(), pc.getCep(),
                         pc.getTelefone(), pc.getCidade(), pc.getEmail(), pc.getAreaCobertura().getId()});
 
-            pst.setString(1, pc.getNome());
-
-            pst.setString(2, pc.getCep());
-
-            pst.setString(3, pc.getTelefone());
-            pst.setString(4, pc.getCidade());
-            pst.setString(5, pc.getEmail());
+            pst.setString(1, new String(pc.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(pc.getCep().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(pc.getTelefone().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(4, new String(pc.getCidade().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(5, new String(pc.getEmail().getBytes("ISO-8859-1"), "UTF-8"));
 
             // Definir o areacobertura_id como nulo se a área de cobertura não for encontrada
             if (pc.getAreaCobertura() != null) {
@@ -61,12 +59,11 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
 
             if (valoresInseridos > 0) {
                 try (ResultSet rs = pst.getGeneratedKeys()) {
-                    if(rs.next()){
+                    if (rs.next()) {
                         pc.setId(rs.getInt(1));
-                    
-                    
+
                     }
-                    
+
                 }
 
             }
@@ -103,11 +100,11 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
                     + "Areacobertura_ID: {5}, ID: {6} ", new Object[]{pc.getNome(), pc.getCep(),
                         pc.getTelefone(), pc.getCidade(), pc.getEmail(), pc.getAreaCobertura().getId(), pc.getId()});
 
-            pst.setString(1, pc.getNome());
-            pst.setString(2, pc.getCep());
-            pst.setString(3, pc.getTelefone());
-            pst.setString(4, pc.getCidade());
-            pst.setString(5, pc.getEmail());
+            pst.setString(1, new String(pc.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(pc.getCep().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(pc.getTelefone().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(4, new String(pc.getCidade().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(5, new String(pc.getEmail().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setInt(6, pc.getAreaCobertura().getId());
 
             pst.setInt(7, pc.getId());
@@ -270,7 +267,7 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
 
     }
 
-     public List<PreCadastro> buscarUsariosSemArea() throws Exception {
+    public List<PreCadastro> buscarUsariosSemArea() throws Exception {
 
         String sql = "SELECT * FROM precadastro WHERE areacobertura_id='17'";
 
@@ -317,5 +314,5 @@ public class PreCadastroDAO extends DataBaseDAO implements InterfaceLoggable, In
         return listaPc;
 
     }
-    
+
 }

@@ -37,6 +37,10 @@
     <body>
 
         <%@include file="menu_login.jsp" %>
+        <%@include file="toast.jsp" %>
+        <%@include file="toast_danger.jsp" %>
+        <%@include file="toast_warning.jsp" %>
+
 
         <div class="main-content">
             <div class="table-responsive">
@@ -51,7 +55,6 @@
                             <th>Cidade</th>
                             <th>E-mail</th>
                             <th>Área de cobertura</th>
-                            <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
                     </thead>
@@ -69,8 +72,7 @@
                                 <td>${pc.cidade}</td>
                                 <td>${pc.email}</td>
                                 <td>${pc.areaCobertura}</td>
-                                <td> <a href="form_alterar_produto.jsp?id=${p.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
-                                <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                                <td> <a href="excluir_pre_cadastro.do?id=${pc.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a></td>
 
                             </tr>
                         </c:forEach>
@@ -85,7 +87,6 @@
                             <th>Cidade</th>
                             <th>E-mail</th>
                             <th>Área de cobertura</th>
-                            <th>Alterar</th>
                             <th>Excluir</th>
                         </tr>
                     </tfoot>

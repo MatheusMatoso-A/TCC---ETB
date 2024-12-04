@@ -42,13 +42,13 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
                         u.getTelefone(), u.getEmail(), u.getDataNascimento(), u.getLogin(), u.getSenha(), u.getAtivo(),
                         u.getPerfil().getId()});
 
-            pst.setString(1, u.getNome());
-            pst.setString(2, u.getCpf());
-            pst.setString(3, u.getTelefone());
-            pst.setString(4, u.getEmail());
+            pst.setString(1, new String(u.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(u.getCpf().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(u.getTelefone().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(4, new String(u.getEmail().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setDate(5, new java.sql.Date(u.getDataNascimento().getTime()));
-            pst.setString(6, u.getLogin());
-            pst.setString(7, u.getSenha());
+            pst.setString(6, new String(u.getLogin().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(7, new String(u.getSenha().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setBoolean(8, u.getAtivo());
             pst.setInt(9, u.getPerfil().getId());
 
@@ -103,13 +103,13 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
                         u.getTelefone(), u.getEmail(), u.getDataNascimento(), u.getLogin(), u.getSenha(), u.getAtivo(),
                         u.getPerfil().getId(), u.getId()});
 
-            pst.setString(1, u.getNome());
-            pst.setString(2, u.getCpf());
-            pst.setString(3, u.getTelefone());
-            pst.setString(4, u.getEmail());
+            pst.setString(1, new String(u.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(u.getCpf().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(u.getTelefone().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(4, new String(u.getEmail().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setDate(5, new java.sql.Date(u.getDataNascimento().getTime()));
-            pst.setString(6, u.getLogin());
-            pst.setString(7, u.getSenha());
+            pst.setString(6, new String(u.getLogin().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(7, new String(u.getSenha().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setBoolean(8, u.getAtivo());
             pst.setInt(9, u.getPerfil().getId());
 
@@ -440,4 +440,80 @@ public class UsuarioDAO extends DataBaseDAO implements InterfaceLoggable, Interf
         return listaTec;
     }
 
+    public void modificarUsuarioFun(Usuario u) throws Exception {
+
+        String sql = "UPDATE usuarios SET nome=?, cpf=?, telefone=?, email=?,  "
+                + " senha=?, ativo=?, perfil_id=? WHERE perfil_id=?";
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: ", sql);
+
+            pst.setString(1, new String(u.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(u.getCpf().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(u.getTelefone().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(4, new String(u.getEmail().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(5, new String(u.getSenha().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setBoolean(6, u.getAtivo());
+            pst.setInt(7, u.getPerfil().getId());
+
+            pst.setInt(8, u.getPerfil().getId());
+
+            pst.executeUpdate();
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+          
+    }
+
+    public void modificarUsuarioCliente(Usuario u) throws Exception {
+
+        String sql = "UPDATE usuarios SET nome=?,  telefone=?, email=?,  "
+                + " senha=?, ativo=? WHERE perfil_id=?";
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: ", sql);
+
+            pst.setString(1, new String(u.getNome().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(u.getTelefone().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(u.getEmail().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(4, new String(u.getSenha().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setBoolean(5, u.getAtivo());
+
+            pst.setInt(6, u.getPerfil().getId());
+
+            pst.executeUpdate();
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+    }
 }

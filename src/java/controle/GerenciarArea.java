@@ -5,24 +5,22 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.entidades.Produtos;
-import modelo.persistencia.ProdutosDAO;
+import modelo.entidades.AreaCobertura;
+import modelo.persistencia.AreaCoberturaDAO;
 
-@WebServlet(name = "GerenciarProdutos", urlPatterns = {"/gerenciar_produtos.do"})
-public class GerenciarProdutos extends HttpServlet {
+public class GerenciarArea extends HttpServlet {
 
-    private ProdutosDAO pDAO;
+    private AreaCoberturaDAO acDAO;
     private String mensagem;
 
     @Override
     public void init() throws ServletException {
 
         try {
-            pDAO = new ProdutosDAO();
+            acDAO = new AreaCoberturaDAO();
         } catch (Exception ex) {
             Logger.getLogger(GerenciarProdutos.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
@@ -38,7 +36,7 @@ public class GerenciarProdutos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GerenciarProdutos</title>");
+            out.println("<title>Servlet GerenciarArea</title>");
             out.println("</head>");
             out.println("<body>");
 
@@ -48,16 +46,16 @@ public class GerenciarProdutos extends HttpServlet {
 
                 switch (action) {
                     case "inserir":
-                        inserirProduto(request, response);
+                        inserirArea(request, response);
                         break;
                     case "modificar":
-                        modificarProduto(request, response);
+                        modificarArea(request, response);
                         break;
                     case "excluir":
-                        excluirProduto(request, response);
+                        excluirArea(request, response);
                         break;
                     default:
-                        response.sendRedirect("prondutos_login.jsp");
+                        response.sendRedirect("areaCobertura_login.jsp");
                         break;
 
                 }
@@ -112,147 +110,152 @@ public class GerenciarProdutos extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void inserirProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void inserirArea(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String nome = request.getParameter("nome");
-            String velocidade = request.getParameter("velocidade");
-            String valorStr = request.getParameter("valor");
+            String cep = request.getParameter("cep");
+            String cidade = request.getParameter("cidade");
+            String estado = request.getParameter("estado");
 
             try {
 
-                valorStr = valorStr.replace(',', '.');
+                boolean cepU = acDAO.cepUnico(cep);
 
-                double valor = Double.parseDouble(valorStr);
+                if (cepU == true) {
 
-                Produtos p = new Produtos();
-                p.setNome(nome);
-                p.setVelocidade(velocidade);
-                p.setValor(valor);
+                    mensagem = "O CEP informado já está cadastrado!";
+                    request.getSession().setAttribute("mensagemWarningToast", mensagem);
+                    out.print("<script language='javascript'>");
+                    out.print("window.location.href = 'listar_area.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("</script>");
 
-                pDAO.salvar(p);
+                } else {
 
-                mensagem = "Produto cadastrado com sucesso!</br> ";
-                request.getSession().setAttribute("mensagemToast", mensagem);
-                out.print("<script language='javascript'>");
-                out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
-                out.print("</script>");
+                    AreaCobertura ac = new AreaCobertura();
 
+                    ac.setCep(cep);
+                    ac.setCidade(cidade);
+                    ac.setEstado(estado);
+
+                    acDAO.salvar(ac);
+
+                    mensagem = "Área de Cobertura cadastrada com sucesso!</br> ";
+                    request.getSession().setAttribute("mensagemToast", mensagem);
+                    out.print("<script language='javascript'>");
+                    out.print("window.location.href = 'listar_area.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("</script>");
+                }
             } catch (Exception e) {
 
-                mensagem = "<strong>Erro ao cadastrar produto<strong> </br> "
-                        + "Ocorreu um problema ao tentar cadastrar o produto. Por favor, verifique os dados e tente novamente.";
+                mensagem = "<strong>Erro ao cadastrar Área de Cobertura<strong> </br> "
+                        + "Ocorreu um problema ao tentar cadastrar a área de cobertura. Por favor, verifique os dados e tente novamente.";
                 request.getSession().setAttribute("mensagemDangerToast", mensagem);
                 out.print("<script language='javascript'>");
-                out.print("window.location.href = 'produtos_login.jsp';");  // Redireciona para listar_usuario.jsp
+                out.print("window.location.href = 'areaCobertura_login.jsp';");  // Redireciona para listar_usuario.jsp
                 out.print("</script>");
 
                 out.print(e);
                 e.printStackTrace();
 
             }
+
         }
     }
 
-    private void modificarProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void modificarArea(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String nome = request.getParameter("nome");
-            String velocidade = request.getParameter("velocidade");
-            String valorStr = request.getParameter("valor");
-            String ativo = request.getParameter("ativo");
+            String cep = request.getParameter("cep");
+            String cidade = request.getParameter("cidade");
+            String estado = request.getParameter("estado");
             int id = Integer.parseInt(request.getParameter("id"));
 
-            if (id<=0) {
-                mensagem = "O ID do produto não foi encontrado!";
+            if (id <= 0) {
+                mensagem = "O ID da área de cobertura não foi encontrado!";
                 request.getSession().setAttribute("mensagemWarningToast", mensagem);
                 out.print("<script language='javascript'>");
-                out.print("window.location.href = 'form_alterar_produto.jsp?id=" + id + "';");  // Redireciona para listar_usuario.jsp
+                out.print("window.location.href = 'form_alterar_area.jsp?id=" + id + "';");  // Redireciona para listar_usuario.jsp
                 out.print("</script>");
 
             } else {
 
                 try {
+                        AreaCobertura ac = new AreaCobertura();
 
-                    valorStr = valorStr.replace(',', '.');
-                    double valor = Double.parseDouble(valorStr);
+                        ac.setCep(cep);
+                        ac.setCidade(cidade);
+                        ac.setEstado(estado);
+                        ac.setId(id);
 
-                    Produtos p = new Produtos();
+                        acDAO.modificar(ac);
 
-                    p.setNome(nome);
-                    p.setVelocidade(velocidade);
-                    p.setValor(valor);
-                    p.setAtivo(Boolean.parseBoolean(ativo));
-                    p.setId(id);
-                    
-                    pDAO.modificar(p);
-                    
-                    mensagem = "Produto modificado com sucesso!</br> ";
-                    request.getSession().setAttribute("mensagemToast", mensagem);
-                    out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
-                    out.print("</script>");
+                        mensagem = "Área de Cobertura alterada com sucesso!</br> ";
+                        request.getSession().setAttribute("mensagemToast", mensagem);
+                        out.print("<script language='javascript'>");
+                        out.print("window.location.href = 'listar_area.jsp';");  // Redireciona para listar_usuario.jsp
+                        out.print("</script>");
                     
 
                 } catch (Exception e) {
-                    mensagem = "<strong>Erro ao alterar  produto<strong> </br> "
-                            + "Ocorreu um problema ao tentar alterar o produto. Por favor, verifique os dados e tente novamente.";
+                    mensagem = "<strong>Erro ao alterar  Área de cobertura<strong> </br> "
+                            + "Ocorreu um problema ao tentar alterar a área de cobertura. Por favor, verifique os dados e tente novamente.";
                     request.getSession().setAttribute("mensagemDangerToast", mensagem);
                     out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("window.location.href = 'listar_area.jsp';");  // Redireciona para listar_usuario.jsp
                     out.print("</script>");
 
                     out.print(e);
                     e.printStackTrace();
                 }
-
             }
 
         }
     }
 
-    private void excluirProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void excluirArea(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
             String id = request.getParameter("id");
 
             if (id == null || id.equals("")) {
-                mensagem = "Um Produto deve ser selecionado!";
+                mensagem = "Uma Área de cobertura deve ser selecionado!";
                 request.getSession().setAttribute("mensagemWarningToast", mensagem);
                 out.print("<script language='javascript'>");
-                out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                out.print("window.location.href = 'listar_area.jsp';");  // Redireciona para listar_usuario.jsp
                 out.print("</script>");
             } else {
 
                 try {
 
-                    Produtos p = new Produtos();
-                    p.setId(Integer.parseInt(id));
-                    pDAO.deletar(p);
+                    AreaCobertura ac = new AreaCobertura();
+                    ac.setId(Integer.parseInt(id));
+                    acDAO.deletar(ac);
 
-                    mensagem = "Produto excluido com sucesso!</br> ";
+                    mensagem = "Área de cobertura excluida com sucesso!</br> ";
                     request.getSession().setAttribute("mensagemToast", mensagem);
                     out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("window.location.href = 'listar_area.jsp';");  // Redireciona para listar_usuario.jsp
                     out.print("</script>");
 
                 } catch (Exception e) {
-                    mensagem = "<strong>Erro ao excluir produto<strong> </br> "
-                            + "Ocorreu um problema ao tentar excluir o produto. Por favor, verifique os dados e tente novamente.";
+                    mensagem = "<strong>Erro ao excluir Área de cobertura<strong> </br> "
+                            + "Ocorreu um problema ao tentar excluir a área de cobertura. Por favor, verifique os dados e tente novamente.";
                     request.getSession().setAttribute("mensagemDangerToast", mensagem);
                     out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("window.location.href = 'listar_area.jsp';");  // Redireciona para listar_usuario.jsp
                     out.print("</script>");
 
                     out.print(e);
                     e.printStackTrace();
                 }
-            }
 
+            }
         }
     }
-
 }

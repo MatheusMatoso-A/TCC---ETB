@@ -20,6 +20,30 @@
         <servlet-name>EfetuarLogin</servlet-name>
         <servlet-class>controle.EfetuarLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarAgendamento</servlet-name>
+        <servlet-class>controle.GerenciarAgendamento</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerenciarArea</servlet-name>
+        <servlet-class>controle.GerenciarArea</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerenciarVendas</servlet-name>
+        <servlet-class>controle.GerenciarVendas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExcluirPreCadastro</servlet-name>
+        <servlet-class>controle.ExcluirPreCadastro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerenciarFuncionarioU</servlet-name>
+        <servlet-class>controle.GerenciarFuncionarioU</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerenciarClienteU</servlet-name>
+        <servlet-class>controle.GerenciarClienteU</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Sair</servlet-name>
         <url-pattern>/sair.do</url-pattern>
@@ -39,6 +63,30 @@
     <servlet-mapping>
         <servlet-name>EfetuarLogin</servlet-name>
         <url-pattern>/efetuar_login.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarAgendamento</servlet-name>
+        <url-pattern>/gerenciar_agendamento.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarArea</servlet-name>
+        <url-pattern>/gerenciar_area.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarVendas</servlet-name>
+        <url-pattern>/gerenciar_vendas.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExcluirPreCadastro</servlet-name>
+        <url-pattern>/excluir_pre_cadastro.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarFuncionarioU</servlet-name>
+        <url-pattern>/gerenciar_funcionario_u.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarClienteU</servlet-name>
+        <url-pattern>/gerenciar_cliente_u.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

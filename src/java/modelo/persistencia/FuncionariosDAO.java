@@ -37,7 +37,7 @@ public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, I
             logFine("Salario: {0}, Matricula{1}, Usuarios_ID: {2} ", new Object[]{f.getSalario(), f.getMatricula(), f.getUsuario().getId()});
 
             pst.setDouble(1, f.getSalario());
-            pst.setString(2, f.getMatricula());
+            pst.setString(2, new String(f.getMatricula().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setInt(3, f.getUsuario().getId());
 
             pst.execute();
@@ -75,7 +75,7 @@ public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, I
             logFine("Salario: {0}, Matricula{1}, ID: {2} ", new Object[]{f.getSalario(), f.getMatricula(), f.getId()});
 
             pst.setDouble(1, f.getSalario());
-            pst.setString(2, f.getMatricula());
+            pst.setString(2, new String(f.getMatricula().getBytes("ISO-8859-1"), "UTF-8"));
 
             pst.setInt(3, f.getId());
 
@@ -281,5 +281,39 @@ public class FuncionariosDAO extends DataBaseDAO implements InterfaceLoggable, I
         }
 
         return f;
+    }
+    
+     public void modificarCadastroFun(Funcionarios f) throws Exception {
+
+        String sql = "UPDATE funcionarios SET salario=? WHERE id=?";
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: {0}", sql);
+       
+
+            pst.setDouble(1, f.getSalario());
+
+            pst.setInt(2, f.getId());
+
+            pst.executeUpdate();
+
+           
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao modificar no banco de dados: {0}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+        } finally {
+
+            desconectar();
+        }
+
     }
 }

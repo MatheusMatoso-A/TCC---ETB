@@ -43,16 +43,16 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
                     new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(),
                         c.getPreCadastro().getId(), c.getUsuario().getId()});
 
-            pst.setString(1, c.getTipoEndereco());
-            pst.setString(2, c.getCep());
-            pst.setString(3, c.getEndereco());
+            pst.setString(1, new String(c.getTipoEndereco().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(c.getCep().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(c.getEndereco().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setInt(4, c.getNumero());
-            pst.setString(5, c.getComplemento());
-            pst.setString(6, c.getPontoReferencia());
+            pst.setString(5, new String(c.getComplemento().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(6, new String(c.getPontoReferencia().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setInt(7, c.getPreCadastro().getId());
             pst.setInt(8, c.getUsuario().getId());
 
-             int valoresInseridos = pst.executeUpdate();
+            int valoresInseridos = pst.executeUpdate();
 
             if (valoresInseridos > 0) {
                 try (ResultSet rs = pst.getGeneratedKeys()) {
@@ -99,20 +99,20 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
 
             logInfo("Executando SQL: {0}", sql);
             logFine("TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, PontoReferencia: {5}, ID: {6} ",
-                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(), 
+                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(),
                         c.getId()});
 
-            pst.setString(1, c.getTipoEndereco());
-            pst.setString(2, c.getCep());
-            pst.setString(3, c.getEndereco());
+            pst.setString(1, new String(c.getTipoEndereco().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(c.getCep().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(c.getEndereco().getBytes("ISO-8859-1"), "UTF-8"));
             pst.setInt(4, c.getNumero());
-            pst.setString(5, c.getComplemento());
-            pst.setString(6, c.getPontoReferencia());
+            pst.setString(5, new String(c.getComplemento().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(6, new String(c.getPontoReferencia().getBytes("ISO-8859-1"), "UTF-8"));
 
             pst.setInt(7, c.getId());
 
             logInfo("Modificado com sucesso no banco de dados para TipoEndereco: {0}, CEP: {1}, Endereco: {2}, Numero: {3}, Complemento: {4}, PontoReferencia: {5}, ID: {6} ",
-                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(), 
+                    new Object[]{c.getTipoEndereco(), c.getCep(), c.getEndereco(), c.getNumero(), c.getComplemento(), c.getPontoReferencia(),
                         c.getId()});
 
         } catch (SQLException e) {
@@ -274,4 +274,60 @@ public class ClientesDAO extends DataBaseDAO implements InterfaceLoggable, Inter
         return listaC;
     }
 
+     public Clientes buscarPorUsuario(Integer id) throws Exception {
+
+        String sql = "SELECT * FROM cliente WHERE usuarios_id=?";
+
+        Clientes c = new Clientes();
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: {0}", sql);
+            logFine("ID: {0}", id);
+
+            pst.setInt(1, id);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    c.setId(rs.getInt("id"));
+                    c.setTipoEndereco(rs.getString("tipoEndereco"));
+                    c.setCep(rs.getString("cep"));
+                    c.setEndereco(rs.getString("endereco"));
+                    c.setNumero(rs.getInt("numero"));
+                    c.setComplemento(rs.getString("complemento"));
+                    c.setPontoReferencia(rs.getString("pontoReferencia"));
+                    c.setPreCadastro(daoPreCadastro.buscarPorId(rs.getInt("preCadastro_id")));
+                    c.setUsuario(daoUsuario.buscarPorId(rs.getInt("usuarios_id")));
+
+                } else {
+
+                    return null;
+                }
+
+            }
+
+            logInfo("Pesquisa por ID bem-sucedida no banco de dados para o ID: {0}", id);
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao pesquisar por ID no banco de dados: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        return c;
+    }
+    
 }

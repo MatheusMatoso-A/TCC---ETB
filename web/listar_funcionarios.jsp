@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,6 +37,10 @@
     <body>
 
         <%@include file="menu_login.jsp" %>
+        <%@include file="toast.jsp" %>
+        <%@include file="toast_danger.jsp" %>
+        <%@include file="toast_warning.jsp" %>
+
 
         <div class="main-content">
             <div class="table-responsive">
@@ -59,25 +65,34 @@
 
                     <tbody>
 
-                        <tr>
+                        <jsp:useBean class="modelo.persistencia.FuncionariosDAO" id="fDB"/>
 
-                            <th>1</th>
-                            <td>Gaston Correia</td>
-                            <td>123.456.789-10</td>
-                            <td>gaston@gmail.com</td>
-                            <td>(61) 9 9999-9999</td>
-                            <td> Gaston Admin</td>
-                            <td>Admin</td>
-                            <td>5000,00</td>
-                            <td>001</td>
-                            <td>Sim</td>
-                            <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
-                            <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                        <c:forEach var="f" items="${fDB.listar()}">
+                            <tr>
 
-                        </tr>
-                        
+                                <th>${f.id}</th>
+                                <td>${f.usuario.nome}</td>
+                                <td>${f.usuario.cpf}</td>
+                                <td>${f.usuario.telefone}</td>
+                                <td>${f.usuario.email}</td>
+                                <td>${f.usuario.login}</td>
+                                <td>${f.usuario.perfil.perfil}</td>
+                                <td>${f.salario}</td>
+                                <td>${f.matricula}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${f.usuario.ativo}">Sim</c:when>
+                                        <c:otherwise>Não</c:otherwise>
+                                    </c:choose>
+
+                                </td>
+                                <td> <a href="form_altera_fun.jsp?id=${f.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
+                                <td> <a href="gerenciar_funcionario_u.do?action=excluir&id=${f.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
+
+                            </tr>
+                        </c:forEach>
                     </tbody>
-                    
+
                     <tfoot class="table-danger border-top border-bottom border-danger">
                         <tr>
                             <th>ID</th>

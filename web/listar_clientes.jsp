@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,6 +38,10 @@
     <body>
 
         <%@include file="menu_login.jsp" %>
+        <%@include file="toast.jsp" %>
+        <%@include file="toast_danger.jsp" %>
+        <%@include file="toast_warning.jsp" %>
+
 
         <div class="main-content">
             <div class="table-responsive">
@@ -62,26 +69,34 @@
 
                     <tbody>
 
-                        <tr>
+                        <jsp:useBean class="modelo.persistencia.ClientesDAO" id="cDB"/>
+                        <c:forEach var="c" items="${cDB.listar()}">
+                            <tr>
 
-                            <th>1</th>
-                            <td>Cleiton da Silva</td>
-                            <td>344.525.176-12</td>
-                            <td>(61) 9 8450-3235</td>
-                            <td>cleiton@gmail.com</td>
-                            <td> Cleitin </td>
-                            <td> Casa </td>
-                            <td>7213524</td>
-                            <td>QI 24</td>
-                            <td>12</td>
-                            <td>Bairro Setor Industrial</td>
-                            <td>Ao lado do mercado vilela</td>
-                            <td>Sim</td>
-                            <td> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </td>
-                            <td> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </td>
+                                <th>${c.id}</th>
+                                <td>${c.usuario.nome}</td>
+                                <td>${c.usuario.cpf}</td>
+                                <td>${c.usuario.telefone}</td>
+                                <td>${c.usuario.email}</td>
+                                <td>${c.usuario.login}</td>
+                                <td>${c.tipoEndereco}</td>
+                                <td>${c.cep}</td>
+                                <td>${c.endereco}</td>
+                                <td>${c.numero}</td>
+                                <td>${c.complemento}</td>
+                                <td>${c.pontoReferencia}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${c.usuario.ativo}">Sim</c:when>
+                                        <c:otherwise>Não</c:otherwise>
+                                    </c:choose>
 
-                        </tr>
+                                </td>
+                                <td> <a href="form_altera_cliente.jsp?id=${c.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
+                                <td> <a href="gerenciar_cliente_u.do?action=excluir&id=${c.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
 
+                            </tr>
+                        </c:forEach>
                     </tbody>
 
                     <tfoot class="table-danger border-top border-bottom border-danger">

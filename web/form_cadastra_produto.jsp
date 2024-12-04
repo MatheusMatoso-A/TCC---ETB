@@ -29,10 +29,11 @@
             <!-- Formulário de Cadastro de Produto -->
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4"> <!-- Usando 4 colunas para telas grandes e 6 colunas para telas médias -->
-                    <form action="cadastrar_produto.do" method="post">
+                    <form action="gerenciar_produtos.do" method="post">
+                        <input type="hidden" name="action" value="inserir">
                         <div class="mb-3">
                             <!-- Nome do Produto -->
-                            <label for="nome" class="form-label">Nome do Produto</label>
+                            <label for="nome" class="form-label">Nome do Plano</label>
                             <input type="text" class="form-control" id="nome" name="nome"  required>
                         </div>
 
@@ -48,6 +49,14 @@
                             <input type="text" class="form-control" id="valor" name="valor"  required>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="ativo" class="form-label">Situação do Plano</label>
+                            <select class="form-select" id="ativo" name="ativo" required>
+                                <option value="" disabled selected>Selecione a situação do plano</option>
+                                <option value="true">Ativo</option>
+                                <option value="false">Inativo</option>
+                            </select>
+                        </div>
 
                         <!-- Botão Enviar -->
                         <div class="d-flex justify-content-center">

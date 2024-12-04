@@ -28,7 +28,7 @@ public class EfetuarLogin extends HttpServlet {
 
             String login = request.getParameter("login");
             String senha = request.getParameter("senha");
-
+            String mensagem;
             try {
                 UsuarioDAO uDB = new UsuarioDAO();
 
@@ -39,14 +39,16 @@ public class EfetuarLogin extends HttpServlet {
                     session.setAttribute("usuario", u);
                     response.sendRedirect("inicio_login.jsp");
 
-                } else {
-                    out.print("<script language='javascript'>");
-                    out.print("alert('Usuario ou Senha inválidos!!\n Se caso persistirn entrar em contato com suporte para verificar se sua conta está ativa.');");
-                    out.print("location.href='login.jsp';");
-                    out.print("</script>");
-                }
+                } 
 
             } catch (Exception e) {
+                
+                mensagem = "<Strong>ATENÇÃO</Strong></br> "
+                        + "Usuário ou senha inválidos!</br> "
+                        + "Se o problema persistir, entre em contato com o suporte para verificar o status de sua conta.";
+                request.getSession().setAttribute("mensagemAlerta", mensagem);
+                response.sendRedirect("login.jsp?warning=true");
+                
                 out.print(e);
                 e.printStackTrace();
 

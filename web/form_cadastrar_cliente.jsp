@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="css/scrollbar.css" type="text/css">
 
 
-        <title>Taí Telecom - Cadastrar Funcionário</title>
+        <title>Taí Telecom - Cadastrar Cliente</title>
 
     </head>
     <body>

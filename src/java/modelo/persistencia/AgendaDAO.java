@@ -27,7 +27,7 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
     @Override
     public void salvar(Agenda ag) throws Exception {
 
-        String sql = "INSERT INTO agenda ( dataComparecimento, status,  vendas_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO agenda ( dataComparecimento, status) VALUES (?, ?)";
 
         conectar();
 
@@ -35,7 +35,7 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
 
             logInfo("Executando SQL: {0}", sql);
             logFine("DataComparecimento: {0}, Status{1}, Vendas_ID: {2} ",
-                    new Object[]{ag.getDataComparecimento(), ag.getStatus(), ag.getVendas().getId()});
+                    new Object[]{ag.getDataComparecimento(), ag.getStatus()});
 
             // Converte LocalDateTime para Timestamp e insere no PreparedStatement
             if (ag.getDataComparecimento() != null) {
@@ -46,13 +46,12 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
                 pst.setNull(1, java.sql.Types.TIMESTAMP); // Caso seja null
             }
 
-            pst.setString(2, ag.getStatus());
-            pst.setInt(3, ag.getVendas().getId());
+            pst.setString(2, new String(ag.getStatus().getBytes("ISO-8859-1"), "UTF-8"));
 
             pst.execute();
 
             logInfo("Inserido com sucesso no banco de dados para DataComparecimento: {0}, Status{1}, Vendas_ID: {2} ",
-                    new Object[]{ag.getDataComparecimento(), ag.getStatus(), ag.getVendas().getId()});
+                    new Object[]{ag.getDataComparecimento(), ag.getStatus()});
 
         } catch (SQLException e) {
             // Logging de erro com detalhes específicos da SQLException
@@ -93,7 +92,7 @@ public class AgendaDAO extends DataBaseDAO implements InterfaceDAO<Integer, Agen
                 pst.setNull(1, java.sql.Types.TIMESTAMP); // Caso seja null
             }
 
-            pst.setString(2, ag.getStatus());
+            pst.setString(2, new String(ag.getStatus().getBytes("ISO-8859-1"), "UTF-8"));
 
             pst.setInt(3, ag.getId());
 

@@ -2,27 +2,28 @@ package controle;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.entidades.Produtos;
-import modelo.persistencia.ProdutosDAO;
+import modelo.entidades.Agenda;
+import modelo.persistencia.AgendaDAO;
 
-@WebServlet(name = "GerenciarProdutos", urlPatterns = {"/gerenciar_produtos.do"})
-public class GerenciarProdutos extends HttpServlet {
+public class GerenciarAgendamento extends HttpServlet {
 
-    private ProdutosDAO pDAO;
+    private AgendaDAO agDAO;
     private String mensagem;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     @Override
     public void init() throws ServletException {
 
         try {
-            pDAO = new ProdutosDAO();
+            agDAO = new AgendaDAO();
         } catch (Exception ex) {
             Logger.getLogger(GerenciarProdutos.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
@@ -38,7 +39,7 @@ public class GerenciarProdutos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GerenciarProdutos</title>");
+            out.println("<title>Servlet GerenciarAgendamento</title>");
             out.println("</head>");
             out.println("<body>");
 
@@ -48,16 +49,16 @@ public class GerenciarProdutos extends HttpServlet {
 
                 switch (action) {
                     case "inserir":
-                        inserirProduto(request, response);
+                        inserirAgenda(request, response);
                         break;
                     case "modificar":
-                        modificarProduto(request, response);
+                        modificarAgenda(request, response);
                         break;
                     case "excluir":
-                        excluirProduto(request, response);
+                        excluirAgenda(request, response);
                         break;
                     default:
-                        response.sendRedirect("prondutos_login.jsp");
+                        response.sendRedirect("agendamento_login.jsp");
                         break;
 
                 }
@@ -73,7 +74,7 @@ public class GerenciarProdutos extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -112,96 +113,92 @@ public class GerenciarProdutos extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void inserirProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void inserirAgenda(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String nome = request.getParameter("nome");
-            String velocidade = request.getParameter("velocidade");
-            String valorStr = request.getParameter("valor");
+            String dataHoraStr = request.getParameter("dataHora");
+            String status = request.getParameter("status");
 
             try {
 
-                valorStr = valorStr.replace(',', '.');
+                LocalDateTime dataHora = LocalDateTime.parse(dataHoraStr, formatter);
 
-                double valor = Double.parseDouble(valorStr);
+                Agenda ag = new Agenda();
 
-                Produtos p = new Produtos();
-                p.setNome(nome);
-                p.setVelocidade(velocidade);
-                p.setValor(valor);
+                ag.setDataComparecimento(dataHora);
+                ag.setStatus(status);
 
-                pDAO.salvar(p);
+                System.out.println("Dados Recebidos:");
+                System.out.println("Data: " + dataHora);
+                System.out.println("status: " + status);
 
-                mensagem = "Produto cadastrado com sucesso!</br> ";
+                agDAO.salvar(ag);
+
+                mensagem = "Agenda cadastrada com sucesso!</br> ";
                 request.getSession().setAttribute("mensagemToast", mensagem);
                 out.print("<script language='javascript'>");
-                out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                out.print("window.location.href = 'listar_agenda.jsp';");  // Redireciona para listar_usuario.jsp
                 out.print("</script>");
 
             } catch (Exception e) {
 
-                mensagem = "<strong>Erro ao cadastrar produto<strong> </br> "
-                        + "Ocorreu um problema ao tentar cadastrar o produto. Por favor, verifique os dados e tente novamente.";
+                mensagem = "<strong>Erro ao cadastrar agenda<strong> </br> "
+                        + "Ocorreu um problema ao tentar cadastrar a agenda. Por favor, verifique os dados e tente novamente.";
                 request.getSession().setAttribute("mensagemDangerToast", mensagem);
                 out.print("<script language='javascript'>");
-                out.print("window.location.href = 'produtos_login.jsp';");  // Redireciona para listar_usuario.jsp
+                out.print("window.location.href = 'agendamento_login.jsp';");  // Redireciona para listar_usuario.jsp
                 out.print("</script>");
 
                 out.print(e);
                 e.printStackTrace();
 
             }
+
         }
     }
 
-    private void modificarProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void modificarAgenda(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String nome = request.getParameter("nome");
-            String velocidade = request.getParameter("velocidade");
-            String valorStr = request.getParameter("valor");
-            String ativo = request.getParameter("ativo");
+            String dataHoraStr = request.getParameter("dataHora");
+            String status = request.getParameter("status");
             int id = Integer.parseInt(request.getParameter("id"));
 
-            if (id<=0) {
-                mensagem = "O ID do produto não foi encontrado!";
+            if (id <= 0) {
+                mensagem = "O ID do agendamento não foi encontrado!";
                 request.getSession().setAttribute("mensagemWarningToast", mensagem);
                 out.print("<script language='javascript'>");
-                out.print("window.location.href = 'form_alterar_produto.jsp?id=" + id + "';");  // Redireciona para listar_usuario.jsp
+                out.print("window.location.href = 'form_alterar_agenda.jsp?id=" + id + "';");  // Redireciona para listar_usuario.jsp
                 out.print("</script>");
 
             } else {
 
                 try {
 
-                    valorStr = valorStr.replace(',', '.');
-                    double valor = Double.parseDouble(valorStr);
+                    LocalDateTime dataHora = LocalDateTime.parse(dataHoraStr, formatter);
 
-                    Produtos p = new Produtos();
+                    Agenda ag = new Agenda();
 
-                    p.setNome(nome);
-                    p.setVelocidade(velocidade);
-                    p.setValor(valor);
-                    p.setAtivo(Boolean.parseBoolean(ativo));
-                    p.setId(id);
-                    
-                    pDAO.modificar(p);
-                    
-                    mensagem = "Produto modificado com sucesso!</br> ";
+                    ag.setDataComparecimento(dataHora);
+                    ag.setStatus(status);
+                    ag.setId(id);
+
+                    agDAO.modificar(ag);
+
+                    mensagem = "Agenda modificada com sucesso!</br> ";
                     request.getSession().setAttribute("mensagemToast", mensagem);
                     out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("window.location.href = 'listar_agenda.jsp';");  // Redireciona para listar_usuario.jsp
                     out.print("</script>");
-                    
 
                 } catch (Exception e) {
-                    mensagem = "<strong>Erro ao alterar  produto<strong> </br> "
-                            + "Ocorreu um problema ao tentar alterar o produto. Por favor, verifique os dados e tente novamente.";
+                    mensagem = "<strong>Erro ao alterar agendaemento<strong> </br> "
+                            + "Ocorreu um problema ao tentar alterar o agendamento. Por favor, verifique os dados e tente novamente.";
                     request.getSession().setAttribute("mensagemDangerToast", mensagem);
                     out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("window.location.href = 'listar_agenda.jsp';");  // Redireciona para listar_usuario.jsp
                     out.print("</script>");
 
                     out.print(e);
@@ -213,46 +210,45 @@ public class GerenciarProdutos extends HttpServlet {
         }
     }
 
-    private void excluirProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void excluirAgenda(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
             String id = request.getParameter("id");
 
             if (id == null || id.equals("")) {
-                mensagem = "Um Produto deve ser selecionado!";
+                mensagem = "Um Agendamento deve ser selecionado!";
                 request.getSession().setAttribute("mensagemWarningToast", mensagem);
                 out.print("<script language='javascript'>");
-                out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                out.print("window.location.href = 'listar_agenda.jsp';");  // Redireciona para listar_usuario.jsp
                 out.print("</script>");
             } else {
 
                 try {
 
-                    Produtos p = new Produtos();
-                    p.setId(Integer.parseInt(id));
-                    pDAO.deletar(p);
+                    Agenda ag = new Agenda();
+                    ag.setId(Integer.parseInt(id));
+                    agDAO.deletar(ag);
 
-                    mensagem = "Produto excluido com sucesso!</br> ";
+                    mensagem = "Agendamento excluido com sucesso!</br> ";
                     request.getSession().setAttribute("mensagemToast", mensagem);
                     out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("window.location.href = 'listar_agenda.jsp';");  // Redireciona para listar_usuario.jsp
                     out.print("</script>");
 
                 } catch (Exception e) {
-                    mensagem = "<strong>Erro ao excluir produto<strong> </br> "
-                            + "Ocorreu um problema ao tentar excluir o produto. Por favor, verifique os dados e tente novamente.";
+                    mensagem = "<strong>Erro ao excluir Agendamento<strong> </br> "
+                            + "Ocorreu um problema ao tentar excluir o agendamento. Por favor, verifique os dados e tente novamente.";
                     request.getSession().setAttribute("mensagemDangerToast", mensagem);
                     out.print("<script language='javascript'>");
-                    out.print("window.location.href = 'listar_produtos.jsp';");  // Redireciona para listar_usuario.jsp
+                    out.print("window.location.href = 'listar_agenda.jsp';");  // Redireciona para listar_usuario.jsp
                     out.print("</script>");
 
                     out.print(e);
                     e.printStackTrace();
                 }
-            }
 
+            }
         }
     }
-
 }

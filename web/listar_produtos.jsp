@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,6 +37,10 @@
     <body>
 
         <%@include file="menu_login.jsp" %>
+        <%@include file="toast.jsp" %>
+        <%@include file="toast_danger.jsp" %>
+        <%@include file="toast_warning.jsp" %>
+
 
         <div class="main-content">
             <div class="table-responsive">
@@ -63,17 +69,17 @@
                                 <th>${p.id}</th>
                                 <td>${p.nome}</td>
                                 <td>${p.velocidade}</td>
-                                <td>${p.valor}</td>
+                                <td><fmt:formatNumber value="${p.valor}" pattern="#,##0.00" /></td>
 
                                 <td>
                                     <c:choose>
-                                        <c:when test="${p.ativo}">Ativo</c:when>
-                                        <c:otherwise>Inativo</c:otherwise>
+                                        <c:when test="${p.ativo}">Sim</c:when>
+                                        <c:otherwise>Não</c:otherwise>
                                     </c:choose> 
                                 </td>
 
                                 <td> <a href="form_alterar_produto.jsp?id=${p.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
-                                <td> <a href="excluir_produto.do?id=${p.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
+                                <td> <a href="gerenciar_produtos.do?action=excluir&id=${p.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
 
                             </tr>
                         </c:forEach>

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Sair", urlPatterns = {"/sair.do"})
 public class Sair extends HttpServlet {
 
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -43,7 +43,7 @@ public class Sair extends HttpServlet {
                 if (session != null) {
 
                     // Remove o atributo específico "usuario" da sessão
-                    session.removeAttribute("usuario");
+                    session.invalidate();
 
                     // Opcional: pode redirecionar para a página de login ou outra página
                     response.sendRedirect("login.jsp");
@@ -52,6 +52,7 @@ public class Sair extends HttpServlet {
 
                     // Caso não exista uma sessão, redireciona para a página de login diretamente
                     response.sendRedirect("login.jsp");
+
                 }
 
             } catch (IOException e) {

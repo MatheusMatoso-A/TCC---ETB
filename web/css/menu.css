@@ -9,7 +9,7 @@ header {
 
 }
 
-.navbar {
+.navbara {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,7 +20,7 @@ header {
     height: 100px;
 }
 
-.menu {
+.menuu {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -28,11 +28,11 @@ header {
     gap: 20px;
 }
 
-.menu li {
+.menuu li {
     position: relative;
 }
 
-.menu a {
+.menuu a {
     text-decoration: none;
     color: #fa0404;
     font-size: 16px;
@@ -40,7 +40,7 @@ header {
     transition: color 0.3s, transform 0.3s;
 }
 
-.menu a:hover {
+.menuu a:hover {
     color: #000000;
     transform: translateY(-2px);
 }

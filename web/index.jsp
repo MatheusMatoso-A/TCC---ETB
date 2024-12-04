@@ -24,6 +24,7 @@
                 <!-- Inclus?o do menu de navega??o -->
                 <%@include file="menu.jsp" %>
                 <%@include file="toast.jsp" %>
+                <%@include file="alerta.jsp" %>
             </div>
         </header>
 
@@ -44,7 +45,7 @@
                         <div class="carousel-inner py-5">
                               <jsp:useBean class="modelo.persistencia.ProdutosDAO" id="pDB"/>
 
-                            <c:forEach var="p" items="${pDB.listar()}" varStatus="status">
+                              <c:forEach var="p" items="${pDB.listarAtivos()}" varStatus="status">
                                 <c:if test="${status.index % 2 == 0}"> <!-- Início de um novo slide -->
                                     <div class="carousel-item ${status.index == 0 ? 'active' : ''}" data-bs-interval="5000">
                                         <div class="row justify-content-center">

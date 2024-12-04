@@ -51,6 +51,8 @@ public class InserirAgendamentoVendasC extends HttpServlet {
             int preCadastroId = Integer.parseInt(request.getParameter("preCadastroId"));
             int planoId = Integer.parseInt(request.getParameter("planoId"));
 
+            String mensagem;
+
             try {
 
                 /**
@@ -155,15 +157,15 @@ public class InserirAgendamentoVendasC extends HttpServlet {
 
                 AgendaDAO agDAO = new AgendaDAO();
                 agDAO.modificarStatus(ag);
-                out.print("<script language='javascript'>");
-                out.print("alert('Agendamento realizado com sucesso!!\nEm até 72h a Fatura estará em seu e-mail.');");
-                out.print("</script>");
-                response.sendRedirect("index.jsp");
+
+                mensagem = "Agendamento realizado com sucesso!!<br>Em até 72h a Fatura estará em seu e-mail.";
+                request.getSession().setAttribute("mensagemAlerta", mensagem);
+                response.sendRedirect("index.jsp?success=true");
+
                 /**
                  * ******************************** Salvando agenda
                  * *********************************
                  */
-
             } catch (Exception e) {
                 out.print(e);
                 e.printStackTrace();

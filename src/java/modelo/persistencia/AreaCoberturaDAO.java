@@ -35,9 +35,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
             logInfo("Executando SQL: {0} ", sql);
             logFine("CEP: {0}, Cidade: {1}, Estado: {2}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado()});
 
-            pst.setString(1, ac.getCep());
-            pst.setString(2, ac.getCidade());
-            pst.setString(3, ac.getEstado());
+            pst.setString(1, new String(ac.getCep().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(ac.getCidade().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(ac.getEstado().getBytes("ISO-8859-1"), "UTF-8"));
 
             pst.execute();
 
@@ -69,9 +69,9 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
             logInfo("Executando SQL: {0} ", sql);
             logFine("CEP: {0}, Cidade: {1}, Estado: {2}, ID: {3}", new Object[]{ac.getCep(), ac.getCidade(), ac.getEstado(), ac.getId()});
 
-            pst.setString(1, ac.getCep());
-            pst.setString(2, ac.getCidade());
-            pst.setString(3, ac.getEstado());
+            pst.setString(1, new String(ac.getCep().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(2, new String(ac.getCidade().getBytes("ISO-8859-1"), "UTF-8"));
+            pst.setString(3, new String(ac.getEstado().getBytes("ISO-8859-1"), "UTF-8"));
 
             pst.setInt(4, ac.getId());
 
@@ -280,4 +280,47 @@ public class AreaCoberturaDAO extends DataBaseDAO implements InterfaceDAO<Intege
 
     }
 
+     // Método para verificar se o Email,CPF ou Login já está em uso 
+    public boolean cepUnico(String cep ) throws Exception {
+
+        String sql = "SELECT COUNT(*) FROM areacobertura WHERE cep = ?";
+
+        conectar();
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            logInfo("Executando SQL: ", sql);
+            logFine("CEP: {0} ", new Object[]{cep});
+
+            pst.setString(1, cep);
+            
+            //Executa consulta
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                return rs.getInt(1) > 0; //Retorna verdadeira se algum dos campos já estiver em uso
+
+            }
+
+        } catch (SQLException e) {
+            // Logging de erro com detalhes específicos da SQLException
+            logSevere("Erro ao verificar a unicidade dos campos: {0}", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            // Logging de erro para exceções gerais
+            logSevere("Erro inesperado: {0}", e.getMessage());
+            throw e;
+
+        } finally {
+
+            desconectar();
+        }
+
+        // Retorna false se nenhum campo estiver em uso. 
+        return false;
+
+    }
+    
 }

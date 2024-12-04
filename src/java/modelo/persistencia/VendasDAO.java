@@ -87,7 +87,7 @@ public class VendasDAO extends DataBaseDAO implements InterfaceLoggable, Interfa
     @Override
     public void modificar(Vendas v) throws Exception {
 
-        String sql = "UPDATE vendas SET foiPago=?, dataVenda=?, dataVencimento=?, produtos_id=?, funcionarios_id=?, cliente_id=? WHERE id=?";
+        String sql = "UPDATE vendas SET foiPago=?,  dataVencimento=?, produtos_id=? WHERE id=?";
 
         conectar();
 

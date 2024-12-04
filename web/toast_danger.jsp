@@ -29,20 +29,20 @@
 </style>
 <%
     // Verifica se existe uma mensagem na sessão
-    String mensagemToast = (String) session.getAttribute("mensagemToast");
-    if (mensagemToast != null) {
+    String mensagemDangerToast = (String) session.getAttribute("mensagemDangerToast");
+    if (mensagemDangerToast != null) {
         // Se houver uma mensagem, exibe o toast e remove a mensagem da sessão
-        session.removeAttribute("mensagemToast");
+        session.removeAttribute("mensagemDangerToast");
 %>
 
-<div class="toast position-fixed top-0 end-0 m-3" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header bg-success text-white">
+<div class="toast position-fixed top-0 end-0 m-3" id="toast-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-danger text-white">
         <strong class="me-auto">Notificação</strong>
         <small>Agora</small>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div class="toast-body bg-success text-white">
-        <%= mensagemToast%>  <!-- Exibe a mensagem passada pelo servlet -->
+    <div class="toast-body bg-danger text-white">
+        <%= mensagemDangerToast%>  <!-- Exibe a mensagem passada pelo servlet -->
     </div>
 </div>
 </div>
@@ -52,9 +52,9 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var toastElement = document.getElementById('toast');
+        var toastElement = document.getElementById('toast-danger');
         var toast = new bootstrap.Toast(toastElement, {
-            delay: 7000 // 5000ms = 5 segundos
+            delay: 10000 // 5000ms = 5 segundos
         });
         toast.show();
     });

@@ -36,6 +36,9 @@
     <body>
 
         <%@include file="menu_login.jsp" %>
+        <%@include file="toast.jsp" %>
+        <%@include file="toast_danger.jsp" %>
+        <%@include file="toast_warning.jsp" %>
 
         <div class="main-content">
             <div class="table-responsive">
@@ -53,20 +56,20 @@
                     </thead>
 
                     <tbody>
-                        
+
                         <jsp:useBean class="modelo.persistencia.AreaCoberturaDAO" id="aDB"/>
                         <c:forEach var="a" items="${aDB.listar()}">
 
-                        <tr>
+                            <tr>
 
-                            <th>${a.id}</th>
-                            <td>${a.cep}</td>
-                            <td>${a.cidade}</td>
-                            <td>${a.estado}</td>
-                            <td> <a href="form_alterar_area.jsp?id=${a.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
-                            <td> <a href="excluir_area.do?id=${a.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
+                                <th>${a.id}</th>
+                                <td>${a.cep}</td>
+                                <td>${a.cidade}</td>
+                                <td>${a.estado}</td>
+                                <td> <a href="form_alterar_area.jsp?id=${a.id}"> <img class="imagem-tabela" src="./imagens/editar.png" alt="Alterar"> </a> </td>
+                                <td> <a href="gerenciar_area.do?action=excluir&id=${a.id}"> <img class="imagem-tabela" src="./imagens/excluir.png" alt="Excluir"> </a> </td>
 
-                        </tr>
+                            </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot class="table-danger border-top border-bottom border-danger">

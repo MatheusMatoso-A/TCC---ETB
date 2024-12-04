@@ -19,10 +19,10 @@
         <header>
             <div class="container">
                 <!-- Inclusão do menu de navegação -->
-
                 <a href="index.jsp" class="d-inline-flex align-items-center">
                     <button class="btn botao"> Voltar </button>
                 </a>
+                <%@include file="alerta_atenção.jsp" %>
             </div>
         </header>
         <!-- Fim do cabeçalho -->

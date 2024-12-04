@@ -1,5 +1,25 @@
+<%@page import="modelo.entidades.Funcionarios"%>
+<%@page import="modelo.persistencia.FuncionariosDAO"%>
+<%@page import="modelo.entidades.Clientes"%>
+<%@page import="modelo.persistencia.ClientesDAO"%>
+<%@page import="modelo.entidades.PerfilMenu"%>
+<%@page import="java.util.List"%>
+<%@page import="modelo.persistencia.PerfilMenuDAO"%>
 <%@page import="modelo.entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    // Verifica se o usuário está logado
+    if (session.getAttribute("usuario") == null) {
+        out.print("<script language='javascript'>");
+        out.print("location.href='login.jsp';");
+        out.print("</script>");
+    }
+%>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,15 +35,39 @@
 <div class="sidebar p-3">
     <h1 class="text-center"> <img src="imagens/tai.png" alt="Logo"></h1>
     <nav class="nav flex-column">
-        <a class="nav-link" href="inicio_login.jsp"><i class="fas fa-home"></i> Início </a>
-        <a class="nav-link" href="cliente_login.jsp"><i class="fas fa-user"></i> Clientes </a>
-        <a class="nav-link" href="fatura_login.jsp"><i class="fas fa-file-invoice-dollar"></i> Fatura </a>
-        <a class="nav-link" href="produtos_login.jsp"><i class="fas fa-box"></i> Produtos </a>
-        <a class="nav-link" href="agendamento_login.jsp"><i class="fas fa-calendar-alt"></i> Agenda </a>
-        <a class="nav-link" href="areaCobertura_login.jsp"><i class="fas fa-map-marked-alt"></i> Área de Cobertura </a>
-        <a class="nav-link" href="funcionario_login.jsp"><i class="fas fa-users"></i> Funcionários </a>
-        <a class="nav-link" href="listar_vendas.jsp"><i class="fas fa-tags"></i> Vendas </a>
-        <a class="nav-link" href="listar_possiveis_clientes.jsp"><i class="fas fa-user-plus"></i> Possíveis Clientes </a>
+
+        <%
+            Usuario usuario = new Usuario();
+            usuario = (Usuario) session.getAttribute("usuario");
+            int i = usuario.getId();
+
+            if (usuario == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+
+            PerfilMenuDAO pmDAO = new PerfilMenuDAO();
+            List<PerfilMenu> listaPM = null;
+
+            try {
+                listaPM = pmDAO.perfilMenuVinculado(usuario.getPerfil().getId());
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                response.sendRedirect("login.jsp");
+
+            }
+
+            for (PerfilMenu pm : listaPM) {
+
+        %>
+
+        <a class="nav-link" href="<%=pm.getMenu().getLink()%>"><i class="<%=pm.getMenu().getIcone()%>"></i> <%=pm.getMenu().getMenu()%> </a>
+
+
+        <%
+            }
+        %>
     </nav>
 </div>
 
@@ -32,14 +76,7 @@
     <h1></h1>
     <div class="header-content">
         <div class="user-menu dropdown">
-            <%
 
-                Usuario usuario = new Usuario();
-                try {
-
-                    usuario = (Usuario) session.getAttribute("usuario");
-
-            %>
 
             <button class="btn btn-danger dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -47,20 +84,44 @@
                 <%=usuario.getNome()%>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="#">Alterar Cadastro</a></li>
+
+                <%
+                    // Determina o link de acordo com o perfil
+                    String linkAlterarCadastro = "#"; // Default (caso algo dê errado)
+                    switch (usuario.getPerfil().getId()) { // Substitua por outro atributo se necessário
+                        case 4: // Exemplo: Perfil de cliente
+                            if (usuario.getPerfil().getId() < 1) {
+
+                                response.sendRedirect("login.jsp");
+
+                            } else {
+
+                                ClientesDAO cDB = new ClientesDAO();
+                                Clientes c = cDB.buscarPorUsuario(i);
+
+                                linkAlterarCadastro = "form_altera_cliente.jsp?id=" + c.getId();
+                            }
+                            break;
+                        default:
+                            if (usuario.getPerfil().getId() < 1) {
+
+                                response.sendRedirect("login.jsp");
+
+                            } else {
+
+                                FuncionariosDAO fDB = new FuncionariosDAO();
+                                Funcionarios f = fDB.buscarPorUsuarioId(i);
+
+                                linkAlterarCadastro = "form_altera_fun.jsp?id=" + f.getId();
+                            }
+                            break;
+                    }
+                %>
+                <li><a class="dropdown-item" href="<%= linkAlterarCadastro%>">Alterar Cadastro</a></li>
                 <li><a class="dropdown-item" href="sair.do">Sair</a></li>
             </ul>
 
-            <%           if (usuario == null) {
-                        response.sendRedirect("login.jsp");
-
-                    }
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-                    response.sendRedirect("login.jsp");
-
-                }
+            <%
 
             %>
 

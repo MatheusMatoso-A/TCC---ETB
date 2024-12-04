@@ -89,7 +89,7 @@ public class InserirUsuarioC extends HttpServlet {
                     uDAO.salvar(u);
 
                     int usuarioId = u.getId();
-                    mensagem = "Cadastro realizado com sucesso!\n "
+                    mensagem = "Cadastro realizado com sucesso!</br> "
                             + "Lembre-se: o acesso à sua conta será liberado após o pagamento da fatura.";
                     request.getSession().setAttribute("mensagemToast", mensagem);
 
